@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.data.model.MovieModel;
 
 public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.ViewHolder> {
 
+    private final Logger logger = Logger.getLogger(MovieRecyclerViewAdapter.class.getName());
     private final List<MovieModel> movieModelList;
     private Context context;
 
@@ -59,6 +61,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         // contents of the view with that element
         MovieModel model = movieModelList.get(position);
 
+        logger.info("onBindViewHolder for movie in position: " + position + " and with icon path: https://image.tmdb.org/t/p/original/" + model.posterPath);
         Glide.with(context)
                 .load("https://image.tmdb.org/t/p/original/" + model.posterPath)
                 .into(holder.getImageViewIcon());
