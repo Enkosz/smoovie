@@ -1,4 +1,4 @@
-package it.unimib.smoovie.viewmodel;
+package it.unimib.smoovie.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,31 +15,17 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import it.unimib.smoovie.R;
-import it.unimib.smoovie.data.model.MovieModel;
+import it.unimib.smoovie.model.MovieModel;
 
-public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.ViewHolder> {
+public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieListRecyclerViewAdapter.ViewHolder> {
 
-    private final Logger logger = Logger.getLogger(MovieRecyclerViewAdapter.class.getName());
+    private final Logger logger = Logger.getLogger(MovieListRecyclerViewAdapter.class.getName());
     private final List<MovieModel> movieModelList;
     private Context context;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        private final ImageView imageViewIcon;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            imageViewIcon = itemView.findViewById(R.id.imageView_icon);
-        }
-
-        public ImageView getImageViewIcon() {
-            return imageViewIcon;
-        }
-    }
-
-    public MovieRecyclerViewAdapter(List<MovieModel> movieModelList) {
+    public MovieListRecyclerViewAdapter(List<MovieModel> movieModelList, Context context) {
         this.movieModelList = movieModelList;
+        this.context = context;
     }
 
     @NonNull
@@ -47,7 +33,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recyclerview_row, parent, false);
+                .inflate(R.layout.recycler_view_movie_item, parent, false);
         context = parent.getContext();
 
         return new ViewHolder(view);
@@ -64,11 +50,26 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         logger.info("onBindViewHolder for movie in position: " + position + " and with icon path: https://image.tmdb.org/t/p/original/" + model.posterPath);
         Glide.with(context)
                 .load("https://image.tmdb.org/t/p/original/" + model.posterPath)
-                .into(holder.getImageViewIcon());
+                .into(holder.getImageViewMovieIcon());
     }
 
     @Override
     public int getItemCount() {
         return movieModelList.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private final ImageView imageViewMovieIcon;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            imageViewMovieIcon = itemView.findViewById(R.id.imageView_movie_icon);
+        }
+
+        public ImageView getImageViewMovieIcon() {
+            return imageViewMovieIcon;
+        }
     }
 }

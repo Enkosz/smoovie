@@ -1,4 +1,4 @@
-package it.unimib.smoovie.data.model;
+package it.unimib.smoovie.model;
 
 import com.google.gson.annotations.SerializedName;
 

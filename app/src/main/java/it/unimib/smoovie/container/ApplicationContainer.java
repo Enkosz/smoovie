@@ -1,6 +1,6 @@
 package it.unimib.smoovie.container;
 
-import it.unimib.smoovie.data.repository.MoviesRepository;
+import it.unimib.smoovie.repository.MoviesRepository;
 
 public class ApplicationContainer {
 

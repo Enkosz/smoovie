@@ -1,6 +1,6 @@
-package it.unimib.smoovie.data.api.service;
+package it.unimib.smoovie.api.service;
 
-import it.unimib.smoovie.data.api.retrofit.RetrofitApiClient;
+import it.unimib.smoovie.api.retrofit.RetrofitApiClient;
 
 public class ServiceProvider {
 
