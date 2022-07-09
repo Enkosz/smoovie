@@ -5,19 +5,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.model.MovieModel;
 
-public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieListRecyclerViewAdapter.ViewHolder> {
+public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int NEWS_VIEW_TYPE = 0;
+    private static final int LOADING_VIEW_TYPE = 1;
 
     private final Logger logger = Logger.getLogger(MovieListRecyclerViewAdapter.class.getName());
     private final List<MovieModel> movieModelList;
@@ -30,27 +35,39 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Create a new view, which defines the UI of the list item
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_view_movie_item, parent, false);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
         context = parent.getContext();
 
-        return new ViewHolder(view);
+        if (viewType == NEWS_VIEW_TYPE) {
+            view = LayoutInflater.from(parent.getContext()).
+                    inflate(R.layout.recycler_view_movie_item, parent, false);
+            return new MovieViewHolder(view);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).
+                    inflate(R.layout.news_loading_item, parent, false);
+            return new LoadingMovieViewHolder(view);
+        }
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof MovieViewHolder) {
+            MovieViewHolder movieViewHolder = (MovieViewHolder) holder;
+            MovieModel model = movieModelList.get(position);
+
+            logger.info("onBindViewHolder for movie in position: " + position + " and with icon path: https://image.tmdb.org/t/p/original/" + model.posterPath);
+            Glide.with(context)
+                    .load("https://image.tmdb.org/t/p/original/" + model.posterPath)
+                    .into(movieViewHolder.getImageViewMovieIcon());
+        } else if (holder instanceof LoadingMovieViewHolder) {
+            ((LoadingMovieViewHolder) holder).activate();
+        }
+    }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        MovieModel model = movieModelList.get(position);
-
-        logger.info("onBindViewHolder for movie in position: " + position + " and with icon path: https://image.tmdb.org/t/p/original/" + model.posterPath);
-        Glide.with(context)
-                .load("https://image.tmdb.org/t/p/original/" + model.posterPath)
-                .into(holder.getImageViewMovieIcon());
+    public int getItemViewType(int position) {
+        return movieModelList.get(position) == null ? LOADING_VIEW_TYPE : NEWS_VIEW_TYPE;
     }
 
     @Override
@@ -58,11 +75,11 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
         return movieModelList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class MovieViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView imageViewMovieIcon;
 
-        public ViewHolder(@NonNull View itemView) {
+        public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageViewMovieIcon = itemView.findViewById(R.id.imageView_movie_icon);
@@ -70,6 +87,19 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
 
         public ImageView getImageViewMovieIcon() {
             return imageViewMovieIcon;
+        }
+    }
+
+    public static class LoadingMovieViewHolder extends RecyclerView.ViewHolder {
+        private final ProgressBar progressBar;
+
+        LoadingMovieViewHolder(View view) {
+            super(view);
+            progressBar = view.findViewById(R.id.progressbar_loading_news);
+        }
+
+        public void activate() {
+            progressBar.setIndeterminate(true);
         }
     }
 }

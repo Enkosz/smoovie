@@ -2,17 +2,14 @@ package it.unimib.smoovie.viewmodel;
 
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.container.ApplicationContainer;
-import it.unimib.smoovie.model.Category;
 import it.unimib.smoovie.model.MovieModel;
 import it.unimib.smoovie.repository.MoviesRepository;
 
@@ -61,7 +58,7 @@ public class MovieViewModel extends ViewModel {
 
     public LiveData<List<MovieModel>> getNowPlayingMovies() {
         if (nowPlayingMovies.getValue() == null) {
-            disposableTopRatedMovies = moviesRepository.getNowPlayingMovies()
+            disposableNowPlayingMovies = moviesRepository.getNowPlayingMovies()
                     .subscribe(movieModelApiResponse -> {
                         nowPlayingMovies.postValue(movieModelApiResponse.movies);
                     });

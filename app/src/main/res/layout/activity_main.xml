@@ -6,62 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView_popular"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView_popularMovies"
+                android:name="it.unimib.smoovie.ui.PopularMoviesFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/popular_movie_category" />
+                android:layout_height="wrap_content" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_popular"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView_topRatedMovies"
+                android:name="it.unimib.smoovie.ui.TopRatedMoviesFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FF0000">
+                android:layout_height="wrap_content" />
 
-            </androidx.recyclerview.widget.RecyclerView>
-
-            <TextView
-                android:id="@+id/textView_topRated"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/top_rated_movie_category" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_topRated"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#AAFF00" />
-
-            <TextView
-                android:id="@+id/textView_topRated2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/now_playing_movie_category" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_nowPlaying"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView_nowPlayingMovies"
+                android:name="it.unimib.smoovie.ui.NowPlayingMoviesFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
