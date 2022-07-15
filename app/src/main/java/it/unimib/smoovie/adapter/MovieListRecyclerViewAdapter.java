@@ -5,26 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
 
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.model.MovieModel;
+import it.unimib.smoovie.utils.Constants;
 
 public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int NEWS_VIEW_TYPE = 0;
-    private static final int LOADING_VIEW_TYPE = 1;
-
-    private final Logger logger = Logger.getLogger(MovieListRecyclerViewAdapter.class.getName());
     private final List<MovieModel> movieModelList;
     private Context context;
 
@@ -39,35 +34,29 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         View view;
         context = parent.getContext();
 
-        if (viewType == NEWS_VIEW_TYPE) {
-            view = LayoutInflater.from(parent.getContext()).
-                    inflate(R.layout.recycler_view_movie_item, parent, false);
-            return new MovieViewHolder(view);
-        } else {
-            view = LayoutInflater.from(parent.getContext()).
-                    inflate(R.layout.news_loading_item, parent, false);
-            return new LoadingMovieViewHolder(view);
-        }
+        view = LayoutInflater.from(parent.getContext()).
+                inflate(R.layout.recycler_view_movie_item, parent, false);
+        return new MovieViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof MovieViewHolder) {
-            MovieViewHolder movieViewHolder = (MovieViewHolder) holder;
-            MovieModel model = movieModelList.get(position);
+        MovieViewHolder movieViewHolder = (MovieViewHolder) holder;
+        MovieModel model = movieModelList.get(position);
 
-            logger.info("onBindViewHolder for movie in position: " + position + " and with icon path: https://image.tmdb.org/t/p/original/" + model.posterPath);
-            Glide.with(context)
-                    .load("https://image.tmdb.org/t/p/original/" + model.posterPath)
-                    .into(movieViewHolder.getImageViewMovieIcon());
-        } else if (holder instanceof LoadingMovieViewHolder) {
-            ((LoadingMovieViewHolder) holder).activate();
-        }
+        this.loadImage(movieViewHolder, model);
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return movieModelList.get(position) == null ? LOADING_VIEW_TYPE : NEWS_VIEW_TYPE;
+    private void loadImage(MovieViewHolder holder, MovieModel model) {
+        CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(((MovieViewHolder) holder).getImageViewMovieIcon().getContext());
+        circularProgressDrawable.setStrokeWidth(5f);
+        circularProgressDrawable.setCenterRadius(30f);
+        circularProgressDrawable.start();
+
+        Glide.with(context)
+                .load(Constants.API_POSTER_URL + model.posterPath)
+                .placeholder(circularProgressDrawable)
+                .into(holder.getImageViewMovieIcon());
     }
 
     @Override
@@ -87,19 +76,6 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
         public ImageView getImageViewMovieIcon() {
             return imageViewMovieIcon;
-        }
-    }
-
-    public static class LoadingMovieViewHolder extends RecyclerView.ViewHolder {
-        private final ProgressBar progressBar;
-
-        LoadingMovieViewHolder(View view) {
-            super(view);
-            progressBar = view.findViewById(R.id.progressbar_loading_news);
-        }
-
-        public void activate() {
-            progressBar.setIndeterminate(true);
         }
     }
 }
