@@ -1,18 +1,20 @@
 package it.unimib.smoovie.adapter;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import it.unimib.smoovie.R;
 
-public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final List<String> categoryList;
 
@@ -34,8 +36,10 @@ public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.
         MovieCategoryViewAdapter.MovieCategoryViewHolder movieCategoryViewHolder = (MovieCategoryViewAdapter.MovieCategoryViewHolder) holder;
         String category = categoryList.get(position);
 
-        movieCategoryViewHolder.getButtonCategory()
-                .setText(category);
+        Button categoryButton = movieCategoryViewHolder.getButtonCategory();
+
+        categoryButton.setText(category);
+        categoryButton.setOnClickListener(new ButtonCategoryOnClickListener());
     }
 
     @Override
@@ -55,6 +59,18 @@ public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.
 
         public Button getButtonCategory() {
             return buttonCategory;
+        }
+    }
+
+    private final static class ButtonCategoryOnClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            Bundle bundle = new Bundle();
+            bundle.putString("link","http://yourlink.com/policy");
+
+            Navigation.findNavController(view)
+                    .navigate(R.id.resultsFragment, bundle);
         }
     }
 }
