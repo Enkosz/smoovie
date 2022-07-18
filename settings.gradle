@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://clojars.org/repo/" }
     }
 }
 rootProject.name = "smoovie"

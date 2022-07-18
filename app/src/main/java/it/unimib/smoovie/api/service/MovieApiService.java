@@ -21,4 +21,10 @@ public interface MovieApiService {
 
     @GET("movie/top_rated")
     Observable<ApiResponse<MovieModel>> fetchTopRatedMovies(@Query("api_key") String key);
+
+    @GET("search/movie")
+    Observable<ApiResponse<MovieModel>> fetchMoviesByQuery(@Query("api_key") String key, @Query("query") String query);
+
+    @GET("discover/movie")
+    Observable<ApiResponse<MovieModel>> fetchMoviesByGenre(@Query("api_key") String key, @Query("with_genres") Integer code);
 }

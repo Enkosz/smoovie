@@ -6,7 +6,9 @@ import io.reactivex.schedulers.Schedulers;
 import it.unimib.smoovie.api.service.MovieApiService;
 import it.unimib.smoovie.api.service.ServiceProvider;
 import it.unimib.smoovie.model.ApiResponse;
+import it.unimib.smoovie.model.MovieCategory;
 import it.unimib.smoovie.model.MovieModel;
+import it.unimib.smoovie.utils.Constants;
 
 public class MoviesRepository {
 
@@ -26,19 +28,31 @@ public class MoviesRepository {
     }
 
     public Observable<ApiResponse<MovieModel>> getPopularMovies() {
-        return movieApiService.fetchPopularMovies("cf29714667ee6f5b118a61f362a58378")
+        return movieApiService.fetchPopularMovies(Constants.API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Observable<ApiResponse<MovieModel>> getTopRatedMovies() {
-        return movieApiService.fetchTopRatedMovies("cf29714667ee6f5b118a61f362a58378")
+        return movieApiService.fetchTopRatedMovies(Constants.API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Observable<ApiResponse<MovieModel>> getNowPlayingMovies() {
-        return movieApiService.fetchNowPlayingMovies("cf29714667ee6f5b118a61f362a58378")
+        return movieApiService.fetchNowPlayingMovies(Constants.API_KEY)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<ApiResponse<MovieModel>> getMoviesByQuery(String query) {
+        return movieApiService.fetchMoviesByQuery(Constants.API_KEY, query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<ApiResponse<MovieModel>> getMoviesByCategory(MovieCategory category) {
+        return movieApiService.fetchMoviesByGenre(Constants.API_KEY, category.getCode())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
