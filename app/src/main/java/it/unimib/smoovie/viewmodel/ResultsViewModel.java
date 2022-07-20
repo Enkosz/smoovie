@@ -12,32 +12,28 @@ import it.unimib.smoovie.model.MovieCategory;
 import it.unimib.smoovie.model.MovieModel;
 import it.unimib.smoovie.repository.MoviesRepository;
 
-public class SearchResultsViewModel extends ViewModel {
+public class ResultsViewModel extends ViewModel {
 
     private final MutableLiveData<List<MovieModel>> searchResultMovieList;
 
     private Disposable disposableSearchResultMovieList;
 
-    public SearchResultsViewModel() {
+    public ResultsViewModel() {
         searchResultMovieList = new MutableLiveData<>();
     }
 
     private final MoviesRepository moviesRepository = ApplicationContainer.getInstance()
             .getMoviesRepository();
 
-    public LiveData<List<MovieModel>> getMoviesByQuery(String query) {
-        if (searchResultMovieList.getValue() == null) {
-            disposableSearchResultMovieList = moviesRepository.getMoviesByQuery(query)
-                    .subscribe(movieModelApiResponse -> {
-                        searchResultMovieList.postValue(movieModelApiResponse.movies);
-                    });
-        }
+    public LiveData<List<MovieModel>> getMoviesByQuery(String query, int page) {
+        disposableSearchResultMovieList = moviesRepository.getMoviesByQuery(query, page)
+                .subscribe(movieModelApiResponse -> searchResultMovieList.postValue(movieModelApiResponse.movies));
 
         return searchResultMovieList;
     }
 
-    public LiveData<List<MovieModel>> getMoviesByCategory(MovieCategory category) {
-        disposableSearchResultMovieList = moviesRepository.getMoviesByCategory(category)
+    public LiveData<List<MovieModel>> getMoviesByCategory(MovieCategory category, int page) {
+        disposableSearchResultMovieList = moviesRepository.getMoviesByCategory(category, page)
                 .subscribe(movieModelApiResponse -> searchResultMovieList.postValue(movieModelApiResponse.movies));
 
         return searchResultMovieList;

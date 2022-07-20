@@ -23,8 +23,8 @@ public interface MovieApiService {
     Observable<ApiResponse<MovieModel>> fetchTopRatedMovies(@Query("api_key") String key);
 
     @GET("search/movie")
-    Observable<ApiResponse<MovieModel>> fetchMoviesByQuery(@Query("api_key") String key, @Query("query") String query);
+    Observable<ApiResponse<MovieModel>> fetchMoviesByQuery(@Query("api_key") String key, @Query("query") String query, @Query("page") Integer page);
 
     @GET("discover/movie")
-    Observable<ApiResponse<MovieModel>> fetchMoviesByGenre(@Query("api_key") String key, @Query("with_genres") Integer code);
+    Observable<ApiResponse<MovieModel>> fetchMoviesByGenre(@Query("api_key") String key, @Query("with_genres") Integer code, @Query("page") Integer page);
 }

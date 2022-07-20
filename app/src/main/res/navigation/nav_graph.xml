@@ -14,6 +14,6 @@
         android:label="SearchFragment" />
     <fragment
         android:id="@+id/resultsFragment"
-        android:name="it.unimib.smoovie.ui.SearchResultsFragment"
+        android:name="it.unimib.smoovie.ui.ResultsFragment"
         android:label="ResultsFragment" />
 </navigation>

@@ -45,14 +45,14 @@ public class MoviesRepository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<ApiResponse<MovieModel>> getMoviesByQuery(String query) {
-        return movieApiService.fetchMoviesByQuery(Constants.API_KEY, query)
+    public Observable<ApiResponse<MovieModel>> getMoviesByQuery(String query, int page) {
+        return movieApiService.fetchMoviesByQuery(Constants.API_KEY, query, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<ApiResponse<MovieModel>> getMoviesByCategory(MovieCategory category) {
-        return movieApiService.fetchMoviesByGenre(Constants.API_KEY, category.getCode())
+    public Observable<ApiResponse<MovieModel>> getMoviesByCategory(MovieCategory category, int page) {
+        return movieApiService.fetchMoviesByGenre(Constants.API_KEY, category.getCode(), page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

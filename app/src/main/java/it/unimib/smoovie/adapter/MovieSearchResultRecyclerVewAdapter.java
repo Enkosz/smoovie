@@ -13,20 +13,21 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.model.MovieModel;
 import it.unimib.smoovie.utils.Constants;
 
-public class MovieSearchResultRecyclerVewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MovieSearchResultRecyclerVewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Notifiable<MovieModel> {
 
-    private final List<MovieModel> movieModelList;
     private final Context context;
+    private List<MovieModel> movieModelList;
 
-    public MovieSearchResultRecyclerVewAdapter(List<MovieModel> movieModelList, Context context) {
-        this.movieModelList = movieModelList;
+    public MovieSearchResultRecyclerVewAdapter(Context context) {
         this.context = context;
+        this.movieModelList = new ArrayList<>();
     }
 
     @NonNull
@@ -55,15 +56,24 @@ public class MovieSearchResultRecyclerVewAdapter extends RecyclerView.Adapter<Re
         circularProgressDrawable.setCenterRadius(30f);
         circularProgressDrawable.start();
 
-        Glide.with(context)
-                .load(Constants.API_POSTER_URL + model.posterPath)
-                .placeholder(circularProgressDrawable)
-                .into(imageViewPoster);
+        if(model.posterPath != null) {
+            Glide.with(context)
+                    .load(Constants.API_POSTER_URL + model.posterPath)
+                    .placeholder(circularProgressDrawable)
+                    .into(imageViewPoster);
+        }
     }
 
     @Override
     public int getItemCount() {
         return movieModelList.size();
+    }
+
+    @Override
+    public void addItems(List<MovieModel> items) {
+        int currentSize = this.getItemCount();
+        this.movieModelList.addAll(items);
+        this.notifyItemRangeChanged(currentSize, this.movieModelList.size() - 1);
     }
 
     public static class MovieSearchResultViewHolder extends RecyclerView.ViewHolder {
