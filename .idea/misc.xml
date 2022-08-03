@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/keyboard_back.xml" value="0.2685" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_movie_detail.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_popular_movies.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_popular_movies_recyclerview.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_results.xml" value="0.33" />

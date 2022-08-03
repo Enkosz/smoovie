@@ -8,4 +8,6 @@ public final class Constants {
 
     public static final String SEARCH_MOVIE_TITLE_BUNDLE_KEY = "SEARCH_MOVIE_TITLE";
     public static final String SEARCH_MOVIE_CATEGORY_BUNDLE_KEY = "SEARCH_MOVIE_CATEGORY";
+
+    public static final String MOVIE_DETAIL_ID_BUNDLE_KEY = "MOVIE_DETAIL_ID";
 }

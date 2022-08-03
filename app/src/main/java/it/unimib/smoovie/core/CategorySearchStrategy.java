@@ -1,4 +1,4 @@
-package it.unimib.smoovie.ui;
+package it.unimib.smoovie.core;
 
 import androidx.lifecycle.LiveData;
 
@@ -9,6 +9,7 @@ import it.unimib.smoovie.model.MovieModel;
 import it.unimib.smoovie.viewmodel.ResultsViewModel;
 
 public class CategorySearchStrategy implements SearchStrategy {
+
     private final ResultsViewModel viewModel;
     private final MovieCategory category;
 

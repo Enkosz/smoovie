@@ -1,6 +1,7 @@
 package it.unimib.smoovie.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
@@ -62,6 +65,17 @@ public class MovieSearchResultRecyclerVewAdapter extends RecyclerView.Adapter<Re
                     .placeholder(circularProgressDrawable)
                     .into(imageViewPoster);
         }
+
+        imageViewPoster.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY, model.id);
+
+            Navigation.findNavController(v)
+                .navigate(R.id.movieDetailFragment, bundle, new NavOptions.Builder()
+                        .setExitAnim(android.R.anim.fade_out)
+                        .setPopEnterAnim(android.R.anim.fade_in)
+                        .build());
+        });
     }
 
     @Override

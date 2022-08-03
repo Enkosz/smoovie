@@ -1,4 +1,4 @@
-package it.unimib.smoovie.ui;
+package it.unimib.smoovie.core;
 
 import android.os.Bundle;
 

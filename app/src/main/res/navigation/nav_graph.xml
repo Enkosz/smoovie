@@ -16,4 +16,8 @@
         android:id="@+id/resultsFragment"
         android:name="it.unimib.smoovie.ui.ResultsFragment"
         android:label="ResultsFragment" />
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="it.unimib.smoovie.ui.MovieDetailFragment"
+        android:label="MovieDetailFragment" />
 </navigation>

@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.core.SearchStrategy;
+import it.unimib.smoovie.core.SearchStrategyFactory;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.adapter.MovieSearchResultRecyclerVewAdapter;
 import it.unimib.smoovie.viewmodel.ResultsViewModel;
