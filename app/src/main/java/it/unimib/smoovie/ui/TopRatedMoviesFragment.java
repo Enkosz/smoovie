@@ -14,7 +14,7 @@ public class TopRatedMoviesFragment extends FeedMoviesFragment {
     }
 
     @Override
-    protected LiveData<List<MovieModel>> fetchMovies() {
-        return this.getViewModel().getTopRatedMovies();
+    protected LiveData<List<MovieModel>> fetchMovies(int page) {
+        return this.getViewModel().getTopRatedMovies(page);
     }
 }

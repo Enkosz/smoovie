@@ -15,13 +15,13 @@ public interface MovieApiService {
     Single<MovieDetailModel> fetchMovie(@Path("id") Long id, @Query("api_key") String key);
 
     @GET("movie/popular")
-    Single<ApiResponse<MovieModel>> fetchPopularMovies(@Query("api_key") String key);
+    Single<ApiResponse<MovieModel>> fetchPopularMovies(@Query("api_key") String key, @Query("page") Integer page);
 
     @GET("movie/now_playing")
-    Single<ApiResponse<MovieModel>> fetchNowPlayingMovies(@Query("api_key") String key);
+    Single<ApiResponse<MovieModel>> fetchNowPlayingMovies(@Query("api_key") String key, @Query("page") Integer page);
 
     @GET("movie/top_rated")
-    Single<ApiResponse<MovieModel>> fetchTopRatedMovies(@Query("api_key") String key);
+    Single<ApiResponse<MovieModel>> fetchTopRatedMovies(@Query("api_key") String key, @Query("page") Integer page);
 
     @GET("search/movie")
     Single<ApiResponse<MovieModel>> fetchMoviesByQuery(@Query("api_key") String key, @Query("query") String query, @Query("page") Integer page);

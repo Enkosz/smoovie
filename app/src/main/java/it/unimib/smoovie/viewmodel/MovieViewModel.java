@@ -34,35 +34,23 @@ public class MovieViewModel extends ViewModel {
     private final MoviesRepository moviesRepository = ApplicationContainer.getInstance()
             .getMoviesRepository();
 
-    public LiveData<List<MovieModel>> getPopularMovies() {
-        if (popularMovies.getValue() == null) {
-            disposablePopularMovies = moviesRepository.getPopularMovies()
-                    .subscribe(movieModelApiResponse -> {
-                        popularMovies.postValue(movieModelApiResponse.movies);
-                    });
-        }
+    public LiveData<List<MovieModel>> getPopularMovies(int page) {
+            disposablePopularMovies = moviesRepository.getPopularMovies(page)
+                    .subscribe(movieModelApiResponse -> popularMovies.postValue(movieModelApiResponse.movies));
 
         return popularMovies;
     }
 
-    public LiveData<List<MovieModel>> getTopRatedMovies() {
-        if (topRatedMovies.getValue() == null) {
-            disposableTopRatedMovies = moviesRepository.getTopRatedMovies()
-                    .subscribe(movieModelApiResponse -> {
-                        topRatedMovies.postValue(movieModelApiResponse.movies);
-                    });
-        }
+    public LiveData<List<MovieModel>> getTopRatedMovies(int page) {
+            disposableTopRatedMovies = moviesRepository.getTopRatedMovies(page)
+                    .subscribe(movieModelApiResponse -> topRatedMovies.postValue(movieModelApiResponse.movies));
 
         return topRatedMovies;
     }
 
-    public LiveData<List<MovieModel>> getNowPlayingMovies() {
-        if (nowPlayingMovies.getValue() == null) {
-            disposableNowPlayingMovies = moviesRepository.getNowPlayingMovies()
-                    .subscribe(movieModelApiResponse -> {
-                        nowPlayingMovies.postValue(movieModelApiResponse.movies);
-                    });
-        }
+    public LiveData<List<MovieModel>> getNowPlayingMovies(int page) {
+            disposableNowPlayingMovies = moviesRepository.getNowPlayingMovies(page)
+                    .subscribe(movieModelApiResponse -> nowPlayingMovies.postValue(movieModelApiResponse.movies));
 
         return nowPlayingMovies;
     }

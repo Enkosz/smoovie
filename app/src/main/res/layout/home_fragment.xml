@@ -22,19 +22,26 @@
                 android:id="@+id/fragmentContainerView_popularMovies"
                 android:name="it.unimib.smoovie.ui.PopularMoviesFragment"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView_topRatedMovies"
                 android:name="it.unimib.smoovie.ui.TopRatedMoviesFragment"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView_nowPlayingMovies"
                 android:name="it.unimib.smoovie.ui.NowPlayingMoviesFragment"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="?attr/actionBarSize" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

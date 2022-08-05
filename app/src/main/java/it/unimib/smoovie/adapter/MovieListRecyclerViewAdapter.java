@@ -12,19 +12,15 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
 
-import java.util.List;
-
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.model.MovieModel;
 import it.unimib.smoovie.utils.Constants;
 
-public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MovieListRecyclerViewAdapter extends AbstractNotifiableListRecyclerViewAdapter<MovieModel> {
 
-    private final List<MovieModel> movieModelList;
     private Context context;
 
-    public MovieListRecyclerViewAdapter(List<MovieModel> movieModelList, Context context) {
-        this.movieModelList = movieModelList;
+    public MovieListRecyclerViewAdapter(Context context) {
         this.context = context;
     }
 
@@ -42,13 +38,13 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MovieViewHolder movieViewHolder = (MovieViewHolder) holder;
-        MovieModel model = movieModelList.get(position);
+        MovieModel model = items.get(position);
 
         this.loadImage(movieViewHolder, model);
     }
 
     private void loadImage(MovieViewHolder holder, MovieModel model) {
-        CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(((MovieViewHolder) holder).getImageViewMovieIcon().getContext());
+        CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(holder.getImageViewMovieIcon().getContext());
         circularProgressDrawable.setStrokeWidth(5f);
         circularProgressDrawable.setCenterRadius(30f);
         circularProgressDrawable.start();
@@ -57,11 +53,6 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
                 .load(Constants.API_POSTER_URL + model.posterPath)
                 .placeholder(circularProgressDrawable)
                 .into(holder.getImageViewMovieIcon());
-    }
-
-    @Override
-    public int getItemCount() {
-        return movieModelList.size();
     }
 
     public static class MovieViewHolder extends RecyclerView.ViewHolder {

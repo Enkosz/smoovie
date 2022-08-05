@@ -16,21 +16,16 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.model.MovieModel;
 import it.unimib.smoovie.utils.Constants;
 
-public class MovieSearchResultRecyclerVewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Notifiable<MovieModel> {
+public class MovieSearchResultRecyclerVewAdapter extends AbstractNotifiableListRecyclerViewAdapter<MovieModel> {
 
     private final Context context;
-    private List<MovieModel> movieModelList;
 
     public MovieSearchResultRecyclerVewAdapter(Context context) {
         this.context = context;
-        this.movieModelList = new ArrayList<>();
     }
 
     @NonNull
@@ -45,7 +40,7 @@ public class MovieSearchResultRecyclerVewAdapter extends RecyclerView.Adapter<Re
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MovieSearchResultRecyclerVewAdapter.MovieSearchResultViewHolder movieSearchResultViewHolder = (MovieSearchResultRecyclerVewAdapter.MovieSearchResultViewHolder) holder;
-        MovieModel model = movieModelList.get(position);
+        MovieModel model = items.get(position);
 
         TextView textViewTitle = movieSearchResultViewHolder.getTextViewTitle();
         TextView textViewCategory = movieSearchResultViewHolder.getTextViewCategory();
@@ -76,18 +71,6 @@ public class MovieSearchResultRecyclerVewAdapter extends RecyclerView.Adapter<Re
                         .setPopEnterAnim(android.R.anim.fade_in)
                         .build());
         });
-    }
-
-    @Override
-    public int getItemCount() {
-        return movieModelList.size();
-    }
-
-    @Override
-    public void addItems(List<MovieModel> items) {
-        int currentSize = this.getItemCount();
-        this.movieModelList.addAll(items);
-        this.notifyItemRangeChanged(currentSize, this.movieModelList.size() - 1);
     }
 
     public static class MovieSearchResultViewHolder extends RecyclerView.ViewHolder {

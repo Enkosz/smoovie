@@ -35,20 +35,20 @@ public class MoviesRepository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<ApiResponse<MovieModel>> getPopularMovies() {
-        return movieApiService.fetchPopularMovies(Constants.API_KEY)
+    public Single<ApiResponse<MovieModel>> getPopularMovies(int page) {
+        return movieApiService.fetchPopularMovies(Constants.API_KEY, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<ApiResponse<MovieModel>> getTopRatedMovies() {
-        return movieApiService.fetchTopRatedMovies(Constants.API_KEY)
+    public Single<ApiResponse<MovieModel>> getTopRatedMovies(int page) {
+        return movieApiService.fetchTopRatedMovies(Constants.API_KEY, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<ApiResponse<MovieModel>> getNowPlayingMovies() {
-        return movieApiService.fetchNowPlayingMovies(Constants.API_KEY)
+    public Single<ApiResponse<MovieModel>> getNowPlayingMovies(int page) {
+        return movieApiService.fetchNowPlayingMovies(Constants.API_KEY, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

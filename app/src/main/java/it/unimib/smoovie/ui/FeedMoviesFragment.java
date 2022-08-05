@@ -15,14 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
+import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.model.MovieModel;
 import it.unimib.smoovie.viewmodel.MovieViewModel;
 
 public abstract class FeedMoviesFragment extends Fragment {
 
-    private MovieListRecyclerViewAdapter movieListRecyclerViewAdapter;
     private ViewModelProvider modelProvider;
 
     private final Integer fragmentId;
@@ -39,13 +38,22 @@ public abstract class FeedMoviesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(fragmentId, container, false);
         RecyclerView mRecyclerViewCountryNews = view.findViewById(recyclerViewId);
-        mRecyclerViewCountryNews.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        MovieListRecyclerViewAdapter adapter = new MovieListRecyclerViewAdapter(getContext());
 
-        fetchMovies()
-            .observe(getViewLifecycleOwner(), movieModels -> {
-                movieListRecyclerViewAdapter = new MovieListRecyclerViewAdapter(movieModels, getContext());
-                mRecyclerViewCountryNews.setAdapter(movieListRecyclerViewAdapter);
-            });
+        mRecyclerViewCountryNews.setAdapter(adapter);
+        mRecyclerViewCountryNews.setLayoutManager(layoutManager);
+
+        EndlessRecyclerOnScrollListener scrollListener = new EndlessRecyclerOnScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int current_page) {
+                fetchMovies(current_page);
+            }
+        };
+
+        mRecyclerViewCountryNews.addOnScrollListener(scrollListener);
+        fetchMovies(1)
+            .observe(getViewLifecycleOwner(), adapter::addItems);
 
         return view;
     }
@@ -57,5 +65,5 @@ public abstract class FeedMoviesFragment extends Fragment {
         return modelProvider.get(MovieViewModel.class);
     }
 
-    protected abstract LiveData<List<MovieModel>> fetchMovies();
+    protected abstract LiveData<List<MovieModel>> fetchMovies(int page);
 }
