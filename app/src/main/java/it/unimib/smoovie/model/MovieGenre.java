@@ -1,7 +1,7 @@
 package it.unimib.smoovie.model;
 
 
-public enum MovieCategory {
+public enum MovieGenre {
 
     ACTION("ACTION", 28),
     ADVENTURE("ADVENTURE", 12),
@@ -10,7 +10,7 @@ public enum MovieCategory {
     private final String category;
     private final Integer code;
 
-    MovieCategory(final String category, final Integer code) {
+    MovieGenre(final String category, final Integer code) {
         this.category = category;
         this.code = code;
     }

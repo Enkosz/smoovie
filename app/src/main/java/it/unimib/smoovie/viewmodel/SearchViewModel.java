@@ -7,17 +7,17 @@ import androidx.lifecycle.ViewModel;
 import java.util.Arrays;
 import java.util.List;
 
-import it.unimib.smoovie.model.MovieCategory;
+import it.unimib.smoovie.model.MovieGenre;
 
 public class SearchViewModel extends ViewModel {
 
-    private final LiveData<List<MovieCategory>> movieCategoryList;
+    private final LiveData<List<MovieGenre>> movieCategoryList;
 
     public SearchViewModel() {
-        movieCategoryList = new MutableLiveData<>(Arrays.asList(MovieCategory.values()));
+        movieCategoryList = new MutableLiveData<>(Arrays.asList(MovieGenre.values()));
     }
 
-    public LiveData<List<MovieCategory>> getMovieCategoryList() {
+    public LiveData<List<MovieGenre>> getMovieCategoryList() {
         return movieCategoryList;
     }
 }

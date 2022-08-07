@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import it.unimib.smoovie.model.MovieModel;
+import it.unimib.smoovie.model.MovieModelCompact;
 
 public interface SearchStrategy {
 
-    LiveData<List<MovieModel>> search(int page);
+    LiveData<List<MovieModelCompact>> search(int page);
 }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -16,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.smoovie.R;
-import it.unimib.smoovie.model.MovieCategory;
+import it.unimib.smoovie.model.MovieGenre;
 import it.unimib.smoovie.utils.Constants;
 
-public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Notifiable<MovieCategory> {
+public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Notifiable<MovieGenre> {
 
-    private List<MovieCategory> categoryList;
+    private List<MovieGenre> categoryList;
 
     public MovieCategoryViewAdapter() {
         this.categoryList = new ArrayList<>();
@@ -39,7 +38,7 @@ public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MovieCategoryViewAdapter.MovieCategoryViewHolder movieCategoryViewHolder = (MovieCategoryViewAdapter.MovieCategoryViewHolder) holder;
-        MovieCategory category = categoryList.get(position);
+        MovieGenre category = categoryList.get(position);
 
         Button categoryButton = movieCategoryViewHolder.getButtonCategory();
 
@@ -54,7 +53,7 @@ public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.
 
     @SuppressLint("NotifyDataSetChanged")
     @Override
-    public void addItems(List<MovieCategory> items) {
+    public void addItems(List<MovieGenre> items) {
         this.categoryList = items;
 
         this.notifyDataSetChanged();
@@ -77,16 +76,16 @@ public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.
 
     private final static class ButtonCategoryOnClickListener implements View.OnClickListener {
 
-        private final MovieCategory category;
+        private final MovieGenre category;
 
-        public ButtonCategoryOnClickListener(MovieCategory category) {
+        public ButtonCategoryOnClickListener(MovieGenre category) {
             this.category = category;
         }
 
         @Override
         public void onClick(View view) {
             Bundle bundle = new Bundle();
-            bundle.putString(Constants.SEARCH_MOVIE_CATEGORY_BUNDLE_KEY, category.getCategory());
+            bundle.putString(Constants.SEARCH_MOVIE_GENRE_BUNDLE_KEY, category.getCategory());
 
             Navigation.findNavController(view)
                     .navigate(R.id.resultsFragment, bundle);

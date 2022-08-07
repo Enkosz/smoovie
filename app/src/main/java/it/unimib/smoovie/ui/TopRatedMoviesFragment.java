@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import it.unimib.smoovie.R;
-import it.unimib.smoovie.model.MovieModel;
+import it.unimib.smoovie.model.MovieModelCompact;
 
 public class TopRatedMoviesFragment extends FeedMoviesFragment {
 
@@ -14,7 +14,7 @@ public class TopRatedMoviesFragment extends FeedMoviesFragment {
     }
 
     @Override
-    protected LiveData<List<MovieModel>> fetchMovies(int page) {
+    protected LiveData<List<MovieModelCompact>> fetchMovies(int page) {
         return this.getViewModel().getTopRatedMovies(page);
     }
 }

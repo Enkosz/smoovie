@@ -13,10 +13,10 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 import com.bumptech.glide.Glide;
 
 import it.unimib.smoovie.R;
-import it.unimib.smoovie.model.MovieModel;
+import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.utils.Constants;
 
-public class MovieListRecyclerViewAdapter extends AbstractNotifiableListRecyclerViewAdapter<MovieModel> {
+public class MovieListRecyclerViewAdapter extends AbstractNotifiableListRecyclerViewAdapter<MovieModelCompact> {
 
     private Context context;
 
@@ -38,12 +38,12 @@ public class MovieListRecyclerViewAdapter extends AbstractNotifiableListRecycler
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MovieViewHolder movieViewHolder = (MovieViewHolder) holder;
-        MovieModel model = items.get(position);
+        MovieModelCompact model = items.get(position);
 
         this.loadImage(movieViewHolder, model);
     }
 
-    private void loadImage(MovieViewHolder holder, MovieModel model) {
+    private void loadImage(MovieViewHolder holder, MovieModelCompact model) {
         CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(holder.getImageViewMovieIcon().getContext());
         circularProgressDrawable.setStrokeWidth(5f);
         circularProgressDrawable.setCenterRadius(30f);

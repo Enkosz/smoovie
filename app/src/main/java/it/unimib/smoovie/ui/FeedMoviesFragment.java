@@ -17,7 +17,7 @@ import java.util.List;
 
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
-import it.unimib.smoovie.model.MovieModel;
+import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.viewmodel.MovieViewModel;
 
 public abstract class FeedMoviesFragment extends Fragment {
@@ -65,5 +65,5 @@ public abstract class FeedMoviesFragment extends Fragment {
         return modelProvider.get(MovieViewModel.class);
     }
 
-    protected abstract LiveData<List<MovieModel>> fetchMovies(int page);
+    protected abstract LiveData<List<MovieModelCompact>> fetchMovies(int page);
 }

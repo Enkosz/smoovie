@@ -3,23 +3,13 @@ package it.unimib.smoovie.ui;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.List;
-import java.util.logging.Logger;
-
 import it.unimib.smoovie.R;
-import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
-import it.unimib.smoovie.model.MovieModel;
-import it.unimib.smoovie.viewmodel.MovieViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

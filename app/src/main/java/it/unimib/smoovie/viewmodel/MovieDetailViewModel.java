@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import io.reactivex.disposables.Disposable;
-import it.unimib.smoovie.model.MovieDetailModel;
+import it.unimib.smoovie.model.MovieModelExtended;
 import it.unimib.smoovie.repository.MoviesRepository;
 
 public class MovieDetailViewModel extends ViewModel {
 
-    private final MutableLiveData<MovieDetailModel> movieDetail;
+    private final MutableLiveData<MovieModelExtended> movieDetail;
     private final MoviesRepository moviesRepository = MoviesRepository.getInstance();
 
     private Disposable disposableMovieDetail;
@@ -19,7 +19,7 @@ public class MovieDetailViewModel extends ViewModel {
         movieDetail = new MutableLiveData<>();
     }
 
-    public LiveData<MovieDetailModel> getMovieDetailById(Long id) {
+    public LiveData<MovieModelExtended> getMovieDetailById(Long id) {
         disposableMovieDetail = moviesRepository.getMovieById(id)
                 .subscribe(movieDetail::postValue);
 

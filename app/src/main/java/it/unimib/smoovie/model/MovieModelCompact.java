@@ -2,7 +2,7 @@ package it.unimib.smoovie.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class MovieModel {
+public class MovieModelCompact {
 
     public Long id;
     public String title;

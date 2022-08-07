@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import it.unimib.smoovie.core.SearchStrategy;
-import it.unimib.smoovie.model.MovieModel;
+import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.viewmodel.ResultsViewModel;
 
 public class TitleSearchStrategy implements SearchStrategy {
@@ -19,7 +18,7 @@ public class TitleSearchStrategy implements SearchStrategy {
     }
 
     @Override
-    public LiveData<List<MovieModel>> search(int page) {
+    public LiveData<List<MovieModelCompact>> search(int page) {
        return viewModel.getMoviesByQuery(query, page);
     }
 }
