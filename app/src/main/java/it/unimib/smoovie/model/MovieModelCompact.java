@@ -9,4 +9,7 @@ public class MovieModelCompact {
 
     @SerializedName("poster_path")
     public String posterPath;
+
+    @SerializedName("backdrop_path")
+    public String backdropPath;
 }

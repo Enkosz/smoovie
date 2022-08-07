@@ -28,4 +28,7 @@ public interface MovieApiService {
 
     @GET("discover/movie")
     Single<ApiResponse<MovieModelCompact>> fetchMoviesByGenre(@Query("api_key") String key, @Query("with_genres") Integer code, @Query("page") Integer page);
+
+    @GET("movie/{id}/similar")
+    Single<ApiResponse<MovieModelCompact>> fetchSimilarMovies(@Path("id") Long id, @Query("api_key") String key, @Query("page") Integer page);
 }

@@ -63,4 +63,10 @@ public class MoviesRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    public Single<ApiResponse<MovieModelCompact>> getSimilarMoviesOfMovie(Long movieId, int page) {
+        return movieApiService.fetchSimilarMovies(movieId, Constants.API_KEY, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 }
