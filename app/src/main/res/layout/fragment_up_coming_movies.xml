@@ -2,17 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?colorPrimaryDark"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView_nowPlayingMovies_category"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="@string/now_playing_movie_category" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/now_playing_movie_category"
+        android:textColor="@color/white_200" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_nowPlayingMovies"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 </LinearLayout>
