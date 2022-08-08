@@ -18,5 +18,6 @@
         <item name="android:fontFamily">@font/montserrat_bold</item>
         <item name="android:itemBackground">@color/black_200</item>
         <item name="android:textColor">@color/white_200</item>
+        <item name="colorControlNormal">@color/white_200</item>
     </style>
 </resources>
