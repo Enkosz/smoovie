@@ -27,7 +27,6 @@ public abstract class FeedMoviesFragment extends Fragment {
     private final Integer fragmentId;
     private final Integer recyclerViewId;
 
-
     public FeedMoviesFragment(Integer fragmentId, Integer recyclerViewId) {
         this.fragmentId = fragmentId;
         this.recyclerViewId = recyclerViewId;

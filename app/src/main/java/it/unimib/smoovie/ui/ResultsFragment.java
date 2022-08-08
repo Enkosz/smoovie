@@ -71,8 +71,8 @@ public class ResultsFragment extends Fragment {
         };
 
         recyclerView.addOnScrollListener(scrollListener);
-        backButton.setOnClickListener(view -> Navigation.findNavController(view)
-                .navigate(R.id.searchFragment));
+        backButton.setOnClickListener(v -> Navigation.findNavController(v)
+                .popBackStack());
 
         // Fetch the first page of data
         searchStrategy.search(1)

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class MovieDetailFragment extends Fragment {
     private TextView textViewMovieRuntime;
     private TextView textViewMovieOverview;
     private RecyclerView recyclerViewMovieSuggestions;
+    private ImageButton imageButtonBackNavigation;
 
     @Nullable
     @Override
@@ -46,6 +48,7 @@ public class MovieDetailFragment extends Fragment {
         textViewMovieRuntime = view.findViewById(R.id.textView_movieDetail_runtime);
         textViewMovieOverview = view.findViewById(R.id.textView_movieDetail_overview);
         recyclerViewMovieSuggestions = view.findViewById(R.id.recyclerView_movieDetail_suggestions);
+        imageButtonBackNavigation = view.findViewById(R.id.imageButton_movieDetail_back);
 
         setupUI();
         return view;
@@ -73,6 +76,8 @@ public class MovieDetailFragment extends Fragment {
         recyclerViewMovieSuggestions.setLayoutManager(layoutManager);
         recyclerViewMovieSuggestions.setAdapter(adapter);
 
+        imageButtonBackNavigation.setOnClickListener(v -> Navigation.findNavController(v)
+                .popBackStack());
 
         EndlessRecyclerOnScrollListener scrollListener = new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
