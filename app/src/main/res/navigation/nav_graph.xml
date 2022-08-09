@@ -35,4 +35,9 @@
         android:id="@+id/movieDetailFragment"
         android:name="it.unimib.smoovie.ui.MovieDetailFragment"
         android:label="MovieDetailFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="it.unimib.smoovie.ui.SettingsFragment"
+        android:label="SettingsFragment"
+        />
 </navigation>
