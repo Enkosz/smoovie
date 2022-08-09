@@ -10,4 +10,5 @@
     <string name="movie_genre_fantasy">Fantasy</string>
 
     <string name="movie_search_query_result_title">Results for "%1$s"</string>
+    <string name="movie_detail_runtime">%1$dh %2$dm</string>
 </resources>

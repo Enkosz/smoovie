@@ -18,4 +18,12 @@ public class MovieModelExtended extends MovieModelCompact {
 
     @SerializedName("release_date")
     public String releaseDate;
+
+    public Integer getRuntimeHours() {
+        return runtime / 60;
+    }
+
+    public Integer getRuntimeMinutes() {
+        return runtime % 60;
+    }
 }

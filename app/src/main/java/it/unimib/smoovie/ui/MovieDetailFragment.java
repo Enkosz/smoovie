@@ -63,8 +63,8 @@ public class MovieDetailFragment extends Fragment {
 
                     textViewMovieDetailTitle.setText(movieModelExtended.title);
                     textViewMovieReleaseDate.setText(movieModelExtended.releaseDate);
-                    textViewMovieRuntime.setText(String.valueOf(movieModelExtended.runtime));
                     textViewMovieOverview.setText(movieModelExtended.overview);
+                    textViewMovieRuntime.setText(getString(R.string.movie_detail_runtime, movieModelExtended.getRuntimeHours(), movieModelExtended.getRuntimeMinutes()));
 
                     Glide.with(requireContext())
                             .load(Constants.API_POSTER_URL + movieModelExtended.backdropPath)
