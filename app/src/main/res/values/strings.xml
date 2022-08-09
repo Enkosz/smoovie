@@ -3,4 +3,11 @@
     <string name="popular_movie_category">Popular</string>
     <string name="top_rated_movie_category">Top Rated</string>
     <string name="now_playing_movie_category">Now Playing</string>
+    <string name="search_movie">Search movie</string>
+
+    <string name="movie_genre_action">Action</string>
+    <string name="movie_genre_adventure">Adventure</string>
+    <string name="movie_genre_fantasy">Fantasy</string>
+
+    <string name="movie_search_query_result_title">Results for "%1$s"</string>
 </resources>

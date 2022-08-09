@@ -21,4 +21,9 @@ public class TitleSearchStrategy implements SearchStrategy {
     public LiveData<List<MovieModelCompact>> search(int page) {
        return viewModel.getMoviesByQuery(query, page);
     }
+
+    @Override
+    public String getQuery() {
+        return query;
+    }
 }

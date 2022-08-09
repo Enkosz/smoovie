@@ -48,7 +48,7 @@ public class SearchFragment extends Fragment {
         layoutManager.setJustifyContent(JustifyContent.CENTER);
         layoutManager.setAlignItems(AlignItems.FLEX_START);
 
-        viewAdapter = new MovieCategoryViewAdapter();
+        viewAdapter = new MovieCategoryViewAdapter(requireContext());
         recyclerViewSearch.setLayoutManager(layoutManager);
         recyclerViewSearch.setAdapter(viewAdapter);
 

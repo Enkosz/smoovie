@@ -1,5 +1,6 @@
 package it.unimib.smoovie.core;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import it.unimib.smoovie.model.MovieGenre;
@@ -14,10 +15,10 @@ public class SearchStrategyFactory {
         this.viewModel = viewModel;
     }
 
-    public SearchStrategy getStrategyByArguments(Bundle bundle) {
+    public SearchStrategy getStrategyByArguments(Bundle bundle, final Context context) {
         if(bundle.getString(Constants.SEARCH_MOVIE_TITLE_BUNDLE_KEY) != null)
             return new TitleSearchStrategy(viewModel, bundle.getString(Constants.SEARCH_MOVIE_TITLE_BUNDLE_KEY));
         else
-            return new GenreSearchStrategy(viewModel, MovieGenre.valueOf(bundle.getString(Constants.SEARCH_MOVIE_GENRE_BUNDLE_KEY)));
+            return new GenreSearchStrategy(viewModel, MovieGenre.valueOf(bundle.getString(Constants.SEARCH_MOVIE_GENRE_BUNDLE_KEY)), context);
     }
 }

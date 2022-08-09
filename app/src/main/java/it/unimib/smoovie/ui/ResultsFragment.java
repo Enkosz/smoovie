@@ -61,7 +61,8 @@ public class ResultsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         if(getArguments() == null) return;
-        SearchStrategy searchStrategy = searchStrategyFactory.getStrategyByArguments(getArguments());
+        SearchStrategy searchStrategy = searchStrategyFactory.getStrategyByArguments(getArguments(), requireContext());
+        textViewSearchQuery.setText(getString(R.string.movie_search_query_result_title, searchStrategy.getQuery()));
 
         EndlessRecyclerOnScrollListener scrollListener = new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override

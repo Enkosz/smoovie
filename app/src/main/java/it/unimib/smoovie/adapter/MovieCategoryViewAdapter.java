@@ -1,6 +1,8 @@
 package it.unimib.smoovie.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +23,11 @@ import it.unimib.smoovie.utils.Constants;
 public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Notifiable<MovieGenre> {
 
     private List<MovieGenre> categoryList;
+    private final Context context;
 
-    public MovieCategoryViewAdapter() {
+    public MovieCategoryViewAdapter(Context context) {
         this.categoryList = new ArrayList<>();
+        this.context = context;
     }
 
     @NonNull
@@ -41,8 +45,9 @@ public class MovieCategoryViewAdapter extends RecyclerView.Adapter<RecyclerView.
         MovieGenre category = categoryList.get(position);
 
         Button categoryButton = movieCategoryViewHolder.getButtonCategory();
+        Resources resources = context.getResources();
 
-        categoryButton.setText(category.getCategory());
+        categoryButton.setText(resources.getIdentifier(String.format("movie_genre_%s", category.getCategory().toLowerCase()), "string", context.getPackageName()));
         categoryButton.setOnClickListener(new ButtonCategoryOnClickListener(category));
     }
 
