@@ -1,4 +1,6 @@
 package it.unimib.smoovie.ui;
+import android.util.Log;
+import android.view.View;
 
 import android.os.Bundle;
 import android.view.MenuItem;
