@@ -33,4 +33,7 @@
     <string name="settings_header_about">ABOUT</string>
     <string name="settings_need_help">Need Help?</string>
     <string name="settings_log_out">Log Out</string>
+    <string name="settings_version">Version 1.0</string>
+    <string name="settings_tos">Terms of Service</string>
+    <string name="settings_privacy_policy">Privacy Policy</string>
 </resources>

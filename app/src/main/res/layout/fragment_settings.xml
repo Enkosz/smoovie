@@ -78,7 +78,7 @@
                 android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:paddingTop="2dp"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16"
@@ -322,7 +322,30 @@
                 android:layout_marginTop="11dp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/gray_200" />
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/settings_version"
+                android:textAlignment="center"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/gray_400"
+                />
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:text="@string/settings_tos"
+                 android:textAlignment="center"
+                 android:layout_marginTop="5dp"
+                 android:textColor="@color/red_400"
+                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/settings_privacy_policy"
+                android:textAlignment="center"
+                android:textColor="@color/red_400"
+                android:layout_marginTop="5dp"
+                />
         </LinearLayout>
 
 
