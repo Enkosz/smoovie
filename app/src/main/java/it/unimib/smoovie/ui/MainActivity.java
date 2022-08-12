@@ -25,7 +25,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import it.unimib.smoovie.R;
 
-public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,34 +40,5 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
         // For the BottomNavigationView
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
-
-        SwitchCompat switch_mature = findViewById(R.id.mature_content);
-
-        if (switch_mature != null) {
-            switch_mature.setOnCheckedChangeListener(this);
-            Log.i("sucapipo", "set!");
-        }
-//    switch_mature.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-////        @Override
-////        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-////            Log.v("Switch state", ""+isChecked);
-////        }
-//    });
-
-//        SharedPreferences settings = getSharedPreferences("CoolPreferences", 0);
-//        SharedPreferences.Editor editor = settings.edit();
-//        editor.putString("show_mature_content", "true");
-//        editor.commit();
-//
-//        String silent = settings.getString("show_mature_content", "value");
-//        Log.i("sucapipo", silent);
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        Log.v("Switch state", "" + isChecked);
-        Log.i("sucapipo", "" + isChecked);
-        Toast.makeText(this, "The Switch is " + (isChecked ? "on" : "off"),
-                Toast.LENGTH_SHORT).show();
     }
 }

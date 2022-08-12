@@ -192,13 +192,12 @@
                     android:text="@string/settings_show_mature_content" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:clickable="true"
+                    android:id="@+id/mature_content"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="5dp"
-                    android:id="@+id/mature_content"
-                    />
+                    android:clickable="true" />
             </RelativeLayout>
 
             <View
