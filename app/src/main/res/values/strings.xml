@@ -25,7 +25,7 @@
     <string name="settings_preview_subtitles_language">English</string>
     <string name="settings_header_functionalities">APP EXPERIENCE</string>
     <string name="settings_show_mature_content">Show Mature Content</string>
-    <string name="settings_streaming_mobile">Stream Using Cellular</string>
+    <string name="settings_streaming_cellular">Stream Using Cellular</string>
     <string name="settings_notifications">Notifications</string>
     <string name="settings_connected_apps">Connected Apps</string>
     <string name="settings_header_privacy">PRIVACY</string>
