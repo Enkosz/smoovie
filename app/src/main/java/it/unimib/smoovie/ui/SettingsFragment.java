@@ -37,13 +37,12 @@ public class SettingsFragment extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
                     editor.putBoolean("showMature", true);
-                    editor.commit();
                     Log.i("mature", "true");
                 } else {
                     editor.putBoolean("showMature", false);
-                    editor.commit();
                     Log.i("mature", "false");
                 }
+                editor.apply();
             }
         });
 
@@ -53,17 +52,15 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
-                    editor.putBoolean("showMature", true);
-                    editor.commit();
+                    editor.putBoolean("streamCellular", true);
                     Log.i("cellular", "true");
                 } else {
                     editor.putBoolean("streamCellular", false);
-                    editor.commit();
                     Log.i("cellular", "false");
                 }
+                editor.apply();
             }
         });
         return view;
-
     }
 }

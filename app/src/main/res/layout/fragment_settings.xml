@@ -139,6 +139,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center_vertical"
+                android:text="@string/settings_log_out" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/gray_200" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/settings_header_general"
                 android:textColor="@color/gray_200" />
@@ -236,6 +250,8 @@
                 android:background="@color/gray_200" />
 
             <TextView
+                android:clickable="true"
+                android:id="@+id/settingsNotifications"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -248,45 +264,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical"
-                android:paddingTop="2dp"
-                android:text="@string/settings_connected_apps"
-                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/gray_200" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/settings_header_privacy"
-                android:textColor="@color/gray_200" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:gravity="center_vertical"
-                android:paddingTop="2dp"
-                android:text="@string/settings_sell_personal_information"
-                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/gray_200" />
 
@@ -305,20 +282,6 @@
                 android:paddingTop="2dp"
                 android:text="@string/settings_need_help"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical"
-                android:text="@string/settings_log_out" />
 
             <View
                 android:layout_width="match_parent"
