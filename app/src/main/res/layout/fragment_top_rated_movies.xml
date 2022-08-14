@@ -15,8 +15,16 @@
         android:text="@string/top_rated_movie_category"
         android:textColor="@color/white_200" />
 
+    <ProgressBar
+        android:id="@+id/progressBar_nowPlayingMovies"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_topRatedMovies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 </LinearLayout>

@@ -10,7 +10,7 @@ import it.unimib.smoovie.model.MovieModelCompact;
 public class TopRatedMoviesFragment extends FeedMoviesFragment {
 
     public TopRatedMoviesFragment() {
-        super(R.layout.fragment_top_rated_movies, R.id.recyclerView_topRatedMovies);
+        super(R.layout.fragment_top_rated_movies, R.id.recyclerView_topRatedMovies, R.id.progressBar_nowPlayingMovies);
     }
 
     @Override

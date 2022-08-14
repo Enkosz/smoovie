@@ -10,7 +10,7 @@ import it.unimib.smoovie.model.MovieModelCompact;
 public class PopularMoviesFragment extends FeedMoviesFragment {
 
     public PopularMoviesFragment() {
-        super(R.layout.fragment_popular_movies, R.id.recyclerView_nowPlayingMovies);
+        super(R.layout.fragment_popular_movies, R.id.recyclerView_nowPlayingMovies, R.id.progressBar_popularMovies);
     }
 
     @Override
