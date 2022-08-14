@@ -4,24 +4,34 @@
     <string name="top_rated_movie_category">Migliori</string>
     <string name="now_playing_movie_category">In Riproduzione</string>
     <string name="search_movie">Cerca Film</string>
+
     <string name="movie_genre_action">Azione</string>
     <string name="movie_genre_adventure">Avventura</string>
     <string name="movie_genre_fantasy">Fantasia</string>
     <string name="movie_search_query_result_title">Risultati per %1$s</string>
-    <string name="settings_title">Il Mio Account</string>
-    <string name="settings_subscription_type">Abbonamento</string>
-    <string name="settings_modify_email">Cambia Mail</string>
-    <string name="settings_modify_password">Cambia Password</string>
-    <string name="settings_header_general">GENERALE</string>
-    <string name="settings_subtitles_language">Lingua Sottotitoli</string>
-    <string name="settings_header_functionalities">ESPERIENZA APP</string>
-    <string name="settings_show_mature_content">Mostra Contenuti per Adulti</string>
-    <string name="settings_streaming_mobile">Riproduci tramite Dati Cellulare</string>
+
+    <string name="settings_title">Il mio account</string>
+    <string name="settings_header_account_profile">ACCOUNT &amp; PROFILO</string>
+    <string name="settings_subscription_type">Tipo di iscrizione</string>
+    <string name="settings_modify_email">Modifica l\'email</string>
+    <string name="settings_modify_password">Modifica la password</string>
+    <string name="settings_header_general">IMPOSTAZIONI GENERALI</string>
+    <string name="settings_subtitles_language">Lingua dei sottotitoli</string>
+    <string name="settings_header_functionalities">IMPOSTAZIONI DELLA APP</string>
+    <string name="settings_show_mature_content">Mostra i contenuti vietati ai minori</string>
+    <string name="settings_streaming_cellular">Visualizzazione in streaming su rete</string>
     <string name="settings_notifications">Notifiche</string>
     <string name="settings_connected_apps">App Connesse</string>
     <string name="settings_sell_personal_information">Non vendere le mie informazioni</string>
-    <string name="settings_header_about">ALTRO</string>
-    <string name="settings_need_help">Bisogno di Aiuto?</string>
+    <string name="settings_header_about">INFORMAZIONI</string>
+    <string name="settings_need_help">Hai bisogno di Aiuto?</string>
     <string name="settings_log_out">Esci</string>
     <string name="settings_version">Versione</string>
+    <string name="settings_tos">Termini di Servizio</string>
+    <string name="settings_privacy_policy">Informativa sulla Privacy</string>
+
+    <string name="notifications_title">Notifiche</string>
+    <string name="notifications_general">Aggiornamenti generali</string>
+    <string name="notifications_content">Aggiornamenti sui contenuti</string>
+    <string name="notifications_promotional">Aggiornamenti promozionali</string>
 </resources>
