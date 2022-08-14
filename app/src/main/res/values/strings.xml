@@ -36,4 +36,9 @@
     <string name="settings_version">Version 1.0</string>
     <string name="settings_tos">Terms of Service</string>
     <string name="settings_privacy_policy">Privacy Policy</string>
+
+    <string name="notifications_title">Notifications</string>
+    <string name="notifications_general">General Updates</string>
+    <string name="notifications_content">Content Updates</string>
+    <string name="notifications_promotional">Promotional Updates</string>
 </resources>
