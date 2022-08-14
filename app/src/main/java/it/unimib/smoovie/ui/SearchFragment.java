@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -24,12 +25,13 @@ import it.unimib.smoovie.adapter.MovieCategoryViewAdapter;
 import it.unimib.smoovie.utils.Constants;
 import it.unimib.smoovie.viewmodel.SearchViewModel;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements ProgressDisplay {
 
     private SearchViewModel searchViewModel;
     private RecyclerView recyclerViewSearch;
     private MovieCategoryViewAdapter viewAdapter;
     private SearchView searchView;
+    private ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -37,7 +39,9 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         recyclerViewSearch = view.findViewById(R.id.recyclerView_search);
         searchView = view.findViewById(R.id.searchView);
+        progressBar = view.findViewById(R.id.progressBar_search);
 
+        showProgress();
         setupUI();
         setupViewModel();
         return view;
@@ -79,6 +83,21 @@ public class SearchFragment extends Fragment {
         searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
         searchViewModel.getMovieCategoryList()
-            .observe(getViewLifecycleOwner(), movieCategories -> viewAdapter.addItems(movieCategories));
+            .observe(getViewLifecycleOwner(), movieCategories -> {
+                viewAdapter.addItems(movieCategories);
+                hideProgress();
+            });
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerViewSearch.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+        recyclerViewSearch.setVisibility(View.VISIBLE);
     }
 }
