@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -40,7 +42,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
     private ImageButton imageButtonBackNavigation;
 
     private LinearLayout movieDetailContainer;
-    private LinearLayout loadingContainer;
+    private ConstraintLayout loadingContainer;
 
     @Nullable
     @Override
