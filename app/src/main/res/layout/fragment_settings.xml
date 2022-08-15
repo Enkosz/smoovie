@@ -9,9 +9,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="12dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,12 +30,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
+                android:paddingStart="12dp"
                 android:text="@string/settings_title"
-                android:textSize="25sp" />
+                android:textColor="@color/white"
+                android:textSize="26sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingStart="12dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="100dp"
@@ -53,7 +56,7 @@
                         android:contentDescription="@string/settings_image_description"
                         android:gravity="center_vertical"
                         android:padding="0dp"
-                        android:src="@drawable/logo_white" />
+                        android:src="@drawable/logo_sus" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -61,293 +64,297 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="120dp"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="40dp"
                     android:gravity="center_vertical"
-                    android:text="@string/settings_username" />
+                    android:text="@string/settings_username"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
             </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:paddingStart="@dimen/button_padding"
                 android:text="@string/settings_header_account_profile"
-                android:textColor="@color/gray_200" />
+                android:textColor="@color/gray_400"
+                android:textSize="@dimen/text_size" />
 
             <TextView
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:clickable="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
-                android:paddingTop="2dp"
-                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16"
-                android:text="@string/settings_subscription_type" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:gravity="center_vertical"
-                    android:paddingTop="2dp"
-                    android:text="@string/settings_modify_email"
-                    app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="25dp"
-                    android:text="@string/settings_preview_email"
-                    android:textColor="@color/gray_400" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:gravity="center_vertical"
-                android:paddingTop="2dp"
-                android:text="@string/settings_modify_password"
+                android:padding="@dimen/button_padding"
+                android:text="@string/settings_subscription_type"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/settings_header_general"
-                android:textColor="@color/gray_200" />
+                android:background="@color/gray" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/button_padding">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
-                    android:paddingTop="2dp"
-                    android:text="@string/settings_subtitles_language"
+                    android:text="@string/settings_modify_email"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size"
                     app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="25dp"
-                    android:paddingTop="10dp"
+                    android:layout_marginEnd="35dp"
+                    android:text="@string/settings_preview_email"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:padding="@dimen/button_padding"
+                android:text="@string/settings_modify_password"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size"
+                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:padding="@dimen/button_padding"
+                android:text="@string/settings_log_out"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="@dimen/button_padding"
+                android:text="@string/settings_header_general"
+                android:textColor="@color/gray_200"
+                android:textSize="@dimen/text_size" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/button_padding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/settings_subtitles_language"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size"
+                    app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="35dp"
                     android:text="@string/settings_preview_subtitles_language"
-                    android:textColor="@color/gray_400" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
+                android:background="@color/gray" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:paddingStart="@dimen/button_padding"
                 android:text="@string/settings_header_functionalities"
-                android:textColor="@color/gray_200" />
+                android:textColor="@color/gray_200"
+                android:textSize="@dimen/text_size" />
 
             <RelativeLayout
+                android:id="@+id/relative_layout_show_mature_content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/button_padding">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
+                    android:layout_marginTop="2.5dp"
                     android:gravity="center_vertical"
-                    android:text="@string/settings_show_mature_content" />
+                    android:text="@string/settings_show_mature_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_show_mature_content"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="5dp" />
+                    android:clickable="true" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
+                android:background="@color/gray" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:id="@+id/relative_layout_stream_using_cellular"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/button_padding">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2.5dp"
                     android:gravity="center_vertical"
-                    android:text="@string/settings_streaming_mobile" />
+                    android:text="@string/settings_streaming_cellular"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_stream_using_cellular"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="0dp" />
+                    android:clickable="true" />
             </RelativeLayout>
-
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
+                android:background="@color/gray" />
 
             <TextView
+                android:id="@+id/notifications_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
+                android:padding="@dimen/button_padding"
                 android:text="@string/settings_notifications"
-                android:paddingTop="2dp"
-                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size"
+                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical"
-                android:text="@string/settings_connected_apps"
-                android:paddingTop="2dp"
-                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/gray_200" />
+                android:background="@color/gray" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/settings_header_privacy"
-                android:textColor="@color/gray_200" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:gravity="center_vertical"
-                android:text="@string/settings_sell_personal_information"
-                android:paddingTop="2dp"
-                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:paddingStart="@dimen/button_padding"
                 android:text="@string/settings_header_about"
-                android:textColor="@color/gray_200" />
+                android:textColor="@color/gray_200"
+                android:textSize="@dimen/text_size" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
+                android:padding="@dimen/button_padding"
                 android:text="@string/settings_need_help"
-                android:paddingTop="2dp"
-                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size"
+                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
+                android:background="@color/gray" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical"
-                android:text="@string/settings_log_out" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_200" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:text="@string/settings_version"
                 android:textAlignment="center"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/gray_400"
-                />
-             <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:text="@string/settings_tos"
-                 android:textAlignment="center"
-                 android:layout_marginTop="5dp"
-                 android:textColor="@color/red_400"
-                 />
+                android:textColor="@color/gray_400" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/settings_tos"
+                android:textAlignment="center"
+                android:textColor="@color/red_400" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:text="@string/settings_privacy_policy"
                 android:textAlignment="center"
-                android:textColor="@color/red_400"
-                android:layout_marginTop="5dp"
-                />
+                android:textColor="@color/red_400" />
         </LinearLayout>
-
 
     </ScrollView>
 

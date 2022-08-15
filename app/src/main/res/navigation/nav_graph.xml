@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="it.unimib.smoovie.ui.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="it.unimib.smoovie.ui.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="SearchFragment">
         <action
             android:id="@+id/action_searchFragment_to_resultsFragment"
             app:destination="@id/resultsFragment" />
@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/resultsFragment"
         android:name="it.unimib.smoovie.ui.ResultsFragment"
-        android:label="ResultsFragment" >
+        android:label="ResultsFragment">
         <action
             android:id="@+id/action_resultsFragment_to_movieDetailFragment2"
             app:destination="@id/movieDetailFragment" />
@@ -38,6 +38,16 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="it.unimib.smoovie.ui.SettingsFragment"
-        android:label="SettingsFragment"
-        />
+        android:label="SettingsFragment">
+        <action
+            android:id="@+id/action_settingsFragment_to_notificationsFragment"
+            app:destination="@+id/notificationsFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="it.unimib.smoovie.ui.NotificationsFragment"
+        android:label="NotificationsFragment">
+    </fragment>
+
 </navigation>
