@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +34,7 @@ public class SettingsFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         SwitchCompat switchShowMatureContent = view.findViewById(R.id.switch_show_mature_content);
-        switchShowMatureContent.setChecked(sharedPreferences.getBoolean("showMatureContent", false));
+        switchShowMatureContent.setChecked(sharedPreferences.getBoolean("showMatureContent", true));
         switchShowMatureContent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -47,9 +48,24 @@ public class SettingsFragment extends Fragment {
                 editor.apply();
             }
         });
+        RelativeLayout relativeLayoutShowMatureContent = view.findViewById(R.id.relative_layout_show_mature_content);
+        relativeLayoutShowMatureContent.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (sharedPreferences.getBoolean("showMatureContent", true)) {
+                            switchShowMatureContent.setChecked(false);
+                            editor.putBoolean("showMatureContent", false).apply();
+                        } else {
+                            switchShowMatureContent.setChecked(true);
+                            editor.putBoolean("showMatureContent", true).apply();
+                        }
+                    }
+                }
+        );
 
         SwitchCompat switchStreamUsingCellular = view.findViewById(R.id.switch_stream_using_cellular);
-        switchStreamUsingCellular.setChecked(sharedPreferences.getBoolean("streamUsingCellular", false));
+        switchStreamUsingCellular.setChecked(sharedPreferences.getBoolean("streamUsingCellular", true));
         switchStreamUsingCellular.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -63,6 +79,22 @@ public class SettingsFragment extends Fragment {
                 editor.apply();
             }
         });
+        RelativeLayout relativeLayoutStreamUsingCellular  = view.findViewById(R.id.relative_layout_stream_using_cellular);
+        relativeLayoutStreamUsingCellular.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (sharedPreferences.getBoolean("streamUsingCellular", true)) {
+                            switchStreamUsingCellular.setChecked(false);
+                            editor.putBoolean("streamUsingCellular", false).apply();
+                        } else {
+                            switchStreamUsingCellular.setChecked(true);
+                            editor.putBoolean("streamUsingCellular", true).apply();
+                        }
+                    }
+                }
+        );
+
         return view;
     }
 }

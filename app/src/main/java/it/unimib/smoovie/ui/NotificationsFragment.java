@@ -30,6 +30,10 @@ public class NotificationsFragment extends Fragment {
         backButton.setOnClickListener(v -> Navigation.findNavController(v)
                 .popBackStack());
 
+        RelativeLayout relativeLayoutBackButton = view.findViewById(R.id.relative_layout_notifications_back_button);
+        relativeLayoutBackButton.setOnClickListener(v -> Navigation.findNavController(v)
+                .popBackStack());
+
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear().commit();

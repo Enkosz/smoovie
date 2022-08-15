@@ -19,17 +19,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="12dp">
 
             <RelativeLayout
+                android:id="@+id/relative_layout_notifications_back_button"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <ImageButton
                     android:id="@+id/imageButton_notificationsSettings_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/black"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     android:bottomLeftRadius="10dp"
                     android:bottomRightRadius="10dp"
                     android:minWidth="48dp"
@@ -43,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="60dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="11dp"
                     android:text="@string/notifications_title"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
@@ -63,18 +71,15 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    >
+                    android:padding="@dimen/button_padding">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3.5dp"
+                        android:layout_marginTop="3dp"
                         android:text="@string/notifications_general"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_general_updates"
@@ -90,22 +95,20 @@
                     android:id="@+id/relative_layout_content_updates"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="50dp"
                     android:background="@color/black"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp">
+                    android:padding="@dimen/button_padding">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3.5dp"
+                        android:layout_marginTop="3dp"
                         android:text="@string/notifications_content"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_content_updates"
@@ -121,22 +124,20 @@
                     android:id="@+id/relative_layout_promotional_updates"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="93dp"
+                    android:layout_marginTop="100dp"
                     android:background="@color/black"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp">
+                    android:padding="@dimen/button_padding">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3.5dp"
+                        android:layout_marginTop="3dp"
                         android:text="@string/notifications_promotional"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_promotional_updates"
