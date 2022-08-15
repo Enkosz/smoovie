@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,7 @@ import it.unimib.smoovie.utils.Constants;
 import it.unimib.smoovie.viewmodel.MovieDetailViewModel;
 import it.unimib.smoovie.viewmodel.ResultsViewModel;
 
-public class MovieDetailFragment extends Fragment {
+public class MovieDetailFragment extends Fragment implements ProgressDisplay {
 
     private ImageView imageViewMovieDetailBackgroundPoster;
     private TextView textViewMovieDetailTitle;
@@ -37,6 +38,9 @@ public class MovieDetailFragment extends Fragment {
     private TextView textViewMovieOverview;
     private RecyclerView recyclerViewMovieSuggestions;
     private ImageButton imageButtonBackNavigation;
+
+    private LinearLayout movieDetailContainer;
+    private LinearLayout loadingContainer;
 
     @Nullable
     @Override
@@ -50,6 +54,10 @@ public class MovieDetailFragment extends Fragment {
         recyclerViewMovieSuggestions = view.findViewById(R.id.recyclerView_movieDetail_suggestions);
         imageButtonBackNavigation = view.findViewById(R.id.imageButton_movieDetail_back);
 
+        movieDetailContainer = view.findViewById(R.id.movie_detail_container);
+        loadingContainer = view.findViewById(R.id.movie_detail_loadingContainer);
+
+        showProgress();
         setupUI();
         return view;
     }
@@ -88,6 +96,21 @@ public class MovieDetailFragment extends Fragment {
 
         recyclerViewMovieSuggestions.addOnScrollListener(scrollListener);
         movieDetailViewModel.getMovieDetailSuggestionsById(id, 1)
-                .observe(getViewLifecycleOwner(), adapter::addItems);
+                .observe(getViewLifecycleOwner(), movieModelCompacts -> {
+                    adapter.addItems(movieModelCompacts);
+                    hideProgress();
+                });
+    }
+
+    @Override
+    public void showProgress() {
+        loadingContainer.setVisibility(View.VISIBLE);
+        movieDetailContainer.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        loadingContainer.setVisibility(View.GONE);
+        movieDetailContainer.setVisibility(View.VISIBLE);
     }
 }
