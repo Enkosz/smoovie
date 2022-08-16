@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,13 +23,14 @@ import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.adapter.MovieSearchResultRecyclerVewAdapter;
 import it.unimib.smoovie.viewmodel.ResultsViewModel;
 
-public class ResultsFragment extends Fragment {
+public class ResultsFragment extends Fragment implements ProgressDisplay {
 
     private ResultsViewModel viewModel;
     private MovieSearchResultRecyclerVewAdapter adapter;
     private TextView textViewSearchQuery;
     private ImageButton backButton;
     private RecyclerView recyclerView;
+    private ProgressBar progressBar;
 
     private SearchStrategyFactory searchStrategyFactory;
 
@@ -39,7 +41,9 @@ public class ResultsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView_results);
         backButton = view.findViewById(R.id.button_search_result_back);
         textViewSearchQuery = view.findViewById(R.id.textView_search_results);
+        progressBar = view.findViewById(R.id.progressBar_results);
 
+        showProgress();
         setupViewModel();
         setupStrategyFactory();
         setupUI();
@@ -77,6 +81,21 @@ public class ResultsFragment extends Fragment {
 
         // Fetch the first page of data
         searchStrategy.search(1)
-                .observe(getViewLifecycleOwner(), movieModels -> adapter.addItems(movieModels));
+                .observe(getViewLifecycleOwner(), movieModels -> {
+                    adapter.addItems(movieModels);
+                    hideProgress();
+                });
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 }

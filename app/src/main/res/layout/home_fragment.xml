@@ -6,39 +6,37 @@
 
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView_popularMovies"
                 android:name="it.unimib.smoovie.ui.PopularMoviesFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:clipChildren="false"
                 android:clipToPadding="false" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView_topRatedMovies"
                 android:name="it.unimib.smoovie.ui.TopRatedMoviesFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:clipChildren="false"
                 android:clipToPadding="false" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView_nowPlayingMovies"
                 android:name="it.unimib.smoovie.ui.NowPlayingMoviesFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:clipChildren="false"
                 android:clipToPadding="false" />
         </LinearLayout>

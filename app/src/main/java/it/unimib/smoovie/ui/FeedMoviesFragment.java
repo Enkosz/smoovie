@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,28 +21,35 @@ import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.viewmodel.MovieViewModel;
 
-public abstract class FeedMoviesFragment extends Fragment {
+public abstract class FeedMoviesFragment extends Fragment implements ProgressDisplay {
 
     private ViewModelProvider modelProvider;
+    private RecyclerView recyclerViewMovies;
+    private ProgressBar progressBar;
 
     private final Integer fragmentId;
     private final Integer recyclerViewId;
+    private final Integer progressBarId;
 
-    public FeedMoviesFragment(Integer fragmentId, Integer recyclerViewId) {
+    public FeedMoviesFragment(Integer fragmentId, Integer recyclerViewId, Integer progressBarId) {
         this.fragmentId = fragmentId;
         this.recyclerViewId = recyclerViewId;
+        this.progressBarId = progressBarId;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(fragmentId, container, false);
-        RecyclerView mRecyclerViewCountryNews = view.findViewById(recyclerViewId);
+        progressBar = view.findViewById(progressBarId);
+        recyclerViewMovies = view.findViewById(recyclerViewId);
+
+        this.showProgress();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         MovieListRecyclerViewAdapter adapter = new MovieListRecyclerViewAdapter(getContext());
 
-        mRecyclerViewCountryNews.setAdapter(adapter);
-        mRecyclerViewCountryNews.setLayoutManager(layoutManager);
+        recyclerViewMovies.setAdapter(adapter);
+        recyclerViewMovies.setLayoutManager(layoutManager);
 
         EndlessRecyclerOnScrollListener scrollListener = new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
@@ -50,9 +58,12 @@ public abstract class FeedMoviesFragment extends Fragment {
             }
         };
 
-        mRecyclerViewCountryNews.addOnScrollListener(scrollListener);
+        recyclerViewMovies.addOnScrollListener(scrollListener);
         fetchMovies(1)
-            .observe(getViewLifecycleOwner(), adapter::addItems);
+            .observe(getViewLifecycleOwner(), movieModelCompacts -> {
+                adapter.addItems(movieModelCompacts);
+                hideProgress();
+            });
 
         return view;
     }
@@ -65,4 +76,16 @@ public abstract class FeedMoviesFragment extends Fragment {
     }
 
     protected abstract LiveData<List<MovieModelCompact>> fetchMovies(int page);
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerViewMovies.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+        recyclerViewMovies.setVisibility(View.VISIBLE);
+    }
 }

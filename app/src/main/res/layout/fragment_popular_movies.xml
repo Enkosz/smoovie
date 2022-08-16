@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?colorPrimaryDark"
@@ -15,8 +16,16 @@
         android:text="@string/popular_movie_category"
         android:textColor="@color/white_200" />
 
+    <ProgressBar
+        android:id="@+id/progressBar_popularMovies"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_nowPlayingMovies"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 </LinearLayout>

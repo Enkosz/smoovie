@@ -10,7 +10,7 @@ import it.unimib.smoovie.model.MovieModelCompact;
 public class NowPlayingMoviesFragment extends FeedMoviesFragment {
 
     public NowPlayingMoviesFragment() {
-        super(R.layout.fragment_up_coming_movies, R.id.recyclerView_nowPlayingMovies);
+        super(R.layout.fragment_up_now_playing_movies, R.id.recyclerView_nowPlayingMovies, R.id.progressBar_nowPlayingMovies);
     }
 
     @Override
