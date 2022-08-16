@@ -9,12 +9,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +29,7 @@ import it.unimib.smoovie.adapter.MovieSearchResultRecyclerVewAdapter;
 import it.unimib.smoovie.core.SearchStrategy;
 import it.unimib.smoovie.core.SearchStrategyFactory;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
+import it.unimib.smoovie.model.MovieModelExtended;
 import it.unimib.smoovie.utils.Constants;
 import it.unimib.smoovie.viewmodel.MovieDetailViewModel;
 import it.unimib.smoovie.viewmodel.ResultsViewModel;
@@ -69,7 +72,19 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
         Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
 
         movieDetailViewModel.getMovieDetailById(id)
-                .observe(getViewLifecycleOwner(), movieModelExtended -> {
+                .observe(getViewLifecycleOwner(), modelExtendedResponseWrapper -> {
+                    if(modelExtendedResponseWrapper.hasErrors()) {
+                        Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+
+                        Navigation.findNavController(requireView())
+                                .navigate(R.id.homeFragment, new Bundle(), new NavOptions.Builder()
+                                        .setExitAnim(android.R.anim.fade_out)
+                                        .setPopEnterAnim(android.R.anim.fade_in)
+                                        .build());
+                        return;
+                    }
+
+                    MovieModelExtended movieModelExtended = modelExtendedResponseWrapper.getResponse();
 
                     textViewMovieDetailTitle.setText(movieModelExtended.title);
                     textViewMovieReleaseDate.setText(movieModelExtended.releaseDate);
@@ -79,6 +94,8 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
                     Glide.with(requireContext())
                             .load(Constants.API_POSTER_URL + movieModelExtended.backdropPath)
                             .into(imageViewMovieDetailBackgroundPoster);
+
+                    hideProgress();
                 });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -98,9 +115,19 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
 
         recyclerViewMovieSuggestions.addOnScrollListener(scrollListener);
         movieDetailViewModel.getMovieDetailSuggestionsById(id, 1)
-                .observe(getViewLifecycleOwner(), movieModelCompacts -> {
-                    adapter.addItems(movieModelCompacts);
-                    hideProgress();
+                .observe(getViewLifecycleOwner(), responseWrapper -> {
+                    if(responseWrapper.hasErrors()) {
+                        Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+
+                        Navigation.findNavController(requireView())
+                                .navigate(R.id.homeFragment, new Bundle(), new NavOptions.Builder()
+                                        .setExitAnim(android.R.anim.fade_out)
+                                        .setPopEnterAnim(android.R.anim.fade_in)
+                                        .build());
+                        return;
+                    }
+
+                    adapter.addItems(responseWrapper.getResponse().movies);
                 });
     }
 

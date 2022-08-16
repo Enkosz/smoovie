@@ -5,20 +5,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
+import it.unimib.smoovie.model.ApiResponse;
 import it.unimib.smoovie.model.MovieModelCompact;
+import it.unimib.smoovie.model.ResponseWrapper;
 import it.unimib.smoovie.viewmodel.MovieViewModel;
 
 public abstract class FeedMoviesFragment extends Fragment implements ProgressDisplay {
@@ -60,8 +66,19 @@ public abstract class FeedMoviesFragment extends Fragment implements ProgressDis
 
         recyclerViewMovies.addOnScrollListener(scrollListener);
         fetchMovies(1)
-            .observe(getViewLifecycleOwner(), movieModelCompacts -> {
-                adapter.addItems(movieModelCompacts);
+            .observe(getViewLifecycleOwner(), responseWrapper -> {
+                if(responseWrapper.hasErrors()) {
+                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+
+                    Navigation.findNavController(requireView())
+                            .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()
+                                    .setExitAnim(android.R.anim.fade_out)
+                                    .setPopEnterAnim(android.R.anim.fade_in)
+                                    .build());
+                    return;
+                }
+
+                adapter.addItems(responseWrapper.getResponse().movies);
                 hideProgress();
             });
 
@@ -75,7 +92,7 @@ public abstract class FeedMoviesFragment extends Fragment implements ProgressDis
         return modelProvider.get(MovieViewModel.class);
     }
 
-    protected abstract LiveData<List<MovieModelCompact>> fetchMovies(int page);
+    protected abstract LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> fetchMovies(int page);
 
     @Override
     public void showProgress() {

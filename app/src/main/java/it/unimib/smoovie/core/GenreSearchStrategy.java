@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import it.unimib.smoovie.model.ApiResponse;
 import it.unimib.smoovie.model.MovieGenre;
 import it.unimib.smoovie.model.MovieModelCompact;
+import it.unimib.smoovie.model.ResponseWrapper;
 import it.unimib.smoovie.viewmodel.ResultsViewModel;
 
 public class GenreSearchStrategy implements SearchStrategy {
@@ -23,7 +25,7 @@ public class GenreSearchStrategy implements SearchStrategy {
     }
 
     @Override
-    public LiveData<List<MovieModelCompact>> search(int page) {
+    public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> search(int page) {
         return viewModel.getMoviesByCategory(category, page);
     }
 
