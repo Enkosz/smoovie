@@ -49,5 +49,5 @@
         android:name="it.unimib.smoovie.ui.NotificationsFragment"
         android:label="NotificationsFragment">
     </fragment>
-
+    
 </navigation>

@@ -64,32 +64,34 @@ public class SettingsFragment extends Fragment {
                 }
         );
 
-        SwitchCompat switchStreamUsingCellular = view.findViewById(R.id.switch_stream_using_cellular);
-        switchStreamUsingCellular.setChecked(sharedPreferences.getBoolean("streamUsingCellular", true));
-        switchStreamUsingCellular.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        String keytag1 = "darkMode";
+        SwitchCompat switchDarkMode = view.findViewById(R.id.switch_dark_mode);
+        switchDarkMode.setChecked(sharedPreferences.getBoolean(keytag1, true));
+        switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
-                    editor.putBoolean("streamUsingCellular", true);
-                    Log.i("stream_using_cellular", "true");
+                    editor.putBoolean(keytag1, true);
+                    Log.i(keytag1, "true");
                 } else {
-                    editor.putBoolean("streamUsingCellular", false);
-                    Log.i("stream_using_cellular", "false");
+                    editor.putBoolean(keytag1, false);
+                    Log.i(keytag1, "false");
                 }
                 editor.apply();
             }
         });
-        RelativeLayout relativeLayoutStreamUsingCellular  = view.findViewById(R.id.relative_layout_stream_using_cellular);
-        relativeLayoutStreamUsingCellular.setOnClickListener(
+
+        RelativeLayout relativeLayoutDarkMode  = view.findViewById(R.id.relative_layout_dark_mode);
+        relativeLayoutDarkMode.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (sharedPreferences.getBoolean("streamUsingCellular", true)) {
-                            switchStreamUsingCellular.setChecked(false);
-                            editor.putBoolean("streamUsingCellular", false).apply();
+                        if (sharedPreferences.getBoolean(keytag1, true)) {
+                            switchDarkMode.setChecked(false);
+                            editor.putBoolean(keytag1, false).apply();
                         } else {
-                            switchStreamUsingCellular.setChecked(true);
-                            editor.putBoolean("streamUsingCellular", true).apply();
+                            switchDarkMode.setChecked(true);
+                            editor.putBoolean(keytag1, true).apply();
                         }
                     }
                 }
