@@ -36,18 +36,14 @@ public class NotificationsFragment extends Fragment {
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear().commit();
+//        editor.clear().apply();
 
         SwitchCompat switchGeneralUpdates = view.findViewById(R.id.switch_general_updates);
         switchGeneralUpdates.setChecked(sharedPreferences.getBoolean("generalUpdates", true));
         switchGeneralUpdates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    editor.putBoolean("generalUpdates", true);
-                } else {
-                    editor.putBoolean("generalUpdates", false);
-                }
+                editor.putBoolean("generalUpdates", isChecked);
                 editor.apply();
             }
         });
@@ -71,11 +67,7 @@ public class NotificationsFragment extends Fragment {
         switchContentUpdates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    editor.putBoolean("contentUpdates", true);
-                } else {
-                    editor.putBoolean("contentUpdates", false);
-                }
+                editor.putBoolean("contentUpdates", isChecked);
                 editor.apply();
             }
         });
@@ -99,11 +91,7 @@ public class NotificationsFragment extends Fragment {
         switchPromotionalUpdates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    editor.putBoolean("promotionalUpdates", true);
-                } else {
-                    editor.putBoolean("promotionalUpdates", false);
-                }
+                editor.putBoolean("promotionalUpdates", isChecked);
                 editor.apply();
             }
         });

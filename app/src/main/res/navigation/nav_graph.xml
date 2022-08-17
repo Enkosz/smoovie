@@ -43,11 +43,20 @@
             android:id="@+id/action_settingsFragment_to_notificationsFragment"
             app:destination="@+id/notificationsFragment"
             />
+        <action
+            android:id="@+id/action_settingsFragment_to_languageFragment"
+            app:destination="@+id/languageFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="it.unimib.smoovie.ui.NotificationsFragment"
         android:label="NotificationsFragment">
     </fragment>
-    
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="it.unimib.smoovie.ui.LanguageFragment"
+        android:label="LanguageFragment">
+    </fragment>
+
 </navigation>

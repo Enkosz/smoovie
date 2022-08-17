@@ -30,6 +30,10 @@ public class SettingsFragment extends Fragment {
         textViewNotificationsSettings.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(R.id.notificationsFragment));
 
+        RelativeLayout relativeLayoutLanguageSettings = view.findViewById(R.id.relative_layout_language);
+        relativeLayoutLanguageSettings.setOnClickListener(v -> Navigation.findNavController(v)
+                .navigate(R.id.languageFragment));
+
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
