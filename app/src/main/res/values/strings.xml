@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">smoovie</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_search">Search</string>
+    <string name="bottom_nav_settings">Settings</string>
+
+    <string name="app_name" translatable="false">smoovie</string>
     <string name="popular_movie_category">Popular</string>
     <string name="top_rated_movie_category">Top Rated</string>
     <string name="now_playing_movie_category">Now Playing</string>
@@ -10,25 +14,26 @@
     <string name="movie_genre_fantasy">Fantasy</string>
 
     <string name="movie_search_query_result_title">Results for "%1$s"</string>
-    <string name="movie_detail_runtime">%1$dh %2$dm</string>
+    <string name="movie_detail_runtime" translatable="false">%1$dh %2$dm</string>
 
     <string name="settings_title">My Account</string>
-    <string name="settings_image_description">settings_profile_icon</string>
-    <string name="settings_username">Username</string>
+    <string name="settings_image_description" translatable="false">settings_profile_icon</string>
+    <string name="settings_username" translatable="false">Username</string>
     <string name="settings_header_account_profile">ACCOUNT &amp; PROFILE</string>
     <string name="settings_subscription_type">Membership Plan</string>
     <string name="settings_modify_email">Change Email</string>
-    <string name="settings_preview_email">test@email.com</string>
+    <string name="settings_preview_email" translatable="false">test@email.com</string>
     <string name="settings_modify_password">Change password</string>
     <string name="settings_header_general">GENERAL</string>
     <string name="settings_language">Language</string>
     <string name="settings_preview_language">English</string>
+    <string name="settings_preview_subtitles_language" translatable="false">English</string>
     <string name="settings_header_functionalities">APP EXPERIENCE</string>
     <string name="settings_show_mature_content">Show Mature Content</string>
     <string name="settings_dark_mode">Dark Mode</string>
     <string name="settings_notifications">Notifications</string>
     <string name="settings_connected_apps">Connected Apps</string>
-    <string name="settings_header_privacy">PRIVACY</string>
+    <string name="settings_header_privacy" translatable="false">PRIVACY</string>
     <string name="settings_sell_personal_information">Do not sell my personal information</string>
     <string name="settings_header_about">ABOUT</string>
     <string name="settings_need_help">Need Help?</string>

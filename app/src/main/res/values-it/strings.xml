@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_search">Cerca</string>
+    <string name="bottom_nav_settings">Impostazioni</string>
+
+    <string name="popular_movie_category">Popolari</string>
+    <string name="top_rated_movie_category">Migliori</string>
+    <string name="now_playing_movie_category">In Riproduzione</string>
+    <string name="search_movie">Cerca Film</string>
+
+    <string name="movie_genre_action">Azione</string>
+    <string name="movie_genre_adventure">Avventura</string>
+    <string name="movie_genre_fantasy">Fantasia</string>
+    <string name="movie_search_query_result_title">Risultati per %1$s</string>
+
+    <string name="settings_title">Il mio account</string>
+    <string name="settings_header_account_profile">ACCOUNT &amp; PROFILO</string>
+    <string name="settings_subscription_type">Tipo di iscrizione</string>
+    <string name="settings_modify_email">Modifica l\'email</string>
+    <string name="settings_modify_password">Modifica la password</string>
+    <string name="settings_header_general">IMPOSTAZIONI GENERALI</string>
+    <string name="settings_language">Lingua</string>
+    <string name="settings_preview_language">Italiano</string>
+    <string name="settings_header_functionalities">IMPOSTAZIONI DELLA APP</string>
+    <string name="settings_show_mature_content">Mostra i contenuti vietati ai minori</string>
+    <string name="settings_dark_mode">Modalità Scura</string>
+    <string name="settings_notifications">Notifiche</string>
+    <string name="settings_connected_apps">App Connesse</string>
+    <string name="settings_sell_personal_information">Non vendere le mie informazioni</string>
+    <string name="settings_header_about">INFORMAZIONI</string>
+    <string name="settings_need_help">Hai bisogno di Aiuto?</string>
+    <string name="settings_log_out">Esci</string>
+    <string name="settings_version">Versione</string>
+    <string name="settings_tos">Termini di Servizio</string>
+    <string name="settings_privacy_policy">Informativa sulla Privacy</string>
+
+    <string name="notifications_title">Notifiche</string>
+    <string name="notifications_general">Aggiornamenti generali</string>
+    <string name="notifications_content">Aggiornamenti sui contenuti</string>
+    <string name="notifications_promotional">Aggiornamenti promozionali</string>
+
+    <string name="language_title">Lingua</string>
+    <string name="language_english">Inglese</string>
+    <string name="language_italian">Italiano</string>
+</resources>
