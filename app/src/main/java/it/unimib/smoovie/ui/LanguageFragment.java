@@ -5,27 +5,20 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import java.util.Locale;
-import java.util.Objects;
-
 import it.unimib.smoovie.R;
 
 public class LanguageFragment extends Fragment {
@@ -53,8 +46,6 @@ public class LanguageFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         boolean englishChecked = sharedPreferences.getBoolean("english", false);
         boolean italianChecked = sharedPreferences.getBoolean("italian", false);
-        Log.i("langcheck", "en: "+englishChecked);
-        Log.i("langcheck", "it: "+italianChecked);
 
         if (englishChecked) {
             radioLanguageEnglish.setChecked(true);
@@ -64,43 +55,28 @@ public class LanguageFragment extends Fragment {
         }
 
         RadioGroup radioGroupLanguage = view.findViewById(R.id.radiogroup_language);
-        radioGroupLanguage.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                String tag = "radio_language";
-                switch (checkedId) {
-                    case R.id.radio_language_english:
-                        Log.i(tag, "onCheckedChanged: english");
-                        changeLocale("en");
-                        break;
-                    case R.id.radio_language_italian:
-                        Log.i(tag, "onCheckedChanged: italian");
-                        changeLocale("it");
-                        break;
-                    default:
-                        break;
-                }
-                editor.putBoolean("english", radioLanguageEnglish.isChecked());
-                editor.putBoolean("italian", radioLanguageItalian.isChecked());
-                editor.apply();
-                requireActivity().recreate();
+        radioGroupLanguage.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.radio_language_english) {
+                changeLocale("en");
+            } else if (checkedId == R.id.radio_language_italian) {
+                changeLocale("it");
             }
+
+            editor.putBoolean("english", radioLanguageEnglish.isChecked());
+            editor.putBoolean("italian", radioLanguageItalian.isChecked());
+            editor.apply();
+            requireActivity().recreate();
         });
 
         return view;
-
     }
 
     public void changeLocale(String lang) {
-        Log.i("lang", "changeLanguage: " + lang);
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
-        Resources resources = getActivity().getResources();
+        Resources resources = requireActivity().getResources();
         Configuration config = resources.getConfiguration();
         config.setLocale(locale);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
-        Log.i("lang2", "ciao willy!");
     }
-
-
 }

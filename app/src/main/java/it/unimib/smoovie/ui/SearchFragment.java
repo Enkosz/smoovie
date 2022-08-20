@@ -26,7 +26,6 @@ import it.unimib.smoovie.viewmodel.SearchViewModel;
 
 public class SearchFragment extends Fragment {
 
-    private SearchViewModel searchViewModel;
     private RecyclerView recyclerViewSearch;
     private MovieCategoryViewAdapter viewAdapter;
     private SearchView searchView;
@@ -76,7 +75,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void setupViewModel() {
-        searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
+        SearchViewModel searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
         searchViewModel.getMovieCategoryList()
             .observe(getViewLifecycleOwner(), movieCategories -> viewAdapter.addItems(movieCategories));

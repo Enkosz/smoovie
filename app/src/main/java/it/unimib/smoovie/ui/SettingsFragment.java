@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,36 +33,30 @@ public class SettingsFragment extends Fragment {
         relativeLayoutLanguageSettings.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(R.id.languageFragment));
 
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         SwitchCompat switchShowMatureContent = view.findViewById(R.id.switch_show_mature_content);
         switchShowMatureContent.setChecked(sharedPreferences.getBoolean("showMatureContent", true));
-        switchShowMatureContent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    editor.putBoolean("showMatureContent", true);
-                    Log.i("switch_show_mature_content", "true");
-                } else {
-                    editor.putBoolean("showMatureContent", false);
-                    Log.i("switch_show_mature_content", "false");
-                }
-                editor.apply();
+        switchShowMatureContent.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked) {
+                editor.putBoolean("showMatureContent", true);
+                Log.i("switch_show_mature_content", "true");
+            } else {
+                editor.putBoolean("showMatureContent", false);
+                Log.i("switch_show_mature_content", "false");
             }
+            editor.apply();
         });
         RelativeLayout relativeLayoutShowMatureContent = view.findViewById(R.id.relative_layout_show_mature_content);
         relativeLayoutShowMatureContent.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (sharedPreferences.getBoolean("showMatureContent", true)) {
-                            switchShowMatureContent.setChecked(false);
-                            editor.putBoolean("showMatureContent", false).apply();
-                        } else {
-                            switchShowMatureContent.setChecked(true);
-                            editor.putBoolean("showMatureContent", true).apply();
-                        }
+                view1 -> {
+                    if (sharedPreferences.getBoolean("showMatureContent", true)) {
+                        switchShowMatureContent.setChecked(false);
+                        editor.putBoolean("showMatureContent", false).apply();
+                    } else {
+                        switchShowMatureContent.setChecked(true);
+                        editor.putBoolean("showMatureContent", true).apply();
                     }
                 }
         );
@@ -71,32 +64,26 @@ public class SettingsFragment extends Fragment {
         String keytag1 = "darkMode";
         SwitchCompat switchDarkMode = view.findViewById(R.id.switch_dark_mode);
         switchDarkMode.setChecked(sharedPreferences.getBoolean(keytag1, true));
-        switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    editor.putBoolean(keytag1, true);
-                    Log.i(keytag1, "true");
-                } else {
-                    editor.putBoolean(keytag1, false);
-                    Log.i(keytag1, "false");
-                }
-                editor.apply();
+        switchDarkMode.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked) {
+                editor.putBoolean(keytag1, true);
+                Log.i(keytag1, "true");
+            } else {
+                editor.putBoolean(keytag1, false);
+                Log.i(keytag1, "false");
             }
+            editor.apply();
         });
 
         RelativeLayout relativeLayoutDarkMode  = view.findViewById(R.id.relative_layout_dark_mode);
         relativeLayoutDarkMode.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (sharedPreferences.getBoolean(keytag1, true)) {
-                            switchDarkMode.setChecked(false);
-                            editor.putBoolean(keytag1, false).apply();
-                        } else {
-                            switchDarkMode.setChecked(true);
-                            editor.putBoolean(keytag1, true).apply();
-                        }
+                view2 -> {
+                    if (sharedPreferences.getBoolean(keytag1, true)) {
+                        switchDarkMode.setChecked(false);
+                        editor.putBoolean(keytag1, false).apply();
+                    } else {
+                        switchDarkMode.setChecked(true);
+                        editor.putBoolean(keytag1, true).apply();
                     }
                 }
         );
