@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/Background">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="12dp"
-        android:scrollbars="none"
+        style="@style/ScrollView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,14 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:paddingStart="12dp"
-                android:text="@string/settings_title"
-                android:textColor="@color/white"
-                android:textSize="26sp" />
+            <TextView style="@style/TextViewTitle" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -49,56 +35,26 @@
 
                     <ImageView
                         android:id="@+id/imageView_profile_icon"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_alignParentStart="true"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@string/settings_image_description"
-                        android:gravity="center_vertical"
-                        android:padding="0dp"
+                        style="@style/ImageViewProfilePicture"
                         android:src="@drawable/logo_sus" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="120dp"
-                    android:layout_marginTop="40dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/settings_username"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    style="@style/TextViewUsername"
+                    android:text="@string/settings_username" />
             </RelativeLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:paddingStart="@dimen/button_padding"
-                android:text="@string/settings_header_account_profile"
-                android:textColor="@color/gray_400"
-                android:textSize="@dimen/text_size" />
+                style="@style/TextViewHeader"
+                android:layout_marginBottom="5dp"
+                android:text="@string/settings_header_account_profile" />
 
             <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:padding="@dimen/button_padding"
+                style="@style/TextViewButtonPrimary"
                 android:text="@string/settings_subscription_type"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray" />
+            <View style="@style/HorizontalRow" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -113,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/settings_modify_email"
-                    android:textColor="@color/white"
+                    android:textColor="@color/TextPrimary"
                     android:textSize="@dimen/text_size"
                     app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
@@ -123,58 +79,28 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="35dp"
                     android:text="@string/settings_preview_email"
-                    android:textColor="@color/white"
+                    android:textColor="@color/TextPrimary"
                     android:textSize="14sp" />
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray" />
+            <View style="@style/HorizontalRow" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:padding="@dimen/button_padding"
+                style="@style/TextViewButtonPrimary"
                 android:text="@string/settings_modify_password"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray" />
+            <View style="@style/HorizontalRow" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:padding="@dimen/button_padding"
-                android:text="@string/settings_log_out"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size" />
+                style="@style/TextViewButtonPrimary"
+                android:text="@string/settings_log_out" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray" />
+            <View style="@style/HorizontalRow" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:paddingStart="@dimen/button_padding"
-                android:text="@string/settings_header_general"
-                android:textColor="@color/gray_200"
-                android:textSize="@dimen/text_size" />
+                style="@style/TextViewHeader"
+                android:text="@string/settings_header_general" />
 
             <RelativeLayout
                 android:id="@+id/relative_layout_language"
@@ -186,12 +112,9 @@
                 android:padding="@dimen/button_padding">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    style="@style/TextViewButtonPrimary"
+                    android:padding="0dp"
                     android:text="@string/settings_language"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size"
                     app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
                 <TextView
@@ -200,41 +123,26 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="35dp"
                     android:text="@string/settings_preview_language"
-                    android:textColor="@color/white"
+                    android:textColor="@color/TextPrimary"
                     android:textSize="14sp" />
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray" />
+            <View style="@style/HorizontalRow" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:paddingStart="@dimen/button_padding"
-                android:text="@string/settings_header_functionalities"
-                android:textColor="@color/gray_200"
-                android:textSize="@dimen/text_size" />
+                style="@style/TextViewHeader"
+                android:text="@string/settings_header_functionalities" />
 
             <RelativeLayout
                 android:id="@+id/relative_layout_show_mature_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:padding="@dimen/button_padding">
+                style="@style/TextViewButtonPrimary">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_show_mature_content"
+                    style="@style/TextViewButtonPrimary"
                     android:layout_marginTop="2.5dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/settings_show_mature_content"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size" />
+                    android:padding="0dp"
+                    android:text="@string/settings_show_mature_content" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switch_show_mature_content"
@@ -244,28 +152,18 @@
                     android:clickable="true" />
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray" />
+            <View style="@style/HorizontalRow" />
 
             <RelativeLayout
-                android:layout_width="match_parent"
                 android:id="@+id/relative_layout_dark_mode"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:padding="@dimen/button_padding">
+                style="@style/TextViewButtonPrimary">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_dark_mode"
+                    style="@style/TextViewButtonPrimary"
                     android:layout_marginTop="2.5dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/settings_dark_mode"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size" />
+                    android:padding="0dp"
+                    android:text="@string/settings_dark_mode" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switch_dark_mode"
@@ -275,85 +173,43 @@
                     android:clickable="true" />
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray" />
+            <View style="@style/HorizontalRow" />
 
             <TextView
                 android:id="@+id/notifications_settings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:padding="@dimen/button_padding"
+                style="@style/TextViewButtonPrimary"
                 android:text="@string/settings_notifications"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray" />
+            <View style="@style/HorizontalRow" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:paddingStart="@dimen/button_padding"
-                android:text="@string/settings_header_about"
-                android:textColor="@color/gray_200"
-                android:textSize="@dimen/text_size" />
+                style="@style/TextViewHeader"
+                android:text="@string/settings_header_about" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:padding="@dimen/button_padding"
+                style="@style/TextViewButtonPrimary"
                 android:text="@string/settings_need_help"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray" />
+            <View style="@style/HorizontalRow" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/TextViewVersion"
                 android:layout_marginTop="20dp"
                 android:text="@string/settings_version"
-                android:textAlignment="center"
-                android:textColor="@color/gray_400" />
+                android:textColor="@color/Version" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/TextViewButtonSecondary"
                 android:layout_marginTop="5dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
                 android:text="@string/settings_tos"
-                android:textAlignment="center"
                 android:textColor="@color/red_400" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/TextViewButtonSecondary"
                 android:layout_marginTop="5dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
                 android:text="@string/settings_privacy_policy"
-                android:textAlignment="center"
                 android:textColor="@color/red_400" />
         </LinearLayout>
 
