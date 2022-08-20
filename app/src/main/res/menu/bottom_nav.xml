@@ -5,16 +5,16 @@
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home_24"
         android:iconTint="@color/white_200"
-        android:title="Home" />
+        android:title="@string/bottom_nav_home" />
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search_24"
         android:iconTint="@color/white_200"
-        android:title="Search" />
+        android:title="@string/bottom_nav_search" />
     <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_account_circle_24"
         android:iconTint="@color/white_200"
-        android:title="Settings" />
+        android:title="@string/bottom_nav_settings" />
 
 </menu>
