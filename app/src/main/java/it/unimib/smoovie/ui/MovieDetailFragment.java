@@ -1,5 +1,9 @@
 package it.unimib.smoovie.ui;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,14 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
@@ -23,10 +30,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.model.MovieModelExtended;
+import it.unimib.smoovie.room.model.FavoriteMovie;
 import it.unimib.smoovie.utils.Constants;
 import it.unimib.smoovie.viewmodel.MovieDetailViewModel;
 
@@ -39,9 +48,16 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
     private TextView textViewMovieOverview;
     private RecyclerView recyclerViewMovieSuggestions;
     private ImageButton imageButtonBackNavigation;
+    private ImageButton buttonMovieDetailAddFavorite;
 
     private LinearLayout movieDetailContainer;
     private ConstraintLayout loadingContainer;
+    private MovieDetailViewModel movieDetailViewModel;
+
+    private boolean isFavorite = false;
+
+    private Disposable addFavoriteMovieDisposable;
+    private Disposable deleteFavoriteMovieDisposable;
 
     @Nullable
     @Override
@@ -54,6 +70,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
         textViewMovieOverview = view.findViewById(R.id.textView_movieDetail_overview);
         recyclerViewMovieSuggestions = view.findViewById(R.id.recyclerView_movieDetail_suggestions);
         imageButtonBackNavigation = view.findViewById(R.id.imageButton_movieDetail_back);
+        buttonMovieDetailAddFavorite = view.findViewById(R.id.button_movieDetail_addFavorite);
 
         movieDetailContainer = view.findViewById(R.id.movie_detail_container);
         loadingContainer = view.findViewById(R.id.movie_detail_loadingContainer);
@@ -64,12 +81,42 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
     }
 
     private void setupUI() {
-        MovieDetailViewModel movieDetailViewModel = new ViewModelProvider(this).get(MovieDetailViewModel.class);
+        movieDetailViewModel = new ViewModelProvider(this).get(MovieDetailViewModel.class);
+
+        setupMovieDetailView();
+        setupMovieDetailRecommendedView();
+        setupMovieDetailFavoriteView();
+    }
+
+    private void setupMovieDetailFavoriteView() {
+        Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
+
+        movieDetailViewModel.getFavoriteMovieById(id)
+                .observe(getViewLifecycleOwner(), favoriteMovie -> buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16)));
+
+        buttonMovieDetailAddFavorite.setOnClickListener(v -> {
+            if (isFavorite) {
+                deleteFavoriteMovieDisposable = movieDetailViewModel.deleteFavoriteMovie(id)
+                        .subscribe(() -> {
+                            buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16));
+                            isFavorite = false;
+                        });
+            } else {
+                addFavoriteMovieDisposable = movieDetailViewModel.addFavoriteMovie(id, "123")
+                        .subscribe(() -> {
+                            buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16_fill));
+                            isFavorite = true;
+                        });
+            }
+        });
+    }
+
+    private void setupMovieDetailView() {
         Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
 
         movieDetailViewModel.getMovieDetailById(id)
                 .observe(getViewLifecycleOwner(), modelExtendedResponseWrapper -> {
-                    if(modelExtendedResponseWrapper.hasErrors()) {
+                    if (modelExtendedResponseWrapper.hasErrors()) {
                         Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
 
                         Navigation.findNavController(requireView())
@@ -93,6 +140,10 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
 
                     hideProgress();
                 });
+    }
+
+    private void setupMovieDetailRecommendedView() {
+        Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         MovieListRecyclerViewAdapter adapter = new MovieListRecyclerViewAdapter(getContext());
@@ -112,7 +163,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
         recyclerViewMovieSuggestions.addOnScrollListener(scrollListener);
         movieDetailViewModel.getMovieDetailSuggestionsById(id, 1)
                 .observe(getViewLifecycleOwner(), responseWrapper -> {
-                    if(responseWrapper.hasErrors()) {
+                    if (responseWrapper.hasErrors()) {
                         Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
 
                         Navigation.findNavController(requireView())
@@ -137,5 +188,15 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
     public void hideProgress() {
         loadingContainer.setVisibility(View.GONE);
         movieDetailContainer.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (addFavoriteMovieDisposable != null && !addFavoriteMovieDisposable.isDisposed())
+            addFavoriteMovieDisposable.dispose();
+        if (deleteFavoriteMovieDisposable != null && !deleteFavoriteMovieDisposable.isDisposed())
+            deleteFavoriteMovieDisposable.dispose();
+
+        super.onDestroyView();
     }
 }

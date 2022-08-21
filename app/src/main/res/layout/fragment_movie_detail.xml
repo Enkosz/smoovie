@@ -65,6 +65,7 @@
                     android:maxLines="2"
                     android:text="TextView"
                     android:textAlignment="textStart" />
+
             </LinearLayout>
 
             <ImageView
@@ -103,6 +104,23 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
                         android:text="TextView" />
+
+                    <LinearLayout
+                        android:id="@+id/movie_detail_actions_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/button_movieDetail_addFavorite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:backgroundTint="@color/black"
+                            android:src="@drawable/ic_star_16" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <TextView
