@@ -36,6 +36,7 @@
                     <ImageView
                         android:id="@+id/imageView_profile_icon"
                         style="@style/ImageViewProfilePicture"
+                        android:contentDescription="@string/settings_image_description"
                         android:src="@drawable/logo_sus" />
                 </androidx.cardview.widget.CardView>
 

@@ -1,4 +1,8 @@
 <resources>
+    <string name="placeholder_textview" translatable="false">TextView</string>
+    <string name="placeholder_search_query" translatable="false">Placeholder Search Query</string>
+    <string name="placeholder_similar_content">Similar Content</string>
+
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_search">Search</string>
     <string name="bottom_nav_settings">Settings</string>
