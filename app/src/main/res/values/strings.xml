@@ -41,4 +41,6 @@
     <string name="notifications_general">General Updates</string>
     <string name="notifications_content">Content Updates</string>
     <string name="notifications_promotional">Promotional Updates</string>
+
+    <string name="error_generic">A generic error occurred</string>
 </resources>

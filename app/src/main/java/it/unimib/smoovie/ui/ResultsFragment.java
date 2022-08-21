@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -81,8 +83,19 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
 
         // Fetch the first page of data
         searchStrategy.search(1)
-                .observe(getViewLifecycleOwner(), movieModels -> {
-                    adapter.addItems(movieModels);
+                .observe(getViewLifecycleOwner(), responseWrapper -> {
+                    if(responseWrapper.hasErrors()) {
+                        Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+
+                        Navigation.findNavController(requireView())
+                                .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()
+                                        .setExitAnim(android.R.anim.fade_out)
+                                        .setPopEnterAnim(android.R.anim.fade_in)
+                                        .build());
+                        return;
+                    }
+
+                    adapter.addItems(responseWrapper.getResponse().movies);
                     hideProgress();
                 });
     }
