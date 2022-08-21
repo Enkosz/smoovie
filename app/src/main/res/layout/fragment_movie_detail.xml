@@ -1,39 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/movie_detail_loadingContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBar_movie_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/movie_detail_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/imageButton_movieDetail_back"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/movie_detail_header_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/black"
-                android:bottomLeftRadius="10dp"
-                android:bottomRightRadius="10dp"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                android:padding="0dp"
-                android:topLeftRadius="10dp"
-                android:topRightRadius="10dp"
-                app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imageButton_movieDetail_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/black"
+                    android:bottomLeftRadius="10dp"
+                    android:bottomRightRadius="10dp"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    android:padding="0dp"
+                    android:topLeftRadius="10dp"
+                    android:topRightRadius="10dp"
+                    app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
+
+                <TextView
+                    android:id="@+id/textView_movieDetail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:text="TextView"
+                    android:textAlignment="textStart" />
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/imageView_movieDetail_backgroundPoster"
@@ -43,79 +76,82 @@
                 android:padding="0dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
+                android:id="@+id/movie_detail_data_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="4dp"
                 android:clipChildren="false"
-                android:clipToPadding="false">
+                android:clipToPadding="false"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView_movieDetail_title"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/movie_detail_metadata_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="TextView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView_movieDetail_similarMovie_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Similar Content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_overview" />
+                    <TextView
+                        android:id="@+id/textView_movieDetail_runtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
 
-                <TextView
-                    android:id="@+id/textView_movieDetail_runtime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="TextView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_title" />
+                    <TextView
+                        android:id="@+id/textView_movieDetail_releaseDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:text="TextView" />
+
+                    <LinearLayout
+                        android:id="@+id/movie_detail_actions_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/button_movieDetail_addFavorite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:backgroundTint="@color/black"
+                            android:src="@drawable/ic_star_16" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView_movieDetail_overview"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ellipsize="end"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_releaseDate" />
-
-                <TextView
-                    android:id="@+id/textView_movieDetail_releaseDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="8dp"
-                    android:text="TextView"
-                    app:layout_constraintStart_toEndOf="@+id/textView_movieDetail_runtime"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_title" />
+                    android:ellipsize="end"
+                    android:text="TextView" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_movieDetail_suggestions"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_similarMovie_label" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:id="@+id/movie_detail_similar_content_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/textView_movieDetail_similarMovie_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Similar Content" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_movieDetail_suggestions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

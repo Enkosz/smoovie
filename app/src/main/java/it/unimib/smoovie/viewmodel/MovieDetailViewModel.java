@@ -1,43 +1,71 @@
 package it.unimib.smoovie.viewmodel;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.disposables.Disposable;
+import it.unimib.smoovie.model.ApiResponse;
 import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.model.MovieModelExtended;
+import it.unimib.smoovie.model.ResponseWrapper;
 import it.unimib.smoovie.repository.MoviesRepository;
+import it.unimib.smoovie.room.model.FavoriteMovie;
 
-public class MovieDetailViewModel extends ViewModel {
+public class MovieDetailViewModel extends AndroidViewModel {
 
-    private final MutableLiveData<MovieModelExtended> movieDetail;
-    private final MutableLiveData<List<MovieModelCompact>> movieDetailSuggestionList;
-    private final MoviesRepository moviesRepository = MoviesRepository.getInstance();
+    private final MutableLiveData<ResponseWrapper<MovieModelExtended>> movieDetail;
+    private final MutableLiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> movieDetailSuggestionList;
+    private final MutableLiveData<FavoriteMovie> favoriteMovie;
+
+    private final MoviesRepository moviesRepository;
 
     private Disposable disposableMovieDetail;
     private Disposable disposableMovieDetailSuggestion;
+    private Disposable disposableFavoriteMovieList;
 
-    public MovieDetailViewModel() {
+    public MovieDetailViewModel(Application application) {
+        super(application);
         movieDetail = new MutableLiveData<>();
         movieDetailSuggestionList = new MutableLiveData<>();
+        favoriteMovie = new MutableLiveData<>();
+
+        moviesRepository = MoviesRepository.getInstance(application);
     }
 
-    public LiveData<MovieModelExtended> getMovieDetailById(Long id) {
+    public LiveData<ResponseWrapper<MovieModelExtended>> getMovieDetailById(Long id) {
         disposableMovieDetail = moviesRepository.getMovieById(id)
                 .subscribe(movieDetail::postValue);
 
         return movieDetail;
     }
 
-    public LiveData<List<MovieModelCompact>> getMovieDetailSuggestionsById(Long movieId, int page) {
+    public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMovieDetailSuggestionsById(Long movieId, int page) {
         disposableMovieDetailSuggestion = moviesRepository.getSimilarMoviesOfMovie(movieId, page)
-                .subscribe(movieModelCompactApiResponse -> movieDetailSuggestionList.postValue(movieModelCompactApiResponse.movies));
+                .subscribe(movieDetailSuggestionList::postValue);
 
         return movieDetailSuggestionList;
     }
+
+    public LiveData<FavoriteMovie> getFavoriteMovieById(Long id) {
+        disposableFavoriteMovieList = moviesRepository.getFavoriteMovieById(id)
+                .subscribe(favoriteMovie::postValue);
+
+        return favoriteMovie;
+    }
+
+    public Completable addFavoriteMovie(Long movieId, String userId) {
+        return moviesRepository.addFavoriteMovie(movieId, userId);
+    }
+    public Completable deleteFavoriteMovie(Long movieId) {
+        return moviesRepository.deleteFavoriteMovie(movieId);
+    }
+
 
     @Override
     protected void onCleared() {
@@ -45,5 +73,6 @@ public class MovieDetailViewModel extends ViewModel {
 
         disposableMovieDetail.dispose();
         disposableMovieDetailSuggestion.dispose();
+        disposableFavoriteMovieList.dispose();
     }
 }

@@ -5,6 +5,7 @@ import io.reactivex.Single;
 import it.unimib.smoovie.model.ApiResponse;
 import it.unimib.smoovie.model.MovieModelExtended;
 import it.unimib.smoovie.model.MovieModelCompact;
+import it.unimib.smoovie.model.ResponseWrapper;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
