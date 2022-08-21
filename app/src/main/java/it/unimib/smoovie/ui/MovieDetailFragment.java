@@ -20,13 +20,9 @@ import com.bumptech.glide.Glide;
 
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
-import it.unimib.smoovie.adapter.MovieSearchResultRecyclerVewAdapter;
-import it.unimib.smoovie.core.SearchStrategy;
-import it.unimib.smoovie.core.SearchStrategyFactory;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.utils.Constants;
 import it.unimib.smoovie.viewmodel.MovieDetailViewModel;
-import it.unimib.smoovie.viewmodel.ResultsViewModel;
 
 public class MovieDetailFragment extends Fragment {
 
