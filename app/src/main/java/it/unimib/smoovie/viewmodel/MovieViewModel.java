@@ -1,23 +1,25 @@
 package it.unimib.smoovie.viewmodel;
 
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import io.reactivex.disposables.Disposable;
-import it.unimib.smoovie.container.ApplicationContainer;
 import it.unimib.smoovie.model.ApiResponse;
 import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.model.ResponseWrapper;
 import it.unimib.smoovie.repository.MoviesRepository;
 
-public class MovieViewModel extends ViewModel {
+public class MovieViewModel extends AndroidViewModel {
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());
+    private final MoviesRepository moviesRepository;
 
     private final MutableLiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> popularMovies;
     private final MutableLiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> topRatedMovies;
@@ -27,14 +29,15 @@ public class MovieViewModel extends ViewModel {
     private Disposable disposableTopRatedMovies;
     private Disposable disposableNowPlayingMovies;
 
-    public MovieViewModel() {
+    public MovieViewModel(Application application) {
+        super(application);
+
         popularMovies = new MutableLiveData<>();
         topRatedMovies = new MutableLiveData<>();
         nowPlayingMovies = new MutableLiveData<>();
-    }
 
-    private final MoviesRepository moviesRepository = ApplicationContainer.getInstance()
-            .getMoviesRepository();
+        moviesRepository = MoviesRepository.getInstance(application);
+    }
 
     public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> getPopularMovies(int page) {
             disposablePopularMovies = moviesRepository.getPopularMovies(page)

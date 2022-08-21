@@ -177,6 +177,7 @@
                 android:textSize="@dimen/text_size" />
 
             <RelativeLayout
+                android:id="@+id/relative_layout_language"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -188,7 +189,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="@string/settings_subtitles_language"
+                    android:text="@string/settings_language"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size"
                     app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
@@ -198,7 +199,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="35dp"
-                    android:text="@string/settings_preview_subtitles_language"
+                    android:text="@string/settings_preview_language"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -250,7 +251,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:id="@+id/relative_layout_stream_using_cellular"
+                android:id="@+id/relative_layout_dark_mode"
                 android:layout_height="match_parent"
                 android:clickable="true"
                 android:focusable="true"
@@ -262,12 +263,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2.5dp"
                     android:gravity="center_vertical"
-                    android:text="@string/settings_streaming_cellular"
+                    android:text="@string/settings_dark_mode"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switch_stream_using_cellular"
+                    android:id="@+id/switch_dark_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"

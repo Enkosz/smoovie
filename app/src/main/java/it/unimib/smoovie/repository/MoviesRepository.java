@@ -1,7 +1,12 @@
 package it.unimib.smoovie.repository;
 
-import java.util.Collections;
+import android.app.Application;
 
+import java.util.Collections;
+import java.util.List;
+
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -13,21 +18,25 @@ import it.unimib.smoovie.model.MovieGenre;
 import it.unimib.smoovie.model.MovieModelExtended;
 import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.model.ResponseWrapper;
+import it.unimib.smoovie.room.SmoovieDatabase;
+import it.unimib.smoovie.room.model.FavoriteMovie;
 import it.unimib.smoovie.utils.Constants;
 
 public class MoviesRepository {
 
     private static MoviesRepository instance;
-    private final MovieApiService movieApiService;
 
-    private MoviesRepository() {
+    private final MovieApiService movieApiService;
+    private final SmoovieDatabase smoovieDatabase;
+
+    private MoviesRepository(Application application) {
         this.movieApiService = ServiceProvider.getInstance().getMovieApiService();
+        this.smoovieDatabase = SmoovieDatabase.getInstance(application);
     }
 
-    public static MoviesRepository getInstance() {
-        if(instance == null) {
-            instance = new MoviesRepository();
-        }
+    public static MoviesRepository getInstance(Application application) {
+        if(instance == null)
+            instance = new MoviesRepository(application);
 
         return instance;
     }
@@ -86,5 +95,26 @@ public class MoviesRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
                 .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
+    }
+
+    public Maybe<FavoriteMovie> getFavoriteMovieById(Long id) {
+        return smoovieDatabase.favoriteMovieDao()
+                .getFavoriteMovieById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Completable deleteFavoriteMovie(Long movieId) {
+        return smoovieDatabase.favoriteMovieDao()
+                .deleteFavoriteMovie(movieId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Completable addFavoriteMovie(Long movieId, String userId) {
+        return smoovieDatabase.favoriteMovieDao()
+                .insertAll(new FavoriteMovie(userId, movieId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }
