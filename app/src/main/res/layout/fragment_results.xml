@@ -41,6 +41,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_search_results"
         app:layout_constraintVertical_bias="0.542">
 
+        <ProgressBar
+            android:id="@+id/progressBar_results"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_results"
             android:layout_width="match_parent"
@@ -50,6 +57,7 @@
             android:clipToPadding="false"
             android:paddingTop="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

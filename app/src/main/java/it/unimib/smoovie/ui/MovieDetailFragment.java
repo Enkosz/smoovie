@@ -6,12 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,10 +26,11 @@ import com.bumptech.glide.Glide;
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
+import it.unimib.smoovie.model.MovieModelExtended;
 import it.unimib.smoovie.utils.Constants;
 import it.unimib.smoovie.viewmodel.MovieDetailViewModel;
 
-public class MovieDetailFragment extends Fragment {
+public class MovieDetailFragment extends Fragment implements ProgressDisplay {
 
     private ImageView imageViewMovieDetailBackgroundPoster;
     private TextView textViewMovieDetailTitle;
@@ -33,6 +39,9 @@ public class MovieDetailFragment extends Fragment {
     private TextView textViewMovieOverview;
     private RecyclerView recyclerViewMovieSuggestions;
     private ImageButton imageButtonBackNavigation;
+
+    private LinearLayout movieDetailContainer;
+    private ConstraintLayout loadingContainer;
 
     @Nullable
     @Override
@@ -46,6 +55,10 @@ public class MovieDetailFragment extends Fragment {
         recyclerViewMovieSuggestions = view.findViewById(R.id.recyclerView_movieDetail_suggestions);
         imageButtonBackNavigation = view.findViewById(R.id.imageButton_movieDetail_back);
 
+        movieDetailContainer = view.findViewById(R.id.movie_detail_container);
+        loadingContainer = view.findViewById(R.id.movie_detail_loadingContainer);
+
+        showProgress();
         setupUI();
         return view;
     }
@@ -55,7 +68,19 @@ public class MovieDetailFragment extends Fragment {
         Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
 
         movieDetailViewModel.getMovieDetailById(id)
-                .observe(getViewLifecycleOwner(), movieModelExtended -> {
+                .observe(getViewLifecycleOwner(), modelExtendedResponseWrapper -> {
+                    if(modelExtendedResponseWrapper.hasErrors()) {
+                        Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+
+                        Navigation.findNavController(requireView())
+                                .navigate(R.id.homeFragment, new Bundle(), new NavOptions.Builder()
+                                        .setExitAnim(android.R.anim.fade_out)
+                                        .setPopEnterAnim(android.R.anim.fade_in)
+                                        .build());
+                        return;
+                    }
+
+                    MovieModelExtended movieModelExtended = modelExtendedResponseWrapper.getResponse();
 
                     textViewMovieDetailTitle.setText(movieModelExtended.title);
                     textViewMovieReleaseDate.setText(movieModelExtended.releaseDate);
@@ -65,6 +90,8 @@ public class MovieDetailFragment extends Fragment {
                     Glide.with(requireContext())
                             .load(Constants.API_POSTER_URL + movieModelExtended.backdropPath)
                             .into(imageViewMovieDetailBackgroundPoster);
+
+                    hideProgress();
                 });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -84,6 +111,31 @@ public class MovieDetailFragment extends Fragment {
 
         recyclerViewMovieSuggestions.addOnScrollListener(scrollListener);
         movieDetailViewModel.getMovieDetailSuggestionsById(id, 1)
-                .observe(getViewLifecycleOwner(), adapter::addItems);
+                .observe(getViewLifecycleOwner(), responseWrapper -> {
+                    if(responseWrapper.hasErrors()) {
+                        Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+
+                        Navigation.findNavController(requireView())
+                                .navigate(R.id.homeFragment, new Bundle(), new NavOptions.Builder()
+                                        .setExitAnim(android.R.anim.fade_out)
+                                        .setPopEnterAnim(android.R.anim.fade_in)
+                                        .build());
+                        return;
+                    }
+
+                    adapter.addItems(responseWrapper.getResponse().movies);
+                });
+    }
+
+    @Override
+    public void showProgress() {
+        loadingContainer.setVisibility(View.VISIBLE);
+        movieDetailContainer.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        loadingContainer.setVisibility(View.GONE);
+        movieDetailContainer.setVisibility(View.VISIBLE);
     }
 }

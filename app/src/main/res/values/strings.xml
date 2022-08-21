@@ -50,4 +50,6 @@
     <string name="language_title">Language</string>
     <string name="language_english">English</string>
     <string name="language_italian">Italian</string>
+
+    <string name="error_generic">Generic Error</string>
 </resources>

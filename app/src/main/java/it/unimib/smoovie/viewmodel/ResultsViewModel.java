@@ -8,13 +8,15 @@ import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.container.ApplicationContainer;
+import it.unimib.smoovie.model.ApiResponse;
 import it.unimib.smoovie.model.MovieGenre;
 import it.unimib.smoovie.model.MovieModelCompact;
+import it.unimib.smoovie.model.ResponseWrapper;
 import it.unimib.smoovie.repository.MoviesRepository;
 
 public class ResultsViewModel extends ViewModel {
 
-    private final MutableLiveData<List<MovieModelCompact>> searchResultMovieList;
+    private final MutableLiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> searchResultMovieList;
 
     private Disposable disposableSearchResultMovieList;
 
@@ -25,16 +27,16 @@ public class ResultsViewModel extends ViewModel {
     private final MoviesRepository moviesRepository = ApplicationContainer.getInstance()
             .getMoviesRepository();
 
-    public LiveData<List<MovieModelCompact>> getMoviesByQuery(String query, int page) {
+    public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByQuery(String query, int page) {
         disposableSearchResultMovieList = moviesRepository.getMoviesByQuery(query, page)
-                .subscribe(movieModelApiResponse -> searchResultMovieList.postValue(movieModelApiResponse.movies));
+                .subscribe(searchResultMovieList::postValue);
 
         return searchResultMovieList;
     }
 
-    public LiveData<List<MovieModelCompact>> getMoviesByCategory(MovieGenre category, int page) {
+    public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByCategory(MovieGenre category, int page) {
         disposableSearchResultMovieList = moviesRepository.getMoviesByCategory(category, page)
-                .subscribe(movieModelApiResponse -> searchResultMovieList.postValue(movieModelApiResponse.movies));
+                .subscribe(searchResultMovieList::postValue);
 
         return searchResultMovieList;
     }

@@ -16,13 +16,9 @@ public class FavoriteMovie {
     @ColumnInfo(name = "film_id")
     public String filmId;
 
-
-
-
-    public FavoriteMovie(String userId, String filmId, String posterPath){
+    public FavoriteMovie(int id, String userId, String filmId) {
+        this.id = id;
         this.userId = userId;
         this.filmId = filmId;
-
     }
-
 }

@@ -43,4 +43,6 @@
     <string name="language_title">Lingua</string>
     <string name="language_english">Inglese</string>
     <string name="language_italian">Italiano</string>
+
+    <string name="error_generic">Errore generico</string>
 </resources>
