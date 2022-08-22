@@ -1,9 +1,5 @@
 package it.unimib.smoovie.ui;
 
-import android.content.Context;
-import android.content.res.ColorStateList;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
@@ -35,8 +28,8 @@ import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.model.MovieModelExtended;
-import it.unimib.smoovie.room.model.FavoriteMovie;
 import it.unimib.smoovie.utils.Constants;
+import it.unimib.smoovie.utils.ProgressDisplay;
 import it.unimib.smoovie.viewmodel.MovieDetailViewModel;
 
 public class MovieDetailFragment extends Fragment implements ProgressDisplay {

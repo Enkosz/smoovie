@@ -23,6 +23,7 @@ import it.unimib.smoovie.core.SearchStrategy;
 import it.unimib.smoovie.core.SearchStrategyFactory;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.adapter.MovieSearchResultRecyclerVewAdapter;
+import it.unimib.smoovie.utils.ProgressDisplay;
 import it.unimib.smoovie.viewmodel.ResultsViewModel;
 
 public class ResultsFragment extends Fragment implements ProgressDisplay {
