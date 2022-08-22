@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Background">
+    android:background="@color/black"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/movie_detail_loadingContainer"
@@ -34,11 +35,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/imageButton_movieDetail_back"
-                style="@style/ImageButton"
-                android:background="@color/Background"
-                app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24_black" />
+            <LinearLayout
+                android:id="@+id/movie_detail_header_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imageButton_movieDetail_back"
@@ -62,8 +63,9 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="2"
-                    android:text="TextView"
-                    android:textAlignment="textStart" />
+                    android:text="@string/placeholder_textview"
+                    android:textAlignment="textStart"
+                    />
 
             </LinearLayout>
 
@@ -89,36 +91,20 @@
                     android:id="@+id/movie_detail_metadata_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="@string/placeholder_textview"
-                    android:textColor="@color/TextPrimary"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView_movieDetail_similarMovie_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/placeholder_similar_content"
-                    android:textColor="@color/TextPrimary"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_overview" />
+                    <TextView
+                        android:id="@+id/textView_movieDetail_runtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder_textview" />
 
-                <TextView
-                    android:id="@+id/textView_movieDetail_runtime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/placeholder_textview"
-                    android:textColor="@color/TextPrimary"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_title" />
+                    <TextView
+                        android:id="@+id/textView_movieDetail_releaseDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:text="@string/placeholder_textview" />
 
                     <LinearLayout
                         android:id="@+id/movie_detail_actions_container"
@@ -143,28 +129,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:text="@string/placeholder_textview"
-                    android:textColor="@color/TextPrimary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_releaseDate" />
+                    android:text="@string/placeholder_textview" />
 
-                <TextView
-                    android:id="@+id/textView_movieDetail_releaseDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/placeholder_textview"
-                    android:textColor="@color/TextPrimary"
-                    app:layout_constraintStart_toEndOf="@+id/textView_movieDetail_runtime"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_title" />
+                <LinearLayout
+                    android:id="@+id/movie_detail_similar_content_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView_movieDetail_similarMovie_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Similar Content" />
+                        android:text="@string/placeholder_similar_content" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView_movieDetail_suggestions"

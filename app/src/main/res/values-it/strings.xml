@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="placeholder_similar_content">Contenuti Simili</string>
-
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_search">Cerca</string>
     <string name="bottom_nav_settings">Impostazioni</string>
@@ -45,4 +43,14 @@
     <string name="language_title">Lingua</string>
     <string name="language_english">Inglese</string>
     <string name="language_italian">Italiano</string>
+
+    <string name="error_generic">Errore Generico</string>
+
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_username">Username</string>
+    <string name="auth_login">Login</string>
+    <string name="auth_register">Registrati</string>
+    <string name="auth_new_user_register">Nuovo utente? Registrati ora</string>
+    <string name="auth_exising_user_login">Sei già un utente? Entra ora</string>
 </resources>

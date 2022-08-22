@@ -89,7 +89,7 @@
             <TextView
                 style="@style/TextViewButtonPrimary"
                 android:text="@string/settings_modify_password"
-                android:textColor="@color/white"
+                android:textColor="@color/TextPrimary"
                 android:textSize="@dimen/text_size"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
@@ -115,6 +115,7 @@
                 android:padding="@dimen/button_padding">
 
                 <TextView
+                    android:id="@+id/textView_language"
                     style="@style/TextViewButtonPrimary"
                     android:padding="0dp"
                     android:text="@string/settings_language"
