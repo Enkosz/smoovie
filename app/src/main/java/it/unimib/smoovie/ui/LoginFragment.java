@@ -10,6 +10,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.google.firebase.auth.FirebaseUser;
 
@@ -18,13 +19,14 @@ import it.unimib.smoovie.R;
 public class LoginFragment extends Fragment {
 
     private Button buttonLogin;
+    private Button buttonRegister;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         buttonLogin = view.findViewById(R.id.button_login);
-
+        buttonRegister = view.findViewById(R.id.button_registger_newuser);
         setupUI();
         return view;
     }
@@ -34,6 +36,11 @@ public class LoginFragment extends Fragment {
             Intent intent = new Intent(requireContext(), ApplicationActivity.class);
 
             startActivity(intent);
+        });
+
+        buttonRegister.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment);
+
         });
     }
 }

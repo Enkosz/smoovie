@@ -45,4 +45,12 @@
     <string name="language_italian">Italiano</string>
 
     <string name="error_generic">Errore generico</string>
+
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_username">Username</string>
+    <string name="auth_login">Login</string>
+    <string name="auth_register">Registrati</string>
+    <string name="auth_new_user_register">Nuovo utente? Registrati ora</string>
+    <string name="auth_exising_user_login">Già registrato? Esegui il login ora</string>
 </resources>

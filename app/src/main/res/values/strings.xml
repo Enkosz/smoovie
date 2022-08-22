@@ -52,4 +52,12 @@
     <string name="language_italian">Italian</string>
 
     <string name="error_generic">Generic Error</string>
+
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_username">Username</string>
+    <string name="auth_login">Login</string>
+    <string name="auth_register">Register</string>
+    <string name="auth_new_user_register">New user? Register now</string>
+    <string name="auth_exising_user_login">Already an user? Login now</string>
 </resources>
