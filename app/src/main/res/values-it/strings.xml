@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="placeholder_similar_content">Contenuti Simili</string>
+
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_search">Cerca</string>
     <string name="bottom_nav_settings">Impostazioni</string>
@@ -43,6 +45,4 @@
     <string name="language_title">Lingua</string>
     <string name="language_english">Inglese</string>
     <string name="language_italian">Italiano</string>
-
-    <string name="error_generic">Errore generico</string>
 </resources>
