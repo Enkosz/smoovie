@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorPrimaryDark"
+    android:background="@color/Background"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView_topRatedMovies_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
+        android:layout_marginStart="6dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="4dp"
         android:text="@string/top_rated_movie_category"
-        android:textColor="@color/white_200" />
+        android:textColor="@color/TextPrimary" />
 
     <ProgressBar
         android:id="@+id/progressBar_nowPlayingMovies"
