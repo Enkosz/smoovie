@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorPrimaryDark"
+    android:background="@color/Background"
     android:orientation="vertical">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginBottom="4dp"
         android:text="@string/top_rated_movie_category"
-        android:textColor="@color/white_200" />
+        android:textColor="@color/TextPrimary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_topRatedMovies"

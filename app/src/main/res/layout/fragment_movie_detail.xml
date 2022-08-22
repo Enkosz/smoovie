@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/Background">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,17 +23,9 @@
 
             <ImageButton
                 android:id="@+id/imageButton_movieDetail_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/black"
-                android:bottomLeftRadius="10dp"
-                android:bottomRightRadius="10dp"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                android:padding="0dp"
-                android:topLeftRadius="10dp"
-                android:topRightRadius="10dp"
-                app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
+                style="@style/ImageButton"
+                android:background="@color/Background"
+                app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24_black" />
 
             <ImageView
                 android:id="@+id/imageView_movieDetail_backgroundPoster"
@@ -58,6 +50,7 @@
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:text="@string/placeholder_textview"
+                    android:textColor="@color/TextPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,6 +61,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/placeholder_similar_content"
+                    android:textColor="@color/TextPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_overview" />
 
@@ -78,6 +72,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/placeholder_textview"
+                    android:textColor="@color/TextPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_title" />
 
@@ -89,6 +84,7 @@
                     android:layout_marginTop="8dp"
                     android:ellipsize="end"
                     android:text="@string/placeholder_textview"
+                    android:textColor="@color/TextPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_releaseDate" />
@@ -100,6 +96,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/placeholder_textview"
+                    android:textColor="@color/TextPrimary"
                     app:layout_constraintStart_toEndOf="@+id/textView_movieDetail_runtime"
                     app:layout_constraintTop_toBottomOf="@+id/textView_movieDetail_title" />
 
