@@ -12,8 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.google.firebase.auth.FirebaseUser;
-
 import it.unimib.smoovie.R;
 
 public class LoginFragment extends Fragment {
@@ -26,7 +24,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         buttonLogin = view.findViewById(R.id.button_login);
-        buttonRegister = view.findViewById(R.id.button_registger_newuser);
+        buttonRegister = view.findViewById(R.id.button_register_new_user);
         setupUI();
         return view;
     }

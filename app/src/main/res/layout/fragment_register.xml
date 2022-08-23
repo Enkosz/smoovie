@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="97dp"
+        android:autofillHints="emailAddress"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="97dp"
+        android:autofillHints="username"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="97dp"
+        android:autofillHints="password"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,12 +81,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword_register" />
 
     <Button
-        android:id="@+id/button_login_existinguser"
+        android:id="@+id/button_login_existing_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
         android:backgroundTint="@null"
-        android:text="@string/auth_exising_user_login"
+        android:text="@string/auth_existing_user_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword_register" />

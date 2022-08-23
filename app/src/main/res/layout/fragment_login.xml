@@ -10,9 +10,9 @@
         android:id="@+id/editTextEmail_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
         android:ems="10"
         android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_label_email_login" />
 
@@ -20,9 +20,9 @@
         android:id="@+id/editTextPassword_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
         android:ems="10"
         android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_label_password_login" />
 
@@ -50,15 +50,15 @@
         android:id="@+id/button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="154dp"
         android:layout_marginTop="23dp"
         android:backgroundTint="@color/red_200"
         android:text="@string/auth_login"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword_login" />
 
     <Button
-        android:id="@+id/button_registger_newuser"
+        android:id="@+id/button_register_new_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"

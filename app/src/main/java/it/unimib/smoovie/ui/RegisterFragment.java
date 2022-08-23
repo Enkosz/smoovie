@@ -1,6 +1,5 @@
 package it.unimib.smoovie.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -34,7 +33,7 @@ public class RegisterFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
-        buttonLogin = view.findViewById(R.id.button_login_existinguser);
+        buttonLogin = view.findViewById(R.id.button_login_existing_user);
         buttonRegister = view.findViewById(R.id.button_register);
         editTextEmail = view.findViewById(R.id.editTextEmail_register);
         editTextUsername = view.findViewById(R.id.editTextUsername_register);

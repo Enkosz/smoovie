@@ -52,5 +52,9 @@
     <string name="auth_login">Login</string>
     <string name="auth_register">Registrati</string>
     <string name="auth_new_user_register">Nuovo utente? Registrati ora</string>
-    <string name="auth_exising_user_login">Già registrato? Esegui il login ora</string>
+    <string name="auth_existing_user_login">Già registrato? Esegui il login ora</string>
+
+    <string name="hint_email">Inserisci Indirizzo Mail Qui</string>
+    <string name="hint_username">Inserisci Username Qui</string>
+    <string name="password">Inserisci Password Qui</string>
 </resources>
