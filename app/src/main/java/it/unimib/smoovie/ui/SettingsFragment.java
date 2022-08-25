@@ -34,6 +34,10 @@ public class SettingsFragment extends Fragment {
         relativeLayoutLanguageSettings.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(R.id.languageFragment));
 
+        TextView textViewLanguage = view.findViewById(R.id.textView_language);
+        textViewLanguage.setOnClickListener(v -> Navigation.findNavController(v)
+                .navigate(R.id.languageFragment));
+
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -45,6 +49,7 @@ public class SettingsFragment extends Fragment {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+
 
         SwitchCompat switchShowMatureContent = view.findViewById(R.id.switch_show_mature_content);
         switchShowMatureContent.setChecked(sharedPreferences.getBoolean("showMatureContent", true));

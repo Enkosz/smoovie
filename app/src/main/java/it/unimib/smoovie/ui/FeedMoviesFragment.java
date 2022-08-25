@@ -66,27 +66,27 @@ public abstract class FeedMoviesFragment extends Fragment implements ProgressDis
 
         recyclerViewMovies.addOnScrollListener(scrollListener);
         fetchMovies(1)
-            .observe(getViewLifecycleOwner(), responseWrapper -> {
-                if(responseWrapper.hasErrors()) {
-                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+                .observe(getViewLifecycleOwner(), responseWrapper -> {
+                    if (responseWrapper.hasErrors()) {
+                        Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
 
-                    Navigation.findNavController(requireView())
-                            .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()
-                                    .setExitAnim(android.R.anim.fade_out)
-                                    .setPopEnterAnim(android.R.anim.fade_in)
-                                    .build());
-                    return;
-                }
+                        Navigation.findNavController(requireView())
+                                .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()
+                                        .setExitAnim(android.R.anim.fade_out)
+                                        .setPopEnterAnim(android.R.anim.fade_in)
+                                        .build());
+                        return;
+                    }
 
-                adapter.addItems(responseWrapper.getResponse().movies);
-                hideProgress();
-            });
+                    adapter.addItems(responseWrapper.getResponse().movies);
+                    hideProgress();
+                });
 
         return view;
     }
 
     protected MovieViewModel getViewModel() {
-        if(modelProvider == null)
+        if (modelProvider == null)
             modelProvider = new ViewModelProvider(this);
 
         return modelProvider.get(MovieViewModel.class);
