@@ -1,16 +1,17 @@
 package it.unimib.smoovie.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import it.unimib.smoovie.R;
 
@@ -34,12 +35,58 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
+        AtomicBoolean toReset = new AtomicBoolean(false);
+
         // Hide the bottom nav bar when we are in the login fragment
         navController.addOnDestinationChangedListener((ignored, navDestination, bundle) -> {
-            if(navDestination.getId() == R.id.loginFragment)
+            if (navDestination.getId() == R.id.homeFragment) {
+                Log.i("test", "setupNavControllerAuthenticationFilter: homeFragment");
+                toReset.set(false);
+            }
+            if (navDestination.getId() == R.id.searchFragment) {
+                Log.i("test", "setupNavControllerAuthenticationFilter: searchFragment");
+                toReset.set(false);
+            }
+            if (navDestination.getId() == R.id.resultsFragment) {
+//                navDestination.setId(R.id.searchFragment);
+                if (toReset.get()) {
+                    Log.i("test", "setupNavControllerAuthenticationFilter: if, resetting to search");
+                    Log.i("test", "setupNavControllerAuthenticationFilter: inside toReset = " + toReset.get());
+                    navController.navigate(R.id.searchFragment);
+                    toReset.set(false);
+                } else {
+                    Log.i("test", "setupNavControllerAuthenticationFilter: else, toReset = " + toReset.get());
+                    Log.i("test", "setupNavControllerAuthenticationFilter: resultsFragment");
+                    Log.i("test", "setupNavControllerAuthenticationFilter: setting toReset to true");
+                    toReset.set(true);
+                }
+            }
+            if (navDestination.getId() == R.id.movieDetailFragment) {
+                toReset.set(false);
+                Log.i("test", "setupNavControllerAuthenticationFilter: movieDetailFragment");
+                if (toReset.get()) {
+                    Log.i("test", "setupNavControllerAuthenticationFilter: if, resetting to search");
+                    Log.i("test", "setupNavControllerAuthenticationFilter: inside toReset = " + toReset.get());
+                    navController.navigate(R.id.searchFragment);
+                    toReset.set(false);
+                }else {
+                    Log.i("test", "setupNavControllerAuthenticationFilter: else, toReset = " + toReset.get());
+                    Log.i("test", "setupNavControllerAuthenticationFilter: movieDetailFragment");
+                    Log.i("test", "setupNavControllerAuthenticationFilter: setting toReset to true");
+                    toReset.set(true);
+                }
+            }
+            if (navDestination.getId() == R.id.settingsFragment) {
+                Log.i("test", "setupNavControllerAuthenticationFilter: settingsFragment");
+                toReset.set(false);
+            }
+
+            if (navDestination.getId() == R.id.loginFragment)
                 bottomNavigationView.setVisibility(View.GONE);
-            else if(bottomNavigationView.getVisibility() != View.VISIBLE)
+            else if (bottomNavigationView.getVisibility() != View.VISIBLE)
                 bottomNavigationView.setVisibility(View.VISIBLE);
+
+            Log.i("test", "----------");
         });
     }
 }
