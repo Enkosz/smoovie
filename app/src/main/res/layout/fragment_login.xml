@@ -30,9 +30,10 @@
         android:id="@+id/textView_label_email_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="171dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="168dp"
         android:text="@string/auth_email"
+        android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,9 +41,10 @@
         android:id="@+id/textView_label_password_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="24dp"
         android:text="@string/auth_password"
+        android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail_login" />
 
@@ -50,9 +52,10 @@
         android:id="@+id/button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/red_200"
         android:text="@string/auth_login"
+        android:textSize="@dimen/text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword_login" />
@@ -61,7 +64,8 @@
         android:id="@+id/button_register_new_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="96dp"
+        android:textSize="@dimen/text_size"
         android:backgroundTint="@null"
         android:text="@string/auth_new_user_register"
         app:layout_constraintEnd_toEndOf="parent"
