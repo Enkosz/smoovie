@@ -16,9 +16,9 @@
     <color name="gray">#505050</color>
     <color name="off_white">#FAFAFF</color>
 
-<!--    <color name="Primary">#FF000000</color>-->
-    <color name="Background">#FAFAFF</color>
-    <color name="TextPrimary">#FF000000</color>
+    <!--    <color name="Primary">#FF000000</color>-->
+    <color name="Background">#FF000000</color>
+    <color name="TextPrimary">#FFFFFFFF</color>
     <color name="TextSecondary">#808080</color>
     <color name="HorizontalRow">#505050</color>
     <color name="Version">#808080</color>
