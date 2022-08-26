@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -37,6 +38,16 @@ public class AuthManager {
                 }));
 
         return firebaseUserObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Completable logout() {
+        Completable completableLogout = Completable.create(emitter -> {
+            // elimino il token
+        });
+
+        return completableLogout
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

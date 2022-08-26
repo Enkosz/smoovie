@@ -54,7 +54,7 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
     }
 
     private void setupViewModel() {
-        viewModel = new ViewModelProvider(this).get(ResultsViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(ResultsViewModel.class);
     }
 
     private void setupStrategyFactory() {

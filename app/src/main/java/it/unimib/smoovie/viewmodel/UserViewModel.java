@@ -44,6 +44,11 @@ public class UserViewModel extends AndroidViewModel {
                 }));
     }
 
+    public Completable logout() {
+        // TODO
+        return null;
+    }
+
     public Completable createAuthenticatedUser(String email, String password) {
         return Completable.fromObservable(authManager.createUser(email, password)
                 .flatMap(firebaseUser -> {
@@ -57,6 +62,9 @@ public class UserViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
 
-        disposableUser.dispose();
+        if(disposableUser != null && !disposableUser.isDisposed())
+            disposableUser.dispose();
+        if(disposableCreateUser != null && !disposableCreateUser.isDisposed())
+            disposableCreateUser.dispose();
     }
 }

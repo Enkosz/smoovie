@@ -86,7 +86,7 @@ public abstract class FeedMoviesFragment extends Fragment implements ProgressDis
 
     protected MovieViewModel getViewModel() {
         if(modelProvider == null)
-            modelProvider = new ViewModelProvider(this);
+            modelProvider = new ViewModelProvider(requireActivity());
 
         return modelProvider.get(MovieViewModel.class);
     }
