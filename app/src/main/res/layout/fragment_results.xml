@@ -28,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24_black" />
+        app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
 
     <LinearLayout
         android:layout_width="0dp"
