@@ -25,6 +25,8 @@ public class SettingsFragment extends Fragment {
 
     private TextView textViewProfileUsername;
     private TextView textViewNotificationsSettings;
+    private TextView textViewShowMatureContent;
+    private TextView textViewDarkMode;
     private SwitchCompat switchShowMatureContent;
     private SwitchCompat switchDarkMode;
 
@@ -41,11 +43,13 @@ public class SettingsFragment extends Fragment {
 
         textViewProfileUsername = view.findViewById(R.id.textView_settings_profile_username);
         textViewNotificationsSettings = view.findViewById(R.id.notifications_settings);
+        textViewShowMatureContent = view.findViewById(R.id.textView_show_mature_content);
         switchShowMatureContent = view.findViewById(R.id.switch_show_mature_content);
         relativeLayoutShowMatureContent = view.findViewById(R.id.relative_layout_show_mature_content);
         relativeLayoutLanguageSettings = view.findViewById(R.id.relative_layout_language);
         switchDarkMode = view.findViewById(R.id.switch_dark_mode);
         relativeLayoutDarkMode = view.findViewById(R.id.relative_layout_dark_mode);
+        textViewDarkMode = view.findViewById(R.id.textView_dark_mode);
 
         setupViewModel();
         setupNavigation();
@@ -72,33 +76,30 @@ public class SettingsFragment extends Fragment {
         switchShowMatureContent.setChecked(sharedPreferences.getBoolean("showMatureContent", true));
         switchShowMatureContent.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
-                editor.putBoolean(TAG_showMatureContent, true).apply();
-                Log.i(TAG_showMatureContent, "true");
+                editor.putBoolean("showMatureContent", true).apply();
             } else {
-                editor.putBoolean(TAG_showMatureContent, false).apply();
-                Log.i(TAG_showMatureContent, "false");
+                editor.putBoolean("showMatureContent", false).apply();
             }
         });
         relativeLayoutShowMatureContent.setOnClickListener(
                 view1 -> {
-                    if (sharedPreferences.getBoolean(TAG_showMatureContent, true)) {
+                    if (sharedPreferences.getBoolean("showMatureContent", true)) {
                         switchShowMatureContent.setChecked(false);
-                        editor.putBoolean(TAG_showMatureContent, false).apply();
+                        editor.putBoolean("showMatureContent", false).apply();
                     } else {
                         switchShowMatureContent.setChecked(true);
-                        editor.putBoolean(TAG_showMatureContent, true).apply();
+                        editor.putBoolean("showMatureContent", true).apply();
                     }
                 }
         );
-        TextView textViewShowMatureContent = view.findViewById(R.id.textView_show_mature_content);
         textViewShowMatureContent.setOnClickListener(
                 view12 -> {
-                    if (sharedPreferences.getBoolean(TAG_showMatureContent, true)) {
+                    if (sharedPreferences.getBoolean("showMatureContent", true)) {
                         switchShowMatureContent.setChecked(false);
-                        editor.putBoolean(TAG_showMatureContent, false).apply();
+                        editor.putBoolean("showMatureContent", false).apply();
                     } else {
                         switchShowMatureContent.setChecked(true);
-                        editor.putBoolean(TAG_showMatureContent, true).apply();
+                        editor.putBoolean("showMatureContent", true).apply();
                     }
                 }
         );
@@ -107,39 +108,36 @@ public class SettingsFragment extends Fragment {
         switchDarkMode.setChecked(sharedPreferences.getBoolean(keytag1, true));
         switchDarkMode.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
-                editor.putBoolean(TAG_darkMode, true).apply();
-                Log.i(TAG_darkMode, "true");
+                editor.putBoolean("darkMode", true).apply();
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             } else {
-                editor.putBoolean(TAG_darkMode, false).apply();
-                Log.i(TAG_darkMode, "false");
+                editor.putBoolean("darkMode", false).apply();
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         });
 
         relativeLayoutDarkMode.setOnClickListener(
                 view2 -> {
-                    if (sharedPreferences.getBoolean(TAG_darkMode, true)) {
+                    if (sharedPreferences.getBoolean("darkMode", true)) {
                         switchDarkMode.setChecked(false);
-                        editor.putBoolean(TAG_darkMode, false).apply();
+                        editor.putBoolean("darkMode", false).apply();
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     } else {
                         switchDarkMode.setChecked(true);
-                        editor.putBoolean(TAG_darkMode, true).apply();
+                        editor.putBoolean("darkMode", true).apply();
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     }
                 }
         );
-        TextView textViewDarkMode = view.findViewById(R.id.textView_dark_mode);
         textViewDarkMode.setOnClickListener(
                 view22 -> {
-                    if (sharedPreferences.getBoolean(TAG_darkMode, true)) {
+                    if (sharedPreferences.getBoolean("darkMode", true)) {
                         switchDarkMode.setChecked(false);
-                        editor.putBoolean(TAG_darkMode, false).apply();
+                        editor.putBoolean("darkMode", false).apply();
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     } else {
                         switchDarkMode.setChecked(true);
-                        editor.putBoolean(TAG_darkMode, true).apply();
+                        editor.putBoolean("darkMode", true).apply();
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     }
                 }
