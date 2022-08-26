@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
+        android:textSize="@dimen/text_size"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="4dp"
         android:text="@string/popular_movie_category"

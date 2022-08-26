@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textColor="@color/TextPrimary"
         android:text="@string/placeholder_search_query"
+        android:textColor="@color/TextPrimary"
+        android:textSize="@dimen/text_size"
         app:layout_constraintStart_toEndOf="@+id/button_search_result_back"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24_black" />
+        app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
 
     <LinearLayout
         android:layout_width="0dp"

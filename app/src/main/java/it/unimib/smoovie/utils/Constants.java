@@ -10,4 +10,6 @@ public final class Constants {
     public static final String SEARCH_MOVIE_GENRE_BUNDLE_KEY = "SEARCH_MOVIE_GENRE";
 
     public static final String MOVIE_DETAIL_ID_BUNDLE_KEY = "MOVIE_DETAIL_ID";
+
+    public static final String BASIC_AVATAR_URL = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
 }

@@ -14,7 +14,7 @@
     <string name="movie_genre_fantasy">Fantasia</string>
     <string name="movie_search_query_result_title">Risultati per %1$s</string>
 
-    <string name="settings_title">Il mio account</string>
+    <string name="settings_title">Il mio Account</string>
     <string name="settings_header_account_profile">ACCOUNT &amp; PROFILO</string>
     <string name="settings_subscription_type">Tipo di iscrizione</string>
     <string name="settings_modify_email">Modifica l\'email</string>
@@ -22,8 +22,8 @@
     <string name="settings_header_general">IMPOSTAZIONI GENERALI</string>
     <string name="settings_language">Lingua</string>
     <string name="settings_preview_language">Italiano</string>
-    <string name="settings_header_functionalities">IMPOSTAZIONI DELLA APP</string>
-    <string name="settings_show_mature_content">Mostra i contenuti vietati ai minori</string>
+    <string name="settings_header_functionalities">IMPOSTAZIONI APP</string>
+    <string name="settings_show_mature_content">Mostra i Contenuti +18</string>
     <string name="settings_dark_mode">Modalità Scura</string>
     <string name="settings_notifications">Notifiche</string>
     <string name="settings_connected_apps">App Connesse</string>
@@ -44,7 +44,7 @@
     <string name="language_english">Inglese</string>
     <string name="language_italian">Italiano</string>
 
-    <string name="error_generic">Errore Generico</string>
+    <string name="error_generic">Errore generico</string>
 
     <string name="auth_email">Email</string>
     <string name="auth_password">Password</string>
@@ -52,5 +52,9 @@
     <string name="auth_login">Login</string>
     <string name="auth_register">Registrati</string>
     <string name="auth_new_user_register">Nuovo utente? Registrati ora</string>
-    <string name="auth_exising_user_login">Sei già un utente? Entra ora</string>
+    <string name="auth_existing_user_login">Già registrato? Esegui il login ora</string>
+
+    <string name="hint_email">Inserisci Indirizzo Mail Qui</string>
+    <string name="hint_username">Inserisci Username Qui</string>
+    <string name="password">Inserisci Password Qui</string>
 </resources>
