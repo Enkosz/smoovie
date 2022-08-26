@@ -13,6 +13,7 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="4dp"
+        android:textSize="@dimen/text_size"
         android:text="@string/now_playing_movie_category"
         android:textColor="@color/white_200" />
 

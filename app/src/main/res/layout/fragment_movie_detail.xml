@@ -62,6 +62,7 @@
                     android:layout_height="match_parent"
                     android:ellipsize="end"
                     android:gravity="center"
+                    android:textSize="@dimen/text_size"
                     android:maxLines="2"
                     android:text="@string/placeholder_textview"
                     android:textAlignment="textStart"
@@ -96,6 +97,7 @@
                     <TextView
                         android:id="@+id/textView_movieDetail_runtime"
                         android:layout_width="wrap_content"
+                        android:textSize="@dimen/text_size"
                         android:layout_height="wrap_content"
                         android:text="@string/placeholder_textview" />
 
@@ -104,6 +106,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
+                        android:textSize="@dimen/text_size"
                         android:text="@string/placeholder_textview" />
 
                     <LinearLayout
@@ -128,6 +131,7 @@
                     android:id="@+id/textView_movieDetail_overview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size"
                     android:ellipsize="end"
                     android:text="@string/placeholder_textview" />
 
@@ -141,6 +145,7 @@
                     <TextView
                         android:id="@+id/textView_movieDetail_similarMovie_label"
                         android:layout_width="wrap_content"
+                        android:textSize="@dimen/text_size"
                         android:layout_height="wrap_content"
                         android:text="@string/placeholder_similar_content" />
 

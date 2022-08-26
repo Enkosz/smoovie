@@ -36,6 +36,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp"
                 android:ellipsize="end"
+                android:textSize="@dimen/text_size"
                 android:maxLines="2"
                 android:text="@string/placeholder_textview"
                 android:textColor="@color/white_200"
