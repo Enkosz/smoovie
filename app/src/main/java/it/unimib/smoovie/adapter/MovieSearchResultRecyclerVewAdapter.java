@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,6 +43,7 @@ public class MovieSearchResultRecyclerVewAdapter extends AbstractNotifiableListR
         MovieSearchResultRecyclerVewAdapter.MovieSearchResultViewHolder movieSearchResultViewHolder = (MovieSearchResultRecyclerVewAdapter.MovieSearchResultViewHolder) holder;
         MovieModelCompact model = items.get(position);
 
+        CardView movieCard = movieSearchResultViewHolder.getCardView();
         TextView textViewTitle = movieSearchResultViewHolder.getTextViewTitle();
         ImageView imageViewPoster = movieSearchResultViewHolder.getImageViewPoster();
 
@@ -59,7 +61,7 @@ public class MovieSearchResultRecyclerVewAdapter extends AbstractNotifiableListR
                     .into(imageViewPoster);
         }
 
-        imageViewPoster.setOnClickListener(v -> {
+        movieCard.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY, model.id);
 
@@ -75,12 +77,14 @@ public class MovieSearchResultRecyclerVewAdapter extends AbstractNotifiableListR
 
         private final TextView textViewTitle;
         private final ImageView imageViewPoster;
+        private final CardView cardView;
 
         public MovieSearchResultViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.textView_movie_title);
             imageViewPoster = itemView.findViewById(R.id.imageView_movie_poster);
+            cardView = itemView.findViewById(R.id.movie_card_result);
         }
 
         public TextView getTextViewTitle() {
@@ -90,5 +94,7 @@ public class MovieSearchResultRecyclerVewAdapter extends AbstractNotifiableListR
         public ImageView getImageViewPoster() {
             return imageViewPoster;
         }
+
+        public CardView getCardView() { return cardView; }
     }
 }
