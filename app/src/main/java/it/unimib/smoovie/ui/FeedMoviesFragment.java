@@ -17,14 +17,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.model.ApiResponse;
 import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.model.ResponseWrapper;
+import it.unimib.smoovie.utils.ProgressDisplay;
 import it.unimib.smoovie.viewmodel.MovieViewModel;
 
 public abstract class FeedMoviesFragment extends Fragment implements ProgressDisplay {
@@ -86,8 +85,8 @@ public abstract class FeedMoviesFragment extends Fragment implements ProgressDis
     }
 
     protected MovieViewModel getViewModel() {
-        if (modelProvider == null)
-            modelProvider = new ViewModelProvider(this);
+        if(modelProvider == null)
+            modelProvider = new ViewModelProvider(requireActivity());
 
         return modelProvider.get(MovieViewModel.class);
     }

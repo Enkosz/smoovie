@@ -58,5 +58,13 @@
         android:name="it.unimib.smoovie.ui.LanguageFragment"
         android:label="LanguageFragment">
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="it.unimib.smoovie.ui.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="it.unimib.smoovie.ui.RegisterFragment"
+        android:label="RegisterFragment" />
 
 </navigation>

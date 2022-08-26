@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "730983473098",
+    "project_id": "smoovie-app",
+    "storage_bucket": "smoovie-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730983473098:android:c79001a4d2e2ea6abef933",
+        "android_client_info": {
+          "package_name": "it.unimib.smoovie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730983473098-fo028q2iiouka9prj4i98cbl7rtc8d5a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq1OjtFRpQXud06sqJC9oGmMCEpUEhlYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730983473098-fo028q2iiouka9prj4i98cbl7rtc8d5a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

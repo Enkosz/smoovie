@@ -41,8 +41,16 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    style="@style/TextViewUsername"
-                    android:text="@string/settings_username" />
+                    android:id="@+id/textView_settings_profile_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/settings_username"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
             </RelativeLayout>
 
             <TextView

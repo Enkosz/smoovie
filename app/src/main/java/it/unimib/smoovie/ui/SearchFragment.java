@@ -23,6 +23,7 @@ import com.google.android.flexbox.JustifyContent;
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieCategoryViewAdapter;
 import it.unimib.smoovie.utils.Constants;
+import it.unimib.smoovie.utils.ProgressDisplay;
 import it.unimib.smoovie.viewmodel.SearchViewModel;
 
 public class SearchFragment extends Fragment implements ProgressDisplay {
@@ -79,7 +80,7 @@ public class SearchFragment extends Fragment implements ProgressDisplay {
     }
 
     private void setupViewModel() {
-        SearchViewModel searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
+        SearchViewModel searchViewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
 
         searchViewModel.getMovieCategoryList()
             .observe(getViewLifecycleOwner(), movieCategories -> {

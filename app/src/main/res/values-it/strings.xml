@@ -44,7 +44,7 @@
     <string name="language_english">Inglese</string>
     <string name="language_italian">Italiano</string>
 
-    <string name="error_generic">Errore Generico</string>
+    <string name="error_generic">Errore generico</string>
 
     <string name="auth_email">Email</string>
     <string name="auth_password">Password</string>
@@ -52,5 +52,9 @@
     <string name="auth_login">Login</string>
     <string name="auth_register">Registrati</string>
     <string name="auth_new_user_register">Nuovo utente? Registrati ora</string>
-    <string name="auth_exising_user_login">Sei già un utente? Entra ora</string>
+    <string name="auth_existing_user_login">Già registrato? Esegui il login ora</string>
+
+    <string name="hint_email">Inserisci Indirizzo Mail Qui</string>
+    <string name="hint_username">Inserisci Username Qui</string>
+    <string name="password">Inserisci Password Qui</string>
 </resources>
