@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,6 +25,8 @@ public class SettingsFragment extends Fragment {
 
     private TextView textViewProfileUsername;
     private TextView textViewNotificationsSettings;
+    private TextView textViewShowMatureContent;
+    private TextView textViewDarkMode;
     private SwitchCompat switchShowMatureContent;
     private SwitchCompat switchDarkMode;
 
@@ -40,11 +43,13 @@ public class SettingsFragment extends Fragment {
 
         textViewProfileUsername = view.findViewById(R.id.textView_settings_profile_username);
         textViewNotificationsSettings = view.findViewById(R.id.notifications_settings);
+        textViewShowMatureContent = view.findViewById(R.id.textView_show_mature_content);
         switchShowMatureContent = view.findViewById(R.id.switch_show_mature_content);
         relativeLayoutShowMatureContent = view.findViewById(R.id.relative_layout_show_mature_content);
         relativeLayoutLanguageSettings = view.findViewById(R.id.relative_layout_language);
         switchDarkMode = view.findViewById(R.id.switch_dark_mode);
         relativeLayoutDarkMode = view.findViewById(R.id.relative_layout_dark_mode);
+        textViewDarkMode = view.findViewById(R.id.textView_dark_mode);
 
         setupViewModel();
         setupNavigation();
@@ -71,16 +76,24 @@ public class SettingsFragment extends Fragment {
         switchShowMatureContent.setChecked(sharedPreferences.getBoolean("showMatureContent", true));
         switchShowMatureContent.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
-                editor.putBoolean("showMatureContent", true);
-                Log.i("switch_show_mature_content", "true");
+                editor.putBoolean("showMatureContent", true).apply();
             } else {
-                editor.putBoolean("showMatureContent", false);
-                Log.i("switch_show_mature_content", "false");
+                editor.putBoolean("showMatureContent", false).apply();
             }
-            editor.apply();
         });
         relativeLayoutShowMatureContent.setOnClickListener(
                 view1 -> {
+                    if (sharedPreferences.getBoolean("showMatureContent", true)) {
+                        switchShowMatureContent.setChecked(false);
+                        editor.putBoolean("showMatureContent", false).apply();
+                    } else {
+                        switchShowMatureContent.setChecked(true);
+                        editor.putBoolean("showMatureContent", true).apply();
+                    }
+                }
+        );
+        textViewShowMatureContent.setOnClickListener(
+                view12 -> {
                     if (sharedPreferences.getBoolean("showMatureContent", true)) {
                         switchShowMatureContent.setChecked(false);
                         editor.putBoolean("showMatureContent", false).apply();
@@ -95,23 +108,37 @@ public class SettingsFragment extends Fragment {
         switchDarkMode.setChecked(sharedPreferences.getBoolean(keytag1, true));
         switchDarkMode.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
-                editor.putBoolean(keytag1, true);
-                Log.i(keytag1, "true");
+                editor.putBoolean("darkMode", true).apply();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             } else {
-                editor.putBoolean(keytag1, false);
-                Log.i(keytag1, "false");
+                editor.putBoolean("darkMode", false).apply();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
-            editor.apply();
         });
 
         relativeLayoutDarkMode.setOnClickListener(
                 view2 -> {
-                    if (sharedPreferences.getBoolean(keytag1, true)) {
+                    if (sharedPreferences.getBoolean("darkMode", true)) {
                         switchDarkMode.setChecked(false);
-                        editor.putBoolean(keytag1, false).apply();
+                        editor.putBoolean("darkMode", false).apply();
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     } else {
                         switchDarkMode.setChecked(true);
-                        editor.putBoolean(keytag1, true).apply();
+                        editor.putBoolean("darkMode", true).apply();
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    }
+                }
+        );
+        textViewDarkMode.setOnClickListener(
+                view22 -> {
+                    if (sharedPreferences.getBoolean("darkMode", true)) {
+                        switchDarkMode.setChecked(false);
+                        editor.putBoolean("darkMode", false).apply();
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    } else {
+                        switchDarkMode.setChecked(true);
+                        editor.putBoolean("darkMode", true).apply();
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     }
                 }
         );

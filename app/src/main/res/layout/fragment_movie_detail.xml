@@ -63,8 +63,9 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="2"
-                    android:text="TextView"
-                    android:textAlignment="textStart" />
+                    android:text="@string/placeholder_textview"
+                    android:textAlignment="textStart"
+                    />
 
             </LinearLayout>
 
@@ -96,14 +97,14 @@
                         android:id="@+id/textView_movieDetail_runtime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:text="@string/placeholder_textview" />
 
                     <TextView
                         android:id="@+id/textView_movieDetail_releaseDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
-                        android:text="TextView" />
+                        android:text="@string/placeholder_textview" />
 
                     <LinearLayout
                         android:id="@+id/movie_detail_actions_container"
@@ -128,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:text="TextView" />
+                    android:text="@string/placeholder_textview" />
 
                 <LinearLayout
                     android:id="@+id/movie_detail_similar_content_container"
@@ -141,7 +142,7 @@
                         android:id="@+id/textView_movieDetail_similarMovie_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Similar Content" />
+                        android:text="@string/placeholder_similar_content" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView_movieDetail_suggestions"

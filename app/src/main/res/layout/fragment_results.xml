@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/Background">
 
     <TextView
         android:id="@+id/textView_search_results"
@@ -12,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Placeholder Search Query"
+        android:textColor="@color/TextPrimary"
+        android:text="@string/placeholder_search_query"
         app:layout_constraintStart_toEndOf="@+id/button_search_result_back"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,12 +22,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@color/black"
+        android:background="@color/Background"
         app:layout_constraintEnd_toStartOf="@+id/textView_search_results"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
+        app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24_black" />
 
     <LinearLayout
         android:layout_width="0dp"

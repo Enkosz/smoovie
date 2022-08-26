@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/Background">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,20 +31,9 @@
 
                 <ImageButton
                     android:id="@+id/imageButton_notificationsSettings_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/black"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:bottomLeftRadius="10dp"
-                    android:bottomRightRadius="10dp"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="0dp"
-                    android:topLeftRadius="10dp"
-                    android:topRightRadius="10dp"
-                    app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
+                    style="@style/ImageButton"
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24_black" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -53,7 +41,7 @@
                     android:layout_marginStart="60dp"
                     android:layout_marginTop="11dp"
                     android:text="@string/notifications_title"
-                    android:textColor="@color/white"
+                    android:textColor="@color/TextPrimary"
                     android:textSize="20sp" />
 
             </RelativeLayout>
@@ -65,21 +53,12 @@
 
                 <RelativeLayout
                     android:id="@+id/relative_layout_general_updates"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/black"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:padding="@dimen/button_padding">
+                    style="@style/RelativeLayoutUpdates">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
+                        style="@style/TextViewUpdates"
                         android:text="@string/notifications_general"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_general_updates"
@@ -92,23 +71,14 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:layout_marginTop="55dp"
                     android:id="@+id/relative_layout_content_updates"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="50dp"
-                    android:background="@color/black"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:padding="@dimen/button_padding">
+                    style="@style/RelativeLayoutUpdates">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
+                        style="@style/TextViewUpdates"
                         android:text="@string/notifications_content"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_content_updates"
@@ -121,23 +91,14 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:layout_marginTop="110dp"
                     android:id="@+id/relative_layout_promotional_updates"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="100dp"
-                    android:background="@color/black"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:padding="@dimen/button_padding">
+                    style="@style/RelativeLayoutUpdates">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
+                        style="@style/TextViewUpdates"
                         android:text="@string/notifications_promotional"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_promotional_updates"
