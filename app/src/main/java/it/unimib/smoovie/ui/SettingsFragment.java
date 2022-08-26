@@ -14,29 +14,60 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.viewmodel.UserViewModel;
 
 public class SettingsFragment extends Fragment {
+
+    private TextView textViewProfileUsername;
+    private TextView textViewNotificationsSettings;
+    private SwitchCompat switchShowMatureContent;
+    private SwitchCompat switchDarkMode;
+
+    private RelativeLayout relativeLayoutShowMatureContent;
+    private RelativeLayout relativeLayoutLanguageSettings;
+    private RelativeLayout relativeLayoutDarkMode;
+
+    private UserViewModel userViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        TextView textViewNotificationsSettings = view.findViewById(R.id.notifications_settings);
+        textViewProfileUsername = view.findViewById(R.id.textView_settings_profile_username);
+        textViewNotificationsSettings = view.findViewById(R.id.notifications_settings);
+        switchShowMatureContent = view.findViewById(R.id.switch_show_mature_content);
+        relativeLayoutShowMatureContent = view.findViewById(R.id.relative_layout_show_mature_content);
+        relativeLayoutLanguageSettings = view.findViewById(R.id.relative_layout_language);
+        switchDarkMode = view.findViewById(R.id.switch_dark_mode);
+        relativeLayoutDarkMode = view.findViewById(R.id.relative_layout_dark_mode);
+
+        setupViewModel();
+        setupNavigation();
+        setupUI();
+        return view;
+    }
+
+    private void setupViewModel() {
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+    }
+
+    private void setupNavigation() {
         textViewNotificationsSettings.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(R.id.notificationsFragment));
 
-        RelativeLayout relativeLayoutLanguageSettings = view.findViewById(R.id.relative_layout_language);
         relativeLayoutLanguageSettings.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(R.id.languageFragment));
+    }
 
+    private void setupUI() {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        SwitchCompat switchShowMatureContent = view.findViewById(R.id.switch_show_mature_content);
         switchShowMatureContent.setChecked(sharedPreferences.getBoolean("showMatureContent", true));
         switchShowMatureContent.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
@@ -48,7 +79,6 @@ public class SettingsFragment extends Fragment {
             }
             editor.apply();
         });
-        RelativeLayout relativeLayoutShowMatureContent = view.findViewById(R.id.relative_layout_show_mature_content);
         relativeLayoutShowMatureContent.setOnClickListener(
                 view1 -> {
                     if (sharedPreferences.getBoolean("showMatureContent", true)) {
@@ -62,7 +92,6 @@ public class SettingsFragment extends Fragment {
         );
 
         String keytag1 = "darkMode";
-        SwitchCompat switchDarkMode = view.findViewById(R.id.switch_dark_mode);
         switchDarkMode.setChecked(sharedPreferences.getBoolean(keytag1, true));
         switchDarkMode.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
@@ -75,7 +104,6 @@ public class SettingsFragment extends Fragment {
             editor.apply();
         });
 
-        RelativeLayout relativeLayoutDarkMode  = view.findViewById(R.id.relative_layout_dark_mode);
         relativeLayoutDarkMode.setOnClickListener(
                 view2 -> {
                     if (sharedPreferences.getBoolean(keytag1, true)) {
@@ -88,6 +116,5 @@ public class SettingsFragment extends Fragment {
                 }
         );
 
-        return view;
     }
 }

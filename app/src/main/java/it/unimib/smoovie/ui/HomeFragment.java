@@ -41,8 +41,6 @@ public class HomeFragment extends Fragment {
                     Navigation.findNavController(requireView())
                             .navigate(R.id.loginFragment);
                 }
-
-                System.out.println("PORCO DIOOOOOOOOOOOOOOOOOO");
             });
     }
 }

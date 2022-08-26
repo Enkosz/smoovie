@@ -30,6 +30,8 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public LiveData<User> getAuthenticatedUser() {
+        if(authenticatedUser.getValue() == null) authenticatedUser.postValue(null);
+
         return authenticatedUser;
     }
 
