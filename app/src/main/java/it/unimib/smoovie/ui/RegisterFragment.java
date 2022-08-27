@@ -63,6 +63,8 @@ public class RegisterFragment extends Fragment {
                                         .navigate(R.id.loginFragment);
                             });
         });
+
+        buttonLogin.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.loginFragment));
     }
 
     @Override
