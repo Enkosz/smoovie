@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnItemReselectedListener(item -> {
             if(item.getItemId() == R.id.searchFragment) {
+                if (navController.getCurrentDestination().getId() == R.id.movieDetailFragment){
+                    while(navController.getCurrentDestination().getId() == R.id.movieDetailFragment){
+                        navController.popBackStack();
+                    }
+                }else
                 navController.popBackStack();
             }
 
