@@ -13,7 +13,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/placeholder_search_query"
         android:textColor="@color/TextPrimary"
-        android:textSize="@dimen/text_size"
+        android:textSize="@dimen/text_size_h1"
         app:layout_constraintStart_toEndOf="@+id/button_search_result_back"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="26dp"
         android:background="@color/Background"
         app:layout_constraintEnd_toStartOf="@+id/textView_search_results"
         app:layout_constraintHorizontal_bias="0.0"

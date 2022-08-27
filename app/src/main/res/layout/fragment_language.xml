@@ -33,7 +33,7 @@
                     android:id="@+id/imageButton_languageSettings_back"
                     style="@style/ImageButton"
                     android:background="@color/Background"
-                    app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24_black" />
+                    app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
