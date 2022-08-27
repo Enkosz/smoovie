@@ -37,13 +37,30 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
+
+        bottomNavigationView.setOnItemReselectedListener(item -> {
+            if(item.getItemId() == R.id.searchFragment) {
+                navController.popBackStack();
+            }
+
+        });
+
+
         navController.addOnDestinationChangedListener((ignored, navDestination, bundle) -> {
+            // Hide the bottom nav bar when we are in the login fragment
             if (navDestination.getId() == R.id.loginFragment)
-                bottomNavigationView.setVisibility(View.GONE);
+                bottomNavigationView.setVisibility(View.VISIBLE);
             else if (bottomNavigationView.getVisibility() != View.VISIBLE)
                 bottomNavigationView.setVisibility(View.VISIBLE);
 
-            Log.i("test", "setupNavControllerAuthenticationFilter: --------------------------------");
+            if (navDestination.getId() == R.id.settingsFragment)
+                bottomNavigationView.getMenu().findItem(R.id.settingsFragment).setChecked(true);
+            if (navDestination.getId() == R.id.searchFragment || navDestination.getId() == R.id.resultsFragment || navDestination.getId() == R.id.movieDetailFragment)
+                bottomNavigationView.getMenu().findItem(R.id.searchFragment).setChecked(true);
+            if (navDestination.getId() == R.id.homeFragment || navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.registerFragment)
+                bottomNavigationView.getMenu().findItem(R.id.homeFragment).setChecked(true);
+
+
         });
 
 
