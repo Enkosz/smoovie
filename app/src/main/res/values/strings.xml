@@ -27,7 +27,7 @@
     <string name="settings_subscription_type">Membership Plan</string>
     <string name="settings_modify_email">Change Email</string>
     <string name="settings_preview_email" translatable="false">test@email.com</string>
-    <string name="settings_modify_password">Change password</string>
+    <string name="settings_modify_password">Change Password</string>
     <string name="settings_header_general">GENERAL</string>
     <string name="settings_language">Language</string>
     <string name="settings_preview_language">English</string>
