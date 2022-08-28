@@ -22,7 +22,6 @@ public class MovieDetailViewModel extends AndroidViewModel {
     private final MutableLiveData<ResponseWrapper<MovieModelExtended>> movieDetail;
     private final MutableLiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> movieDetailSuggestionList;
     private final MutableLiveData<FavoriteMovie> favoriteMovie;
-    private final MutableLiveData<List<FavoriteMovie>> favoriteMovies;
 
     private final MoviesRepository moviesRepository;
 
@@ -35,7 +34,6 @@ public class MovieDetailViewModel extends AndroidViewModel {
         movieDetail = new MutableLiveData<>();
         movieDetailSuggestionList = new MutableLiveData<>();
         favoriteMovie = new MutableLiveData<>();
-        favoriteMovies = new MutableLiveData<>();
 
         moviesRepository = MoviesRepository.getInstance(application);
     }
@@ -59,11 +57,6 @@ public class MovieDetailViewModel extends AndroidViewModel {
                 .subscribe(favoriteMovie::postValue);
 
         return favoriteMovie;
-    }
-
-    public LiveData<List<FavoriteMovie>> getAllFavouriteMovies() {
-        disposableFavoriteMovieList = moviesRepository.getAllFavourites()
-                .subscribe(favoriteMovies::postValue);
     }
 
     public Completable addFavoriteMovie(Long movieId, String userId) {
