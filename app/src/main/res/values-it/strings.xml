@@ -57,4 +57,5 @@
     <string name="hint_email">Inserisci Indirizzo Mail Qui</string>
     <string name="hint_username">Inserisci Username Qui</string>
     <string name="password">Inserisci Password Qui</string>
+    <string name="preferences">I Miei Preferiti</string>
 </resources>
