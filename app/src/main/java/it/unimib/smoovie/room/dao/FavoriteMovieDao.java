@@ -24,4 +24,7 @@ public interface FavoriteMovieDao {
 
     @Query("SELECT * FROM favoritemovie WHERE film_id = :id")
     Maybe<FavoriteMovie> getFavoriteMovieById(Long id);
+
+    @Query("SELECT * FROM favoritemovie")
+    Maybe<List<FavoriteMovie>> getAllFavoriteMovies();
 }

@@ -104,6 +104,13 @@ public class MoviesRepository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Maybe<List<FavoriteMovie>> getAllFavourites() {
+        return smoovieDatabase.favoriteMovieDao()
+                .getAllFavoriteMovies()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Completable deleteFavoriteMovie(Long movieId) {
         return smoovieDatabase.favoriteMovieDao()
                 .deleteFavoriteMovie(movieId)
