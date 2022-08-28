@@ -16,9 +16,9 @@
 
     <string name="settings_title">Il mio Account</string>
     <string name="settings_header_account_profile">ACCOUNT &amp; PROFILO</string>
-    <string name="settings_subscription_type">Tipo di iscrizione</string>
-    <string name="settings_modify_email">Modifica l\'email</string>
-    <string name="settings_modify_password">Modifica la password</string>
+    <string name="settings_subscription_type">Tipo di Iscrizione</string>
+    <string name="settings_modify_email">Modifica Email</string>
+    <string name="settings_modify_password">Modifica Password</string>
     <string name="settings_header_general">IMPOSTAZIONI GENERALI</string>
     <string name="settings_language">Lingua</string>
     <string name="settings_preview_language">Italiano</string>

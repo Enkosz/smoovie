@@ -13,6 +13,7 @@
         android:autofillHints="emailAddress"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_label_email_register" />
@@ -24,6 +25,7 @@
         android:autofillHints="password"
         android:ems="10"
         android:inputType="textPassword"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_label_password_register" />
@@ -32,9 +34,9 @@
         android:id="@+id/textView_label_password_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="24dp"
         android:text="@string/auth_password"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail_register" />
 
@@ -42,18 +44,22 @@
         android:id="@+id/textView_label_email_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="168dp"
         android:text="@string/auth_email"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_register"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/red_200"
+        android:paddingLeft="28dp"
+        android:paddingTop="10dp"
+        android:paddingRight="28dp"
+        android:paddingBottom="10dp"
         android:text="@string/auth_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

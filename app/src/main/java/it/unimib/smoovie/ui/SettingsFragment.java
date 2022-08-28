@@ -30,6 +30,7 @@ public class SettingsFragment extends Fragment {
 
     private RelativeLayout relativeLayoutShowMatureContent;
     private RelativeLayout relativeLayoutLanguageSettings;
+    private TextView textViewLanguageSettings;
 
     private UserViewModel userViewModel;
 
@@ -44,6 +45,7 @@ public class SettingsFragment extends Fragment {
         switchShowMatureContent = view.findViewById(R.id.switch_show_mature_content);
         relativeLayoutShowMatureContent = view.findViewById(R.id.relative_layout_show_mature_content);
         relativeLayoutLanguageSettings = view.findViewById(R.id.relative_layout_language);
+        textViewLanguageSettings = view.findViewById(R.id.textView_language);
 
         setupViewModel();
         setupNavigation();
@@ -60,6 +62,9 @@ public class SettingsFragment extends Fragment {
                 .navigate(R.id.notificationsFragment));
 
         relativeLayoutLanguageSettings.setOnClickListener(v -> Navigation.findNavController(v)
+                .navigate(R.id.languageFragment));
+
+        textViewLanguageSettings.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(R.id.languageFragment));
     }
 
