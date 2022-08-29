@@ -69,4 +69,5 @@
     <string name="hint_username">Insert Username Here</string>
     <string name="password">Insert Password Here</string>
     <string name="preferences">My Favourites</string>
+    <string name="settings_preferences">Favourites</string>
 </resources>

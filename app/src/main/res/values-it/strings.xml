@@ -58,4 +58,5 @@
     <string name="hint_username">Inserisci Username Qui</string>
     <string name="password">Inserisci Password Qui</string>
     <string name="preferences">I Miei Preferiti</string>
+    <string name="settings_preferences">Preferiti</string>
 </resources>
