@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="placeholder_similar_content">Similar Content</string>
+
+    <string name="results_not_found">Risultati non trovati</string>
+
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_search">Cerca</string>
     <string name="bottom_nav_settings">Impostazioni</string>
