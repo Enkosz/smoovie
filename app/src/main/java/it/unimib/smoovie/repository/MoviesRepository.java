@@ -46,7 +46,7 @@ public class MoviesRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
-                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
+                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("Error getting movie by id"))));
     }
 
     public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getPopularMovies(int page) {
@@ -54,7 +54,7 @@ public class MoviesRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
-                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
+                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("Error getting popular movies"))));
     }
 
     public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getTopRatedMovies(int page) {
@@ -62,7 +62,7 @@ public class MoviesRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
-                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
+                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("Error getting top rated movies"))));
     }
 
     public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getNowPlayingMovies(int page) {
@@ -70,7 +70,7 @@ public class MoviesRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
-                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
+                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("Error getting now playing movies"))));
     }
 
     public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByQuery(String query, int page) {
@@ -78,7 +78,7 @@ public class MoviesRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
-                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
+                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("Error searching for movie"))));
     }
 
     public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByCategory(MovieGenre category, int page) {
@@ -86,7 +86,7 @@ public class MoviesRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
-                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
+                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("Error getting movies"))));
     }
 
     public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getSimilarMoviesOfMovie(Long movieId, int page) {
@@ -94,7 +94,7 @@ public class MoviesRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
-                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
+                .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("Error getting similar movies"))));
     }
 
     public Maybe<FavoriteMovie> getFavoriteMovieById(Long id) {

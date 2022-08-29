@@ -67,7 +67,7 @@ public abstract class FeedMoviesFragment extends Fragment implements ProgressDis
         fetchMovies(1)
                 .observe(getViewLifecycleOwner(), responseWrapper -> {
                     if (responseWrapper.hasErrors()) {
-                        Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireContext(), "Error fetching movies", Toast.LENGTH_LONG).show();
 
                         Navigation.findNavController(requireView())
                                 .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()

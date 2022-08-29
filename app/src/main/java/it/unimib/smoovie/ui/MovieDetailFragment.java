@@ -28,6 +28,7 @@ import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.model.MovieModelExtended;
+import it.unimib.smoovie.model.ResponseWrapper;
 import it.unimib.smoovie.utils.Constants;
 import it.unimib.smoovie.utils.ProgressDisplay;
 import it.unimib.smoovie.viewmodel.MovieDetailViewModel;
@@ -110,10 +111,11 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
         movieDetailViewModel.getMovieDetailById(id)
                 .observe(getViewLifecycleOwner(), modelExtendedResponseWrapper -> {
                     if (modelExtendedResponseWrapper.hasErrors()) {
-                        Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+
+                        Toast.makeText(requireContext(), "Error fetching movie details", Toast.LENGTH_LONG).show();
 
                         Navigation.findNavController(requireView())
-                                .navigate(R.id.homeFragment, new Bundle(), new NavOptions.Builder()
+                                .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()
                                         .setExitAnim(android.R.anim.fade_out)
                                         .setPopEnterAnim(android.R.anim.fade_in)
                                         .build());
@@ -157,10 +159,10 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
         movieDetailViewModel.getMovieDetailSuggestionsById(id, 1)
                 .observe(getViewLifecycleOwner(), responseWrapper -> {
                     if (responseWrapper.hasErrors()) {
-                        Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireContext(), "Error fetching movie details", Toast.LENGTH_LONG).show();
 
                         Navigation.findNavController(requireView())
-                                .navigate(R.id.homeFragment, new Bundle(), new NavOptions.Builder()
+                                .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()
                                         .setExitAnim(android.R.anim.fade_out)
                                         .setPopEnterAnim(android.R.anim.fade_in)
                                         .build());
