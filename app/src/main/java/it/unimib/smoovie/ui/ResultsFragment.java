@@ -1,6 +1,7 @@
 package it.unimib.smoovie.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
     private ResultsViewModel viewModel;
     private MovieSearchResultRecyclerVewAdapter adapter;
     private TextView textViewSearchQuery;
+    private TextView textViewNoResults;
     private ImageButton backButton;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
@@ -45,6 +47,8 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
         backButton = view.findViewById(R.id.button_search_result_back);
         textViewSearchQuery = view.findViewById(R.id.textView_search_results);
         progressBar = view.findViewById(R.id.progressBar_results);
+        textViewNoResults = view.findViewById(R.id.textView_search_no_results);
+        textViewNoResults.setVisibility(View.INVISIBLE);
 
         showProgress();
         setupViewModel();
@@ -97,8 +101,12 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
                     }
 
                     adapter.addItems(responseWrapper.getResponse().movies);
+                    if (adapter.getItemCount() < 1){
+                        textViewNoResults.setVisibility(View.VISIBLE);
+                    }else textViewNoResults.setVisibility(View.INVISIBLE);
                     hideProgress();
                 });
+
     }
 
     @Override
