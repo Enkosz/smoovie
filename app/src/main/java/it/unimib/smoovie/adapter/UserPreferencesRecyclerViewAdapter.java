@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +19,11 @@ import com.bumptech.glide.Glide;
 
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.model.MovieModelCompact;
+import it.unimib.smoovie.model.MovieModelExtended;
 import it.unimib.smoovie.room.model.FavoriteMovie;
 import it.unimib.smoovie.utils.Constants;
 
-public class UserPreferencesRecyclerViewAdapter extends AbstractNotifiableListRecyclerViewAdapter<FavoriteMovie> {
+public class UserPreferencesRecyclerViewAdapter extends AbstractNotifiableListRecyclerViewAdapter<MovieModelExtended> {
     private Context context;
 
     public UserPreferencesRecyclerViewAdapter(Context context) {
@@ -35,19 +38,19 @@ public class UserPreferencesRecyclerViewAdapter extends AbstractNotifiableListRe
 
         view = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.recycler_view_movie_search_result_item, parent, false);
-        return new MovieListRecyclerViewAdapter.MovieViewHolder(view);
+        return new MovieViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MovieViewHolder movieViewHolder = (MovieViewHolder) holder;
-        MovieModelCompact model = items.get(position);
+        MovieModelExtended model = items.get(position);
 
         this.loadImage(movieViewHolder, model);
     }
 
-    private void loadImage(MovieViewHolder holder, MovieModelCompact model) {
-        CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(holder.getImageViewMovieIcon().getContext());
+    private void loadImage(MovieViewHolder holder, MovieModelExtended model) {
+        CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(holder.getImageViewPoster().getContext());
         circularProgressDrawable.setStrokeWidth(5f);
         circularProgressDrawable.setCenterRadius(30f);
         circularProgressDrawable.start();
@@ -55,9 +58,11 @@ public class UserPreferencesRecyclerViewAdapter extends AbstractNotifiableListRe
         Glide.with(context)
                 .load(Constants.API_POSTER_URL + model.posterPath)
                 .placeholder(circularProgressDrawable)
-                .into(holder.getImageViewMovieIcon());
+                .into(holder.getImageViewPoster());
 
-        holder.getImageViewMovieIcon().setOnClickListener(v -> {
+        holder.getTextViewTitle().setText(model.title);
+
+        holder.getCardView().setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY, model.id);
 
@@ -69,24 +74,28 @@ public class UserPreferencesRecyclerViewAdapter extends AbstractNotifiableListRe
         });
     }
 
-    public static class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView imageViewMovieIcon;
+        private final TextView textViewTitle;
+        private final ImageView imageViewPoster;
+        private final CardView cardView;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageViewMovieIcon = itemView.findViewById(R.id.imageView_movie_icon);
-            itemView.setOnClickListener(this);
+            textViewTitle = itemView.findViewById(R.id.textView_movie_title);
+            imageViewPoster = itemView.findViewById(R.id.imageView_movie_poster);
+            cardView = itemView.findViewById(R.id.movie_card_result);
         }
 
-        public ImageView getImageViewMovieIcon() {
-            return imageViewMovieIcon;
+        public TextView getTextViewTitle() {
+            return textViewTitle;
         }
 
-        @Override
-        public void onClick(View view) {
-            // on click listener
+        public ImageView getImageViewPoster() {
+            return imageViewPoster;
         }
+
+        public CardView getCardView() { return cardView; }
     }
 }
