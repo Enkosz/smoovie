@@ -55,12 +55,12 @@
         <TextView
             android:id="@+id/textView_search_no_results"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center"
             android:text="@string/results_not_found"
             android:textColor="@color/TextPrimary"
             android:textSize="20sp"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_results"
