@@ -13,6 +13,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.firebase.AuthManager;
+import it.unimib.smoovie.viewmodel.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Hide the bottom nav bar when we are in the login fragment
         navController.addOnDestinationChangedListener((ignored, navDestination, bundle) -> {
-            if(navDestination.getId() == R.id.loginFragment)
+            if(navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.registerFragment)
                 bottomNavigationView.setVisibility(View.GONE);
             else if(bottomNavigationView.getVisibility() != View.VISIBLE)
                 bottomNavigationView.setVisibility(View.VISIBLE);

@@ -15,32 +15,22 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.firebase.AuthManager;
 import it.unimib.smoovie.viewmodel.UserViewModel;
 
 public class HomeFragment extends Fragment {
 
-    private UserViewModel userViewModel;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.home_fragment, container, false);
-
-        setupViewModel();
-        setupUI();
-        return view;
+        return inflater.inflate(R.layout.home_fragment, container, false);
     }
 
-    private void setupViewModel() {
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        AuthManager authManager = AuthManager.getInstance(requireActivity().getApplication());
 
-    private void setupUI() {
-        userViewModel.getAuthenticatedUser()
-            .observe(getViewLifecycleOwner(), user -> {
-                if(user == null) {
-                    Navigation.findNavController(requireView())
-                            .navigate(R.id.loginFragment);
-                }
-            });
+        if(!authManager.isLogged())
+            Navigation.findNavController(requireView())
+                    .navigate(R.id.loginFragment);
     }
 }

@@ -84,7 +84,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
     private void setupMovieDetailFavoriteView() {
         Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
 
-        movieDetailViewModel.getFavoriteMovieById(id)
+        movieDetailViewModel.getFavoriteMovieById(id, 1l)
                 .observe(getViewLifecycleOwner(), favoriteMovie -> buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16)));
 
         buttonMovieDetailAddFavorite.setOnClickListener(v -> {

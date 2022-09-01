@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.firebase.AuthManager;
 import it.unimib.smoovie.viewmodel.UserViewModel;
 
 
@@ -25,9 +26,9 @@ public class RegisterFragment extends Fragment {
     private Button buttonLogin;
     private Button buttonRegister;
     private EditText editTextEmail, editTextPassword;
-    private UserViewModel userViewModel;
 
     private Disposable disposableCreateUser;
+    private AuthManager authManager;
 
     @Nullable
     @Override
@@ -37,14 +38,10 @@ public class RegisterFragment extends Fragment {
         buttonRegister = view.findViewById(R.id.button_register);
         editTextEmail = view.findViewById(R.id.editTextEmail_register);
         editTextPassword = view.findViewById(R.id.editTextPassword_register);
+        authManager = AuthManager.getInstance(requireActivity().getApplication());
 
-        setupViewModel();
         setupUI();
         return view;
-    }
-
-    private void setupViewModel() {
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
     }
 
     private void setupUI() {
@@ -57,11 +54,9 @@ public class RegisterFragment extends Fragment {
             if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){ editTextEmail.setError("Invalid Email"); editTextEmail.requestFocus(); }
             if(password.isEmpty()){ editTextPassword.setError("Password is required"); editTextPassword.requestFocus(); }
 
-            disposableCreateUser = userViewModel.createAuthenticatedUser(email, password)
-                            .subscribe(() -> {
-                                Navigation.findNavController(requireView())
-                                        .navigate(R.id.loginFragment);
-                            });
+            disposableCreateUser = authManager.createUser(email, password)
+                            .subscribe(() -> Navigation.findNavController(requireView())
+                                    .navigate(R.id.loginFragment));
         });
     }
 
