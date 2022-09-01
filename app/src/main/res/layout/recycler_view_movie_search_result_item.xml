@@ -7,6 +7,7 @@
     android:background="@color/black_200">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/movie_card_result"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/black_200"
@@ -36,10 +37,10 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp"
                 android:ellipsize="end"
-                android:textSize="@dimen/text_size"
                 android:maxLines="2"
                 android:text="@string/placeholder_textview"
                 android:textColor="@color/white_200"
+                android:textSize="@dimen/text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.11"

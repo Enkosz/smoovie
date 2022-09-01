@@ -97,9 +97,9 @@ public class MoviesRepository {
                 .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
     }
 
-    public Maybe<FavoriteMovie> getFavoriteMovieById(Long id) {
+    public Maybe<FavoriteMovie> getFavoriteMovieById(Long id, Long userId) {
         return smoovieDatabase.favoriteMovieDao()
-                .getFavoriteMovieById(id)
+                .getFavoriteMovieById(id, userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

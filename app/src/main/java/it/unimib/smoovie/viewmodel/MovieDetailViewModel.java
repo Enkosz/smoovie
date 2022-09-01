@@ -52,8 +52,8 @@ public class MovieDetailViewModel extends AndroidViewModel {
         return movieDetailSuggestionList;
     }
 
-    public LiveData<FavoriteMovie> getFavoriteMovieById(Long id) {
-        disposableFavoriteMovieList = moviesRepository.getFavoriteMovieById(id)
+    public LiveData<FavoriteMovie> getFavoriteMovieById(Long id, Long userId) {
+        disposableFavoriteMovieList = moviesRepository.getFavoriteMovieById(id, userId)
                 .subscribe(favoriteMovie::postValue);
 
         return favoriteMovie;
