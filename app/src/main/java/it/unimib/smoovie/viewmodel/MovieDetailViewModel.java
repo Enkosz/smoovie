@@ -1,6 +1,8 @@
 package it.unimib.smoovie.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -53,14 +55,21 @@ public class MovieDetailViewModel extends AndroidViewModel {
     }
 
     public LiveData<FavoriteMovie> getFavoriteMovieById(Long id) {
+        System.out.println(" VIEW " + id);
         disposableFavoriteMovieList = moviesRepository.getFavoriteMovieById(id)
-                .subscribe(favoriteMovie::postValue);
+                .subscribe(favoriteMovie1 -> {
+                    Log.println(Log.INFO, "viewmodelmovie", "MV: "+ favoriteMovie1.getFilmTitle());
+                    favoriteMovie.postValue(favoriteMovie1);
+                }, Throwable::printStackTrace, () -> {
+                    favoriteMovie.postValue(null);
+                    System.out.println(" PIPO ");
+                });
 
         return favoriteMovie;
     }
 
-    public Completable addFavoriteMovie(Long movieId, String userId) {
-        return moviesRepository.addFavoriteMovie(movieId, userId);
+    public Completable addFavoriteMovie(Long movieId, String userId, String filmTitle, String filmPosterPath) {
+        return moviesRepository.addFavoriteMovie(movieId, userId, filmTitle, filmPosterPath);
     }
     public Completable deleteFavoriteMovie(Long movieId) {
         return moviesRepository.deleteFavoriteMovie(movieId);

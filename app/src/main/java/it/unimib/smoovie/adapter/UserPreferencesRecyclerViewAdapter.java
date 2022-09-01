@@ -23,7 +23,7 @@ import it.unimib.smoovie.model.MovieModelExtended;
 import it.unimib.smoovie.room.model.FavoriteMovie;
 import it.unimib.smoovie.utils.Constants;
 
-public class UserPreferencesRecyclerViewAdapter extends AbstractNotifiableListRecyclerViewAdapter<MovieModelExtended> {
+public class UserPreferencesRecyclerViewAdapter extends AbstractNotifiableListRecyclerViewAdapter<FavoriteMovie> {
     private Context context;
 
     public UserPreferencesRecyclerViewAdapter(Context context) {
@@ -44,27 +44,27 @@ public class UserPreferencesRecyclerViewAdapter extends AbstractNotifiableListRe
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MovieViewHolder movieViewHolder = (MovieViewHolder) holder;
-        MovieModelExtended model = items.get(position);
+        FavoriteMovie model = items.get(position);
 
         this.loadImage(movieViewHolder, model);
     }
 
-    private void loadImage(MovieViewHolder holder, MovieModelExtended model) {
+    private void loadImage(MovieViewHolder holder, FavoriteMovie model) {
         CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(holder.getImageViewPoster().getContext());
         circularProgressDrawable.setStrokeWidth(5f);
         circularProgressDrawable.setCenterRadius(30f);
         circularProgressDrawable.start();
 
         Glide.with(context)
-                .load(Constants.API_POSTER_URL + model.posterPath)
+                .load(Constants.API_POSTER_URL + model.getFilmPosterPath())
                 .placeholder(circularProgressDrawable)
                 .into(holder.getImageViewPoster());
 
-        holder.getTextViewTitle().setText(model.title);
+        holder.getTextViewTitle().setText(model.getFilmTitle());
 
         holder.getCardView().setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY, model.id);
+            bundle.putLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY, model.getFilmId());
 
             Navigation.findNavController(v)
                     .navigate(R.id.movieDetailFragment, bundle, new NavOptions.Builder()

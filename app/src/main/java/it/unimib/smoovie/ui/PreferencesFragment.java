@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.UserPreferencesRecyclerViewAdapter;
@@ -30,6 +32,7 @@ import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.adapter.MovieSearchResultRecyclerVewAdapter;
 import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.model.MovieModelExtended;
+import it.unimib.smoovie.room.model.FavoriteMovie;
 import it.unimib.smoovie.utils.ProgressDisplay;
 import it.unimib.smoovie.viewmodel.MovieViewModel;
 import it.unimib.smoovie.viewmodel.PreferencesViewModel;
@@ -43,7 +46,7 @@ public class PreferencesFragment extends Fragment implements ProgressDisplay {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
 
-    private List<MovieModelExtended> preferences;
+    private HashSet<MovieModelExtended> preferences;
 
     @Nullable
     @Override
@@ -52,7 +55,7 @@ public class PreferencesFragment extends Fragment implements ProgressDisplay {
         recyclerView = view.findViewById(R.id.recyclerView_preferences);
         backButton = view.findViewById(R.id.button_search_preferences_back);
         progressBar = view.findViewById(R.id.progressBar_preferences);
-        preferences = new ArrayList<>();
+        preferences = new HashSet<>();
 
         showProgress();
         setupViewModel();
@@ -75,15 +78,9 @@ public class PreferencesFragment extends Fragment implements ProgressDisplay {
 
         viewModel.getAllFavouriteMovies()
                 .observe(getViewLifecycleOwner(), currentList -> {
-                    currentList.forEach(favoriteMovie -> {
-                        Log.println(Log.INFO, "preferences-fragment", "" + favoriteMovie.getFilmId());
-                        viewModel.getMovieDetailById(favoriteMovie.getFilmId()).observe(getViewLifecycleOwner(), movieModelExtendedResponseWrapper -> {
-                            Log.println(Log.INFO, "preferences-fragment", "" + movieModelExtendedResponseWrapper.getResponse().title);
-                            preferences.add(movieModelExtendedResponseWrapper.getResponse());
-                        });
-                    });
+                    adapter.clear();
                     hideProgress();
-                    adapter.addItems(preferences);
+                    adapter.addItems(currentList);
                 });
     }
 

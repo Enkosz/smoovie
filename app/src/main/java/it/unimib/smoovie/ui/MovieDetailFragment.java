@@ -1,6 +1,7 @@
 package it.unimib.smoovie.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
     private MovieDetailViewModel movieDetailViewModel;
 
     private boolean isFavorite = false;
+    private String backdropPath = "";
 
     private Disposable addFavoriteMovieDisposable;
     private Disposable deleteFavoriteMovieDisposable;
@@ -83,9 +85,15 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
 
     private void setupMovieDetailFavoriteView() {
         Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
-
+        Log.println(Log.INFO, "moviedetail", "88 ID: "+ id);
         movieDetailViewModel.getFavoriteMovieById(id)
-                .observe(getViewLifecycleOwner(), favoriteMovie -> buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16)));
+                .observe(getViewLifecycleOwner(), favoriteMovie -> {
+                    if (favoriteMovie != null) {
+                        Log.println(Log.INFO, "moviedetail", "91 " + favoriteMovie.getFilmTitle());
+                        buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16_fill));
+                        isFavorite = true;
+                    }
+        } );
 
         buttonMovieDetailAddFavorite.setOnClickListener(v -> {
             if (isFavorite) {
@@ -95,7 +103,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
                             isFavorite = false;
                         });
             } else {
-                addFavoriteMovieDisposable = movieDetailViewModel.addFavoriteMovie(id, "123")
+                addFavoriteMovieDisposable = movieDetailViewModel.addFavoriteMovie(id, "123", textViewMovieDetailTitle.getText().toString(), backdropPath)
                         .subscribe(() -> {
                             buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16_fill));
                             isFavorite = true;
@@ -126,7 +134,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
                     textViewMovieReleaseDate.setText(movieModelExtended.releaseDate);
                     textViewMovieOverview.setText(movieModelExtended.overview);
                     textViewMovieRuntime.setText(getString(R.string.movie_detail_runtime, movieModelExtended.getRuntimeHours(), movieModelExtended.getRuntimeMinutes()));
-
+                    backdropPath = movieModelExtended.posterPath;
                     Glide.with(requireContext())
                             .load(Constants.API_POSTER_URL + movieModelExtended.backdropPath)
                             .into(imageViewMovieDetailBackgroundPoster);
