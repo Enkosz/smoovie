@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,19 +18,19 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.firebase.AuthManager;
 import it.unimib.smoovie.viewmodel.UserViewModel;
 
 public class LoginFragment extends Fragment {
 
     private Button buttonLogin;
     private Button buttonRegister;
-    private FirebaseAuth firebaseAuth;
-    private UserViewModel userViewModel;
 
     private EditText editTextEmail;
     private EditText editTextPassword;
 
     private Disposable disposableAuthenticateUser;
+    private AuthManager authManager;
 
     @Nullable
     @Override
@@ -39,33 +40,31 @@ public class LoginFragment extends Fragment {
         buttonRegister = view.findViewById(R.id.button_register_new_user);
         editTextEmail = view.findViewById(R.id.editTextEmail_login);
         editTextPassword = view.findViewById(R.id.editTextPassword_login);
+        authManager = AuthManager.getInstance(requireActivity().getApplication());
 
-        setupViewModel();
         setupUI();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        userViewModel.getAuthenticatedUser()
-                .observe(getViewLifecycleOwner(), user -> {
-                    // If we already have the authenticated user we can redirect to the home view
-                    if (user != null) {
-                        System.out.println("User authenticated: " + user);
-                        Navigation.findNavController(requireView())
-                                .navigate(R.id.homeFragment);
-                    }
-                });
-    }
-
-    private void setupViewModel() {
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        if (authManager.isLogged())
+            Navigation.findNavController(requireView())
+                    .navigate(R.id.homeFragment);
     }
 
     private void setupUI() {
-        buttonLogin.setOnClickListener(v -> disposableAuthenticateUser = userViewModel.authenticateUser(editTextEmail.getText().toString(), editTextPassword.getText().toString())
-                .subscribe(() -> Navigation.findNavController(requireView())
-                        .navigate(R.id.homeFragment)));
+        buttonLogin.setOnClickListener(v -> {
+            String email = editTextEmail.getText().toString();
+            String password = editTextPassword.getText().toString();
+
+            disposableAuthenticateUser = authManager.authenticateUser(email, password)
+                    .subscribe((authenticationCompleted) -> {
+                        if(!authenticationCompleted) Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
+                        Navigation.findNavController(requireView())
+                                .navigate(R.id.homeFragment);
+                    });
+        });
 
         buttonRegister.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.registerFragment));
     }

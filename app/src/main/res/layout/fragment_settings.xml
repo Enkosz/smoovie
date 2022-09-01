@@ -99,6 +99,7 @@
             <View style="@style/HorizontalRow" />
 
             <TextView
+                android:id="@+id/textView_settings_logout"
                 style="@style/TextViewButtonPrimary"
                 android:text="@string/settings_log_out" />
 

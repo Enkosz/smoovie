@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.firebase.AuthManager;
+import it.unimib.smoovie.viewmodel.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         navController.addOnDestinationChangedListener((ignored, navDestination, bundle) -> {
-            // Hide the bottom nav bar when we are in the login fragment
-            if (navDestination.getId() == R.id.loginFragment)
+            if(navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.registerFragment)
                 bottomNavigationView.setVisibility(View.VISIBLE);
             else if (bottomNavigationView.getVisibility() != View.VISIBLE)
                 bottomNavigationView.setVisibility(View.VISIBLE);
