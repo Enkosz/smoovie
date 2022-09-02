@@ -98,7 +98,6 @@ public class MoviesRepository {
     }
 
     public Maybe<FavoriteMovie> getFavoriteMovieById(Long id) {
-        System.out.println(id);
         return smoovieDatabase.favoriteMovieDao()
                 .getFavoriteMovieById(id)
                 .subscribeOn(Schedulers.io())

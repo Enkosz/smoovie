@@ -29,6 +29,7 @@ import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.model.MovieModelExtended;
+import it.unimib.smoovie.room.model.FavoriteMovie;
 import it.unimib.smoovie.utils.Constants;
 import it.unimib.smoovie.utils.ProgressDisplay;
 import it.unimib.smoovie.viewmodel.MovieDetailViewModel;
@@ -85,11 +86,10 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
 
     private void setupMovieDetailFavoriteView() {
         Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
-        Log.println(Log.INFO, "moviedetail", "88 ID: "+ id);
         movieDetailViewModel.getFavoriteMovieById(id)
-                .observe(getViewLifecycleOwner(), favoriteMovie -> {
+                .observe(getViewLifecycleOwner(), favoriteMovieEvent -> {
+                    FavoriteMovie favoriteMovie = favoriteMovieEvent.getContent();
                     if (favoriteMovie != null) {
-                        Log.println(Log.INFO, "moviedetail", "91 " + favoriteMovie.getFilmTitle());
                         buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16_fill));
                         isFavorite = true;
                     }

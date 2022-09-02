@@ -12,6 +12,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.disposables.Disposable;
+import it.unimib.smoovie.core.Event;
 import it.unimib.smoovie.model.ApiResponse;
 import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.model.MovieModelExtended;
@@ -23,7 +24,7 @@ public class MovieDetailViewModel extends AndroidViewModel {
 
     private final MutableLiveData<ResponseWrapper<MovieModelExtended>> movieDetail;
     private final MutableLiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> movieDetailSuggestionList;
-    private final MutableLiveData<FavoriteMovie> favoriteMovie;
+    private final MutableLiveData<Event<FavoriteMovie>> favoriteMovie;
 
     private final MoviesRepository moviesRepository;
 
@@ -54,15 +55,10 @@ public class MovieDetailViewModel extends AndroidViewModel {
         return movieDetailSuggestionList;
     }
 
-    public LiveData<FavoriteMovie> getFavoriteMovieById(Long id) {
-        System.out.println(" VIEW " + id);
+    public LiveData<Event<FavoriteMovie>> getFavoriteMovieById(Long id) {
         disposableFavoriteMovieList = moviesRepository.getFavoriteMovieById(id)
                 .subscribe(favoriteMovie1 -> {
-                    Log.println(Log.INFO, "viewmodelmovie", "MV: "+ favoriteMovie1.getFilmTitle());
-                    favoriteMovie.postValue(favoriteMovie1);
-                }, Throwable::printStackTrace, () -> {
-                    favoriteMovie.postValue(null);
-                    System.out.println(" PIPO ");
+                    favoriteMovie.postValue(new Event(favoriteMovie1));
                 });
 
         return favoriteMovie;
