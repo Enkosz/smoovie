@@ -18,30 +18,41 @@ import androidx.navigation.Navigation;
 import it.unimib.smoovie.R;
 
 public class NotificationsFragment extends Fragment {
-
+    private ImageButton backButton;
+    private RelativeLayout relativeLayoutBackButton;
+    private RelativeLayout relativeLayoutGeneralUpdates;
+    private RelativeLayout relativeLayoutContentUpdates;
+    private RelativeLayout relativeLayoutPromotionalUpdates;
+    private SwitchCompat switchGeneralUpdates;
+    private SwitchCompat switchContentUpdates;
+    private SwitchCompat switchPromotionalUpdates;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
-        ImageButton backButton = view.findViewById(R.id.imageButton_notificationsSettings_back);
-        backButton.setOnClickListener(v -> Navigation.findNavController(v)
-                .popBackStack());
+        backButton = view.findViewById(R.id.imageButton_notificationsSettings_back);
+        relativeLayoutBackButton = view.findViewById(R.id.relative_layout_notifications_back_button);
+        relativeLayoutGeneralUpdates = view.findViewById(R.id.relative_layout_general_updates);
+        relativeLayoutContentUpdates = view.findViewById(R.id.relative_layout_content_updates);
+        relativeLayoutPromotionalUpdates = view.findViewById(R.id.relative_layout_promotional_updates);
+        switchGeneralUpdates = view.findViewById(R.id.switch_general_updates);
+        switchContentUpdates = view.findViewById(R.id.switch_content_updates);
+        switchPromotionalUpdates = view.findViewById(R.id.switch_promotional_updates);
+        sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        setupUI();
+        return view;
+    }
 
-        RelativeLayout relativeLayoutBackButton = view.findViewById(R.id.relative_layout_notifications_back_button);
-        relativeLayoutBackButton.setOnClickListener(v -> Navigation.findNavController(v)
-                .popBackStack());
+    private void setupUI() {
+        backButton.setOnClickListener(v -> Navigation.findNavController(v).popBackStack());
+        relativeLayoutBackButton.setOnClickListener(v -> Navigation.findNavController(v).popBackStack());
 
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        SwitchCompat switchGeneralUpdates = view.findViewById(R.id.switch_general_updates);
         switchGeneralUpdates.setChecked(sharedPreferences.getBoolean("generalUpdates", true));
-        switchGeneralUpdates.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            editor.putBoolean("generalUpdates", isChecked);
-            editor.apply();
-        });
-        RelativeLayout relativeLayoutGeneralUpdates = view.findViewById(R.id.relative_layout_general_updates);
+        switchGeneralUpdates.setOnCheckedChangeListener((buttonView, isChecked) -> editor.putBoolean("generalUpdates", isChecked).apply());
         relativeLayoutGeneralUpdates.setOnClickListener(
                 view1 -> {
                     if (sharedPreferences.getBoolean("generalUpdates", true)) {
@@ -53,13 +64,8 @@ public class NotificationsFragment extends Fragment {
                     }
                 });
 
-        SwitchCompat switchContentUpdates = view.findViewById(R.id.switch_content_updates);
         switchContentUpdates.setChecked(sharedPreferences.getBoolean("contentUpdates", true));
-        switchContentUpdates.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            editor.putBoolean("contentUpdates", isChecked);
-            editor.apply();
-        });
-        RelativeLayout relativeLayoutContentUpdates = view.findViewById(R.id.relative_layout_content_updates);
+        switchContentUpdates.setOnCheckedChangeListener((buttonView, isChecked) -> editor.putBoolean("contentUpdates", isChecked).apply());
         relativeLayoutContentUpdates.setOnClickListener(
                 view2 -> {
                     if (sharedPreferences.getBoolean("contentUpdates", true)) {
@@ -71,13 +77,8 @@ public class NotificationsFragment extends Fragment {
                     }
                 });
 
-        SwitchCompat switchPromotionalUpdates = view.findViewById(R.id.switch_promotional_updates);
         switchPromotionalUpdates.setChecked(sharedPreferences.getBoolean("promotionalUpdates", true));
-        switchPromotionalUpdates.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            editor.putBoolean("promotionalUpdates", isChecked);
-            editor.apply();
-        });
-        RelativeLayout relativeLayoutPromotionalUpdates = view.findViewById(R.id.relative_layout_promotional_updates);
+        switchPromotionalUpdates.setOnCheckedChangeListener((buttonView, isChecked) -> editor.putBoolean("promotionalUpdates", isChecked).apply());
         relativeLayoutPromotionalUpdates.setOnClickListener(
                 view3 -> {
                     if (sharedPreferences.getBoolean("promotionalUpdates", true)) {
@@ -88,7 +89,5 @@ public class NotificationsFragment extends Fragment {
                         editor.putBoolean("promotionalUpdates", true).apply();
                     }
                 });
-
-        return view;
     }
 }
