@@ -112,7 +112,8 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
                 .observe(getViewLifecycleOwner(), modelExtendedResponseWrapper -> {
                     if (modelExtendedResponseWrapper.hasErrors()) {
 
-                        Toast.makeText(requireContext(), "Error fetching movie details", Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireContext(), modelExtendedResponseWrapper.getErrors().get(0).message, Toast.LENGTH_LONG).show();
+
 
                         Navigation.findNavController(requireView())
                                 .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()
@@ -159,7 +160,9 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
         movieDetailViewModel.getMovieDetailSuggestionsById(id, 1)
                 .observe(getViewLifecycleOwner(), responseWrapper -> {
                     if (responseWrapper.hasErrors()) {
-                        Toast.makeText(requireContext(), "Error fetching movie details", Toast.LENGTH_LONG).show();
+
+                        Toast.makeText(requireContext(), responseWrapper.getErrors().get(0).message, Toast.LENGTH_LONG).show();
+
 
                         Navigation.findNavController(requireView())
                                 .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()
