@@ -3,7 +3,6 @@ package it.unimib.smoovie.ui;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.firebase.AuthManager;
 import it.unimib.smoovie.viewmodel.UserViewModel;
 
 public class SettingsFragment extends Fragment {
@@ -27,6 +27,7 @@ public class SettingsFragment extends Fragment {
     private TextView textViewNotificationsSettings;
     private TextView textViewShowMatureContent;
     private TextView textViewPreferences;
+    private TextView textViewSettingsLogout;
     private SwitchCompat switchShowMatureContent;
 
     private RelativeLayout relativeLayoutShowMatureContent;
@@ -34,6 +35,7 @@ public class SettingsFragment extends Fragment {
     private TextView textViewLanguageSettings;
 
     private UserViewModel userViewModel;
+    private AuthManager authManager;
 
     @Nullable
     @Override
@@ -43,15 +45,19 @@ public class SettingsFragment extends Fragment {
         textViewProfileUsername = view.findViewById(R.id.textView_settings_profile_username);
         textViewNotificationsSettings = view.findViewById(R.id.notifications_settings);
         textViewShowMatureContent = view.findViewById(R.id.textView_show_mature_content);
+        textViewSettingsLogout = view.findViewById(R.id.textView_settings_logout);
         switchShowMatureContent = view.findViewById(R.id.switch_show_mature_content);
         relativeLayoutShowMatureContent = view.findViewById(R.id.relative_layout_show_mature_content);
         relativeLayoutLanguageSettings = view.findViewById(R.id.relative_layout_language);
         textViewLanguageSettings = view.findViewById(R.id.textView_language);
         textViewPreferences = view.findViewById(R.id.settings_preferences);
 
+        authManager = AuthManager.getInstance(requireActivity().getApplication());
+
         setupViewModel();
         setupNavigation();
         setupUI();
+        setupLogoutHandler();
         return view;
     }
 
@@ -107,5 +113,14 @@ public class SettingsFragment extends Fragment {
                 }
         );
 
+    }
+
+    private void setupLogoutHandler() {
+        textViewSettingsLogout.setOnClickListener(v -> {
+            authManager.logout();
+
+            Navigation.findNavController(requireView())
+                    .navigate(R.id.loginFragment);
+        });
     }
 }
