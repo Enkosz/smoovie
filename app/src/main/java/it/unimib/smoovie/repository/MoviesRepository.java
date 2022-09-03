@@ -97,7 +97,7 @@ public class MoviesRepository {
                 .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
     }
 
-    public Maybe<FavoriteMovie> getFavoriteMovieById(Long id, Long userId) {
+    public Maybe<FavoriteMovie> getFavoriteMovieById(Long id, String userId) {
         return smoovieDatabase.favoriteMovieDao()
                 .getFavoriteMovieById(id, userId)
                 .subscribeOn(Schedulers.io())
@@ -118,7 +118,7 @@ public class MoviesRepository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Completable addFavoriteMovie(Long movieId, Long userId, String filmTitle, String filmPosterPath) {
+    public Completable addFavoriteMovie(Long movieId, String userId, String filmTitle, String filmPosterPath) {
         return smoovieDatabase.favoriteMovieDao()
                 .insertAll(new FavoriteMovie(userId, movieId, filmTitle, filmPosterPath))
                 .subscribeOn(Schedulers.io())

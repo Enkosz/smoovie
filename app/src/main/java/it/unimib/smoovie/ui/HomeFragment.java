@@ -8,15 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.firebase.AuthManager;
-import it.unimib.smoovie.viewmodel.UserViewModel;
 
 public class HomeFragment extends Fragment {
 

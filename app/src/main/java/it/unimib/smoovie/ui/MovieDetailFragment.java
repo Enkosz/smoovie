@@ -87,8 +87,8 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
 
     private void setupMovieDetailFavoriteView() {
         Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
-        Long userId = AuthManager.getInstance(requireActivity().getApplication())
-                        .getAuthenticatedUserId();
+        String userId = AuthManager.getInstance(requireActivity().getApplication())
+                        .getAuthenticatedUser().getUid();
 
         movieDetailViewModel.getFavoriteMovieById(id, userId)
                 .observe(getViewLifecycleOwner(), favoriteMovieEvent -> {

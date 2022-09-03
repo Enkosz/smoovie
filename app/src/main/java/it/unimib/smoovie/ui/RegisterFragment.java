@@ -7,20 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.firebase.AuthManager;
 import it.unimib.smoovie.utils.ProgressDisplay;
-import it.unimib.smoovie.viewmodel.UserViewModel;
 
 
 public class RegisterFragment extends Fragment implements ProgressDisplay {
@@ -53,7 +50,7 @@ public class RegisterFragment extends Fragment implements ProgressDisplay {
 
     private void setupUI() {
         buttonRegister.setOnClickListener(v -> {
-
+            showProgress();
             String email = editTextEmail.getText().toString().trim();
             String password = editTextPassword.getText().toString().trim();
 
@@ -62,8 +59,11 @@ public class RegisterFragment extends Fragment implements ProgressDisplay {
             if(password.isEmpty()){ editTextPassword.setError("Password is required"); editTextPassword.requestFocus(); }
 
             disposableCreateUser = authManager.createUser(email, password)
-                            .subscribe(() -> Navigation.findNavController(requireView())
-                                    .navigate(R.id.loginFragment));
+                            .subscribe(() -> {
+                                hideProgress();
+                                Navigation.findNavController(requireView())
+                                        .navigate(R.id.homeFragment);
+                            });
         });
 
         buttonLogin.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.loginFragment));

@@ -12,7 +12,7 @@ public class FavoriteMovie {
     private int id;
 
     @ColumnInfo(name = "user_id")
-    private final Long userId;
+    private final String userId;
 
     @ColumnInfo(name = "film_id")
     private final Long filmId;
@@ -24,14 +24,14 @@ public class FavoriteMovie {
     private final String filmPosterPath;
 
     @Ignore
-    public FavoriteMovie(Long userId, Long filmId, String filmTitle, String filmPosterPath) {
+    public FavoriteMovie(String userId, Long filmId, String filmTitle, String filmPosterPath) {
         this.userId = userId;
         this.filmId = filmId;
         this.filmTitle = filmTitle;
         this.filmPosterPath = filmPosterPath;
     }
 
-    public FavoriteMovie(int id, Long userId, Long filmId, String filmTitle, String filmPosterPath) {
+    public FavoriteMovie(int id, String userId, Long filmId, String filmTitle, String filmPosterPath) {
         this.id = id;
         this.userId = userId;
         this.filmId = filmId;
@@ -43,7 +43,7 @@ public class FavoriteMovie {
         return id;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 

@@ -11,15 +11,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.firebase.AuthManager;
-import it.unimib.smoovie.viewmodel.UserViewModel;
 
 public class SettingsFragment extends Fragment {
 
@@ -34,7 +31,6 @@ public class SettingsFragment extends Fragment {
     private RelativeLayout relativeLayoutLanguageSettings;
     private TextView textViewLanguageSettings;
 
-    private UserViewModel userViewModel;
     private AuthManager authManager;
 
     @Nullable
@@ -54,15 +50,10 @@ public class SettingsFragment extends Fragment {
 
         authManager = AuthManager.getInstance(requireActivity().getApplication());
 
-        setupViewModel();
         setupNavigation();
         setupUI();
         setupLogoutHandler();
         return view;
-    }
-
-    private void setupViewModel() {
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
     }
 
     private void setupNavigation() {
@@ -113,6 +104,7 @@ public class SettingsFragment extends Fragment {
                 }
         );
 
+        textViewProfileUsername.setText(authManager.getAuthenticatedUser().getEmail());
     }
 
     private void setupLogoutHandler() {

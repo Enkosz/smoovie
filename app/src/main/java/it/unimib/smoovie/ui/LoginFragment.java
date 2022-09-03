@@ -6,22 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
-import com.google.firebase.auth.FirebaseAuth;
 
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.firebase.AuthManager;
 import it.unimib.smoovie.utils.ProgressDisplay;
-import it.unimib.smoovie.viewmodel.UserViewModel;
 
 public class LoginFragment extends Fragment implements ProgressDisplay {
 
@@ -66,9 +61,8 @@ public class LoginFragment extends Fragment implements ProgressDisplay {
             String password = editTextPassword.getText().toString();
 
             disposableAuthenticateUser = authManager.authenticateUser(email, password)
-                    .subscribe((authenticationCompleted) -> {
+                    .subscribe(() -> {
                         hideProgress();
-                        if(!authenticationCompleted) Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
                         Navigation.findNavController(requireView())
                                 .navigate(R.id.homeFragment);
                     });
