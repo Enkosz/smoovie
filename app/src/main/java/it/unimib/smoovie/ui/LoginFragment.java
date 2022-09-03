@@ -16,6 +16,9 @@ import androidx.navigation.Navigation;
 
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.core.validator.EmailValidator;
+import it.unimib.smoovie.core.validator.PasswordValidator;
+import it.unimib.smoovie.core.validator.ValidationResult;
 import it.unimib.smoovie.firebase.AuthManager;
 import it.unimib.smoovie.firebase.AuthenticationException;
 import it.unimib.smoovie.utils.ProgressDisplay;
@@ -61,6 +64,22 @@ public class LoginFragment extends Fragment implements ProgressDisplay {
             showProgress();
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
+
+            ValidationResult emailValidationResult = EmailValidator.validate(email);
+            if(!emailValidationResult.isSuccess()) {
+                editTextEmail.setError(getString(emailValidationResult.getMessageId()));
+                editTextEmail.requestFocus();
+                hideProgress();
+                return;
+            }
+
+            ValidationResult passwordValidationResult = PasswordValidator.validate(password);
+            if(!passwordValidationResult.isSuccess()) {
+                editTextPassword.setError(getString(passwordValidationResult.getMessageId()));
+                editTextPassword.requestFocus();
+                hideProgress();
+                return;
+            }
 
             disposableAuthenticateUser = authManager.authenticateUser(email, password)
                     .subscribe(() -> Navigation.findNavController(requireView())

@@ -1,7 +1,7 @@
 package it.unimib.smoovie.ui;
 
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +17,10 @@ import androidx.navigation.Navigation;
 
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.core.validator.EmailValidator;
+import it.unimib.smoovie.core.validator.EmptyValidator;
+import it.unimib.smoovie.core.validator.PasswordValidator;
+import it.unimib.smoovie.core.validator.ValidationResult;
 import it.unimib.smoovie.firebase.AuthManager;
 import it.unimib.smoovie.firebase.AuthenticationException;
 import it.unimib.smoovie.utils.ProgressDisplay;
@@ -53,19 +57,28 @@ public class RegisterFragment extends Fragment implements ProgressDisplay {
     private void setupUI() {
         buttonRegister.setOnClickListener(v -> {
             showProgress();
-            String email = editTextEmail.getText().toString().trim();
-            String password = editTextPassword.getText().toString().trim();
+            String email = editTextEmail.getText().toString();
+            String password = editTextPassword.getText().toString();
 
-            if(email.isEmpty()){ editTextEmail.setError("Email is required"); editTextEmail.requestFocus(); }
-            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) { editTextEmail.setError("Invalid Email"); editTextEmail.requestFocus(); }
-            if(password.isEmpty()){ editTextPassword.setError("Password is required"); editTextPassword.requestFocus(); }
+            ValidationResult emailValidationResult = EmailValidator.validate(email);
+            if(!emailValidationResult.isSuccess()) {
+                editTextEmail.setError(getString(emailValidationResult.getMessageId()));
+                editTextEmail.requestFocus();
+                hideProgress();
+                return;
+            }
+
+            ValidationResult passwordValidationResult = PasswordValidator.validate(password);
+            if(!passwordValidationResult.isSuccess()) {
+                editTextPassword.setError(getString(passwordValidationResult.getMessageId()));
+                editTextPassword.requestFocus();
+                hideProgress();
+                return;
+            }
 
             disposableCreateUser = authManager.createUser(email, password)
-                            .subscribe(() -> {
-                                hideProgress();
-                                Navigation.findNavController(requireView())
-                                        .navigate(R.id.homeFragment);
-                            }, throwable -> {
+                            .subscribe(() -> Navigation.findNavController(requireView())
+                                    .navigate(R.id.homeFragment), throwable -> {
                                 hideProgress();
                                 Toast.makeText(requireContext(), ((AuthenticationException) throwable).getErrorCode(), Toast.LENGTH_LONG)
                                         .show();
