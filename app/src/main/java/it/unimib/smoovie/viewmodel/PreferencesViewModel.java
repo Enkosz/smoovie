@@ -15,18 +15,15 @@ import it.unimib.smoovie.repository.MoviesRepository;
 import it.unimib.smoovie.room.model.FavoriteMovie;
 
 public class PreferencesViewModel extends AndroidViewModel {
-    private final MutableLiveData<ResponseWrapper<MovieModelExtended>> movieDetail;
     private final MutableLiveData<List<FavoriteMovie>> favoriteMovies;
 
     private final MoviesRepository moviesRepository;
 
     private Disposable disposableFavoriteMovieList;
-    private Disposable disposableMovieDetail;
 
     public PreferencesViewModel(Application application) {
         super(application);
         favoriteMovies = new MutableLiveData<>();
-        movieDetail = new MutableLiveData<>();
 
         moviesRepository = MoviesRepository.getInstance(application);
     }
@@ -36,13 +33,6 @@ public class PreferencesViewModel extends AndroidViewModel {
                 .subscribe(favoriteMovies::postValue);
 
         return favoriteMovies;
-    }
-
-    public LiveData<ResponseWrapper<MovieModelExtended>> getMovieDetailById(Long id) {
-        disposableMovieDetail = moviesRepository.getMovieById(id)
-                .subscribe(movieDetail::postValue);
-
-        return movieDetail;
     }
 
     @Override
