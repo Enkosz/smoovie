@@ -13,7 +13,10 @@ import it.unimib.smoovie.room.model.User;
 public interface UserDao {
 
     @Query("SELECT * FROM users WHERE username = :username")
-    Maybe<User> getUserById(String username);
+    Maybe<User> getUserByUsername(String username);
+
+    @Query("SELECT * FROM users WHERE id = :id")
+    Maybe<User> getUserById(Long id);
 
     @Insert
     Single<Long> insert(User user);

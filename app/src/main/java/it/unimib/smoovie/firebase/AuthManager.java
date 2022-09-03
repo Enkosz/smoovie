@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -89,7 +90,13 @@ public class AuthManager {
         return preferences.getBoolean(IS_LOGGED_PREFERENCE, false);
     }
 
-    public void createLoginSession(Long userId) {
+    public Maybe<User> getAuthenticatedUser() throws IllegalAccessException {
+        if(!isLogged()) throw new IllegalAccessException("User not authenticated");
+
+        return userRepository.getUserById(preferences.getLong(USER_ID_PREFERENCE, 0));
+    }
+
+    private void createLoginSession(Long userId) {
         editor.putBoolean(IS_LOGGED_PREFERENCE, true);
         editor.putLong(USER_ID_PREFERENCE, userId);
 
