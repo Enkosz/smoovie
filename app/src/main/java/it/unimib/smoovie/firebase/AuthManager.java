@@ -2,14 +2,17 @@ package it.unimib.smoovie.firebase;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import it.unimib.smoovie.R;
 
 public class AuthManager {
 
@@ -40,10 +43,7 @@ public class AuthManager {
     public Completable createUser(String email, String password) {
         Completable firebaseUserCompletable = Completable.create(emitter -> firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(task -> emitter.onComplete())
-                .addOnFailureListener(exception -> {
-                    exception.printStackTrace();
-                    emitter.onError(exception);
-                }));
+                .addOnFailureListener(exception -> emitter.onError(mapFirebaseAuthException(exception))));
 
         return firebaseUserCompletable
                 .andThen(authenticateUser(email, password))
@@ -64,10 +64,7 @@ public class AuthManager {
 
                     emitter.onComplete();
                 })
-                .addOnFailureListener(exception -> {
-                    exception.printStackTrace();
-                    emitter.onError(exception);
-                })
+                .addOnFailureListener(exception -> emitter.onError(mapFirebaseAuthException(exception)))
         );
 
         return firebaseUserCompletableAuthenticate
@@ -88,6 +85,13 @@ public class AuthManager {
         editor.putString(USER_ID_PREFERENCE, userId);
 
         editor.commit();
+    }
+
+    private AuthenticationException mapFirebaseAuthException(Exception exception) {
+        if(exception instanceof FirebaseAuthException)
+            return new AuthenticationException(((FirebaseAuthException) exception).getErrorCode());
+
+        return new AuthenticationException();
     }
 }
 
