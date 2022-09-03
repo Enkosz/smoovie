@@ -2,9 +2,7 @@ package it.unimib.smoovie.repository;
 
 import android.app.Application;
 
-import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -30,7 +28,14 @@ public class UserRepository {
 
     public Maybe<User> getUserByUsername(String username) {
         return smoovieDatabase.userDao()
-                .getUserById(username)
+                .getUserByUsername(username)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Maybe<User> getUserById(Long id) {
+        return smoovieDatabase.userDao()
+                .getUserById(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

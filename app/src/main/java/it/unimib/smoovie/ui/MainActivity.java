@@ -55,22 +55,16 @@ public class MainActivity extends AppCompatActivity {
 
         navController.addOnDestinationChangedListener((ignored, navDestination, bundle) -> {
             if(navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.registerFragment)
-                bottomNavigationView.setVisibility(View.VISIBLE);
+                bottomNavigationView.setVisibility(View.GONE);
             else if (bottomNavigationView.getVisibility() != View.VISIBLE)
                 bottomNavigationView.setVisibility(View.VISIBLE);
 
             if (navDestination.getId() == R.id.settingsFragment)
                 bottomNavigationView.getMenu().findItem(R.id.settingsFragment).setChecked(true);
-            if (navDestination.getId() == R.id.searchFragment || navDestination.getId() == R.id.resultsFragment || navDestination.getId() == R.id.movieDetailFragment)
+            else if (navDestination.getId() == R.id.searchFragment || navDestination.getId() == R.id.resultsFragment || navDestination.getId() == R.id.movieDetailFragment)
                 bottomNavigationView.getMenu().findItem(R.id.searchFragment).setChecked(true);
-            if (navDestination.getId() == R.id.homeFragment || navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.registerFragment)
+            else if (navDestination.getId() == R.id.homeFragment)
                 bottomNavigationView.getMenu().findItem(R.id.homeFragment).setChecked(true);
-
-
         });
-
-
-
-
     }
 }
