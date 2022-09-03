@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -19,15 +20,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.firebase.AuthManager;
+import it.unimib.smoovie.utils.ProgressDisplay;
 import it.unimib.smoovie.viewmodel.UserViewModel;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements ProgressDisplay {
 
     private Button buttonLogin;
     private Button buttonRegister;
 
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private ConstraintLayout containerProgressBar;
+    private ConstraintLayout containerLogin;
 
     private Disposable disposableAuthenticateUser;
     private AuthManager authManager;
@@ -40,6 +44,8 @@ public class LoginFragment extends Fragment {
         buttonRegister = view.findViewById(R.id.button_register_new_user);
         editTextEmail = view.findViewById(R.id.editTextEmail_login);
         editTextPassword = view.findViewById(R.id.editTextPassword_login);
+        containerProgressBar = view.findViewById(R.id.container_login_progressBar);
+        containerLogin = view.findViewById(R.id.container_login);
         authManager = AuthManager.getInstance(requireActivity().getApplication());
 
         setupUI();
@@ -55,11 +61,13 @@ public class LoginFragment extends Fragment {
 
     private void setupUI() {
         buttonLogin.setOnClickListener(v -> {
+            showProgress();
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
 
             disposableAuthenticateUser = authManager.authenticateUser(email, password)
                     .subscribe((authenticationCompleted) -> {
+                        hideProgress();
                         if(!authenticationCompleted) Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
                         Navigation.findNavController(requireView())
                                 .navigate(R.id.homeFragment);
@@ -75,5 +83,17 @@ public class LoginFragment extends Fragment {
 
         if(disposableAuthenticateUser != null && !disposableAuthenticateUser.isDisposed())
             disposableAuthenticateUser.dispose();
+    }
+
+    @Override
+    public void showProgress() {
+        containerProgressBar.setVisibility(View.VISIBLE);
+        containerLogin.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        containerProgressBar.setVisibility(View.GONE);
+        containerLogin.setVisibility(View.VISIBLE);
     }
 }
