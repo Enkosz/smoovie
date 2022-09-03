@@ -1,8 +1,6 @@
 package it.unimib.smoovie.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,12 +10,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import it.unimib.smoovie.R;
-import it.unimib.smoovie.firebase.AuthManager;
-import it.unimib.smoovie.viewmodel.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemReselectedListener(item -> {
             if(item.getItemId() == R.id.searchFragment) {
                 if (navController.getCurrentDestination().getId() == R.id.movieDetailFragment){
-                    while(navController.getCurrentDestination().getId() == R.id.movieDetailFragment){
+                    while(navController.getCurrentDestination().getId() == R.id.movieDetailFragment) {
                         navController.popBackStack();
                     }
                 }else

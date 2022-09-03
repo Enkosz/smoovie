@@ -2,8 +2,10 @@ package it.unimib.smoovie.firebase;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
 import io.reactivex.Completable;
@@ -11,15 +13,13 @@ import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import it.unimib.smoovie.repository.UserRepository;
-import it.unimib.smoovie.room.model.User;
+import it.unimib.smoovie.R;
 
 public class AuthManager {
 
     private final FirebaseAuth firebaseAuth;
     private final SharedPreferences preferences;
     private final SharedPreferences.Editor editor;
-    private final UserRepository userRepository;
 
     private static AuthManager instance;
 
@@ -29,7 +29,6 @@ public class AuthManager {
 
     private AuthManager(Application application) {
         firebaseAuth = FirebaseAuth.getInstance();
-        userRepository = UserRepository.getInstance(application);
 
         preferences = application.getSharedPreferences(PREFERENCE_NAME, 0);
         editor = preferences.edit();
@@ -43,64 +42,57 @@ public class AuthManager {
     }
 
     public Completable createUser(String email, String password) {
-        Observable<FirebaseUser> firebaseUserObservable = Observable.create(emitter -> firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener(task -> {
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
+        Completable firebaseUserCompletable = Completable.create(emitter -> firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(task -> emitter.onComplete())
+                .addOnFailureListener(exception -> emitter.onError(mapFirebaseAuthException(exception))));
 
-                    emitter.onNext(user);
-                })
-                .addOnFailureListener(exception -> {
-                    exception.printStackTrace();
-                    emitter.onError(exception);
-                }));
-
-
-        return Completable.fromObservable(firebaseUserObservable
-                        .flatMap(firebaseUser -> {
-                            User user = new User(firebaseUser.getUid(), firebaseUser.getEmail());
-
-                            return userRepository.insertUser(user).toObservable();
-                        })).subscribeOn(Schedulers.io())
+        return firebaseUserCompletable
+                .andThen(authenticateUser(email, password))
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public void logout() {
         editor.clear();
         editor.commit();
+        firebaseAuth.signOut();
     }
 
-    public Observable<Boolean> authenticateUser(String email, String password) {
-        Observable<FirebaseUser> firebaseUserObservable = Observable.create(emitter -> firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(authResult -> emitter.onNext(authResult.getUser())).addOnFailureListener(exception -> {
-                    exception.printStackTrace();
-                    emitter.onError(exception);
+    public Completable authenticateUser(String email, String password) {
+        Completable firebaseUserCompletableAuthenticate = Completable.create(emitter -> firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    createLoginSession(authResult.getUser().getUid());
+
+                    emitter.onComplete();
                 })
+                .addOnFailureListener(exception -> emitter.onError(mapFirebaseAuthException(exception)))
         );
 
-        return firebaseUserObservable
-                        .flatMap(firebaseUser -> userRepository.getUserByUsername(firebaseUser.getEmail()).toObservable())
-                        .flatMap(user -> {
-                            createLoginSession(user.getId());
-                            return Observable.just(true);
-                        }).subscribeOn(Schedulers.io())
+        return firebaseUserCompletableAuthenticate
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public FirebaseUser getAuthenticatedUser() {
+        return firebaseAuth.getCurrentUser();
     }
 
     public boolean isLogged() {
         return preferences.getBoolean(IS_LOGGED_PREFERENCE, false);
     }
 
-    public Maybe<User> getAuthenticatedUser() throws IllegalAccessException {
-        if(!isLogged()) throw new IllegalAccessException("User not authenticated");
-
-        return userRepository.getUserById(preferences.getLong(USER_ID_PREFERENCE, 0));
-    }
-
-    private void createLoginSession(Long userId) {
+    public void createLoginSession(String userId) {
         editor.putBoolean(IS_LOGGED_PREFERENCE, true);
-        editor.putLong(USER_ID_PREFERENCE, userId);
+        editor.putString(USER_ID_PREFERENCE, userId);
 
         editor.commit();
+    }
+
+    private AuthenticationException mapFirebaseAuthException(Exception exception) {
+        if(exception instanceof FirebaseAuthException)
+            return new AuthenticationException(((FirebaseAuthException) exception).getErrorCode());
+
+        return new AuthenticationException();
     }
 }
 
