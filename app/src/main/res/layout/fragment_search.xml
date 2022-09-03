@@ -7,12 +7,9 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        style="@style/TextViewTitle"
         android:layout_marginTop="16dp"
         android:text="@string/search_movie"
-        android:textColor="@color/TextPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

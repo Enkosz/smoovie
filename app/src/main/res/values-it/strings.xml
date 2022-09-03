@@ -14,16 +14,16 @@
     <string name="movie_genre_fantasy">Fantasia</string>
     <string name="movie_search_query_result_title">Risultati per %1$s</string>
 
-    <string name="settings_title">Il mio account</string>
+    <string name="settings_title">Il mio Account</string>
     <string name="settings_header_account_profile">ACCOUNT &amp; PROFILO</string>
-    <string name="settings_subscription_type">Tipo di iscrizione</string>
-    <string name="settings_modify_email">Modifica l\'email</string>
-    <string name="settings_modify_password">Modifica la password</string>
+    <string name="settings_subscription_type">Tipo di Iscrizione</string>
+    <string name="settings_modify_email">Modifica Email</string>
+    <string name="settings_modify_password">Modifica Password</string>
     <string name="settings_header_general">IMPOSTAZIONI GENERALI</string>
     <string name="settings_language">Lingua</string>
     <string name="settings_preview_language">Italiano</string>
-    <string name="settings_header_functionalities">IMPOSTAZIONI DELLA APP</string>
-    <string name="settings_show_mature_content">Mostra i contenuti vietati ai minori</string>
+    <string name="settings_header_functionalities">IMPOSTAZIONI APP</string>
+    <string name="settings_show_mature_content">Mostra i Contenuti +18</string>
     <string name="settings_dark_mode">Modalità Scura</string>
     <string name="settings_notifications">Notifiche</string>
     <string name="settings_connected_apps">App Connesse</string>
