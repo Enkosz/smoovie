@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
+import it.unimib.smoovie.firebase.AuthManager;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.model.MovieModelExtended;
 import it.unimib.smoovie.room.model.FavoriteMovie;
@@ -86,7 +87,10 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
 
     private void setupMovieDetailFavoriteView() {
         Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
-        movieDetailViewModel.getFavoriteMovieById(id)
+        Long userId = AuthManager.getInstance(requireActivity().getApplication())
+                        .getAuthenticatedUserId();
+
+        movieDetailViewModel.getFavoriteMovieById(id, userId)
                 .observe(getViewLifecycleOwner(), favoriteMovieEvent -> {
                     FavoriteMovie favoriteMovie = favoriteMovieEvent.getContent();
                     if (favoriteMovie != null) {
@@ -103,7 +107,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
                             isFavorite = false;
                         });
             } else {
-                addFavoriteMovieDisposable = movieDetailViewModel.addFavoriteMovie(id, "123", textViewMovieDetailTitle.getText().toString(), backdropPath)
+                addFavoriteMovieDisposable = movieDetailViewModel.addFavoriteMovie(id, userId, textViewMovieDetailTitle.getText().toString(), backdropPath)
                         .subscribe(() -> {
                             buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16_fill));
                             isFavorite = true;

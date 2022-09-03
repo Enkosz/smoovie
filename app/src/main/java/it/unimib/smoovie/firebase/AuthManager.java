@@ -90,10 +90,12 @@ public class AuthManager {
         return preferences.getBoolean(IS_LOGGED_PREFERENCE, false);
     }
 
-    public Maybe<User> getAuthenticatedUser() throws IllegalAccessException {
-        if(!isLogged()) throw new IllegalAccessException("User not authenticated");
-
+    public Maybe<User> getAuthenticatedUser() {
         return userRepository.getUserById(preferences.getLong(USER_ID_PREFERENCE, 0));
+    }
+
+    public Long getAuthenticatedUserId() {
+        return preferences.getLong(USER_ID_PREFERENCE, 0);
     }
 
     private void createLoginSession(Long userId) {

@@ -55,16 +55,14 @@ public class MovieDetailViewModel extends AndroidViewModel {
         return movieDetailSuggestionList;
     }
 
-    public LiveData<Event<FavoriteMovie>> getFavoriteMovieById(Long id) {
-        disposableFavoriteMovieList = moviesRepository.getFavoriteMovieById(id)
-                .subscribe(favoriteMovie1 -> {
-                    favoriteMovie.postValue(new Event(favoriteMovie1));
-                });
+    public LiveData<Event<FavoriteMovie>> getFavoriteMovieById(Long id, Long userId) {
+        disposableFavoriteMovieList = moviesRepository.getFavoriteMovieById(id, userId)
+                .subscribe(favoriteMovie1 -> favoriteMovie.postValue(new Event(favoriteMovie1)));
 
         return favoriteMovie;
     }
 
-    public Completable addFavoriteMovie(Long movieId, String userId, String filmTitle, String filmPosterPath) {
+    public Completable addFavoriteMovie(Long movieId, Long userId, String filmTitle, String filmPosterPath) {
         return moviesRepository.addFavoriteMovie(movieId, userId, filmTitle, filmPosterPath);
     }
     public Completable deleteFavoriteMovie(Long movieId) {
