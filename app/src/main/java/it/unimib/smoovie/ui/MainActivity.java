@@ -45,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         });
+
+        navController.addOnDestinationChangedListener((ignored, navDestination, bundle) -> {
+            if(navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.registerFragment)
+                bottomNavigationView.setVisibility(View.GONE);
+            else if(bottomNavigationView.getVisibility() != View.VISIBLE)
+                bottomNavigationView.setVisibility(View.VISIBLE);
+        });
     }
 
     @Override
