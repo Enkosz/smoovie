@@ -20,5 +20,8 @@
         <item name="android:textColor">@color/white_200</item>
         <item name="android:editTextColor">@color/white_200</item>
         <item name="colorControlNormal">@color/white_200</item>
+
+        <item name="android:windowSplashScreenBackground">@color/red_400</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_sus</item>
     </style>
 </resources>
