@@ -89,10 +89,7 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
                         Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
 
                         Navigation.findNavController(requireView())
-                                .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()
-                                        .setExitAnim(android.R.anim.fade_out)
-                                        .setPopEnterAnim(android.R.anim.fade_in)
-                                        .build());
+                                .popBackStack();
                         return;
                     }
 

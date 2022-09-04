@@ -90,7 +90,7 @@ public class LoginFragment extends Fragment implements ProgressDisplay {
                     });
         });
 
-        buttonRegister.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.registerFragment));
+        buttonRegister.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment));
     }
 
     @Override
