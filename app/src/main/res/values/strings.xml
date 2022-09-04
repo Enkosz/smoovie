@@ -68,9 +68,9 @@
     <string name="hint_email">Insert Email Address Here</string>
     <string name="hint_username">Insert Username Here</string>
     <string name="password">Insert Password Here</string>
-    <string name="error_login_custom_token">The custom token format is incorrect. Please check the documentation.</string>
-    <string name="error_login_custom_token_mismatch">The custom token corresponds to a different audience.</string>
-    <string name="error_login_credential_malformed_or_expired">The supplied auth credential is malformed or has expired.</string>
+    <string name="error_login_custom_token" translatable="false">The custom token format is incorrect. Please check the documentation.</string>
+    <string name="error_login_custom_token_mismatch" translatable="false">The custom token corresponds to a different audience.</string>
+    <string name="error_login_credential_malformed_or_expired" translatable="false">The supplied auth credential is malformed or has expired.</string>
     <string name="error_login_invalid_email">The email address is badly formatted.</string>
     <string name="error_login_wrong_password">The password is invalid or the user does not have a password.</string>
     <string name="error_login_user_mismatch">The supplied credentials do not correspond to the previously signed in user.</string>
