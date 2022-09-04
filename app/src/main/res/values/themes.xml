@@ -22,7 +22,7 @@
         <item name="colorControlNormal">@color/white_200</item>
 
         <item name="android:windowSplashScreenBackground">@color/red_400</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_sus</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_splashscreen</item>
 
     </style>
 </resources>
