@@ -1,6 +1,7 @@
 package it.unimib.smoovie.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         setupNavControllerAuthenticationFilter();
+        Log.i("SDK", "SDK level: " + android.os.Build.VERSION.SDK_INT);
     }
 
     private void setupNavControllerAuthenticationFilter() {
-
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         assert navHostFragment != null;
         NavController navController = navHostFragment.getNavController();
