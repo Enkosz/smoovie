@@ -20,6 +20,12 @@ public abstract class AbstractNotifiableListRecyclerViewAdapter<T> extends Recyc
         this.notifyItemRangeChanged(currentSize, this.items.size() - 1);
     }
 
+    public void clear() {
+        int size = items.size();
+        items.clear();
+        this.notifyItemRangeRemoved(0, size);
+    }
+
     @Override
     public int getItemCount() {
         return items.size();

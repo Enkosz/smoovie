@@ -89,4 +89,6 @@
     <string name="text_validation_error_min_password_length">Password must be at least 6 characters</string>
     <string name="text_validation_error_empty_field">Field must be not empty</string>
     <string name="text_validation_error_email">Email is not valid</string>
+    <string name="preferences">My Favourites</string>
+    <string name="settings_preferences">Favourites</string>
 </resources>

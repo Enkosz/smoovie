@@ -60,6 +60,9 @@
             android:id="@+id/action_settingsFragment_to_languageFragment"
             app:destination="@+id/languageFragment"
             />
+        <action
+            android:id="@+id/action_settingsFragment_to_preferencesFragment"
+            app:destination="@id/preferencesFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
@@ -87,5 +90,9 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/preferencesFragment"
+        android:name="it.unimib.smoovie.ui.PreferencesFragment"
+        android:label="PreferencesFragment" />
 
 </navigation>

@@ -57,6 +57,8 @@
     <string name="hint_email">Inserisci Indirizzo Mail Qui</string>
     <string name="hint_username">Inserisci Username Qui</string>
     <string name="password">Inserisci Password Qui</string>
+    <string name="preferences">I Miei Preferiti</string>
+    <string name="settings_preferences">Preferiti</string>
     <string name="text_validation_error_email">Email non valida</string>
     <string name="text_validation_error_empty_field">Il Campo non può essere vuoto</string>
     <string name="text_validation_error_min_password_length">La Password deve essere di almeno 6 caratteri</string>

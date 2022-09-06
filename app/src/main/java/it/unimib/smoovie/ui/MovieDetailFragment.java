@@ -1,6 +1,7 @@
 package it.unimib.smoovie.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,10 @@ import com.bumptech.glide.Glide;
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.adapter.MovieListRecyclerViewAdapter;
+import it.unimib.smoovie.firebase.AuthManager;
 import it.unimib.smoovie.listener.EndlessRecyclerOnScrollListener;
 import it.unimib.smoovie.model.MovieModelExtended;
+import it.unimib.smoovie.room.model.FavoriteMovie;
 import it.unimib.smoovie.utils.Constants;
 import it.unimib.smoovie.utils.ProgressDisplay;
 import it.unimib.smoovie.viewmodel.MovieDetailViewModel;
@@ -48,6 +51,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
     private MovieDetailViewModel movieDetailViewModel;
 
     private boolean isFavorite = false;
+    private String backdropPath = "";
 
     private Disposable addFavoriteMovieDisposable;
     private Disposable deleteFavoriteMovieDisposable;
@@ -83,9 +87,17 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
 
     private void setupMovieDetailFavoriteView() {
         Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
+        String userId = AuthManager.getInstance(requireActivity().getApplication())
+                        .getAuthenticatedUser().getUid();
 
-        movieDetailViewModel.getFavoriteMovieById(id, 1l)
-                .observe(getViewLifecycleOwner(), favoriteMovie -> buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16)));
+        movieDetailViewModel.getFavoriteMovieById(id, userId)
+                .observe(getViewLifecycleOwner(), favoriteMovieEvent -> {
+                    FavoriteMovie favoriteMovie = favoriteMovieEvent.getContent();
+                    if (favoriteMovie != null) {
+                        buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16_fill));
+                        isFavorite = true;
+                    }
+        } );
 
         buttonMovieDetailAddFavorite.setOnClickListener(v -> {
             if (isFavorite) {
@@ -95,7 +107,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
                             isFavorite = false;
                         });
             } else {
-                addFavoriteMovieDisposable = movieDetailViewModel.addFavoriteMovie(id, "123")
+                addFavoriteMovieDisposable = movieDetailViewModel.addFavoriteMovie(id, userId, textViewMovieDetailTitle.getText().toString(), backdropPath)
                         .subscribe(() -> {
                             buttonMovieDetailAddFavorite.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_star_16_fill));
                             isFavorite = true;
@@ -123,7 +135,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
                     textViewMovieReleaseDate.setText(movieModelExtended.releaseDate);
                     textViewMovieOverview.setText(movieModelExtended.overview);
                     textViewMovieRuntime.setText(getString(R.string.movie_detail_runtime, movieModelExtended.getRuntimeHours(), movieModelExtended.getRuntimeMinutes()));
-
+                    backdropPath = movieModelExtended.posterPath;
                     Glide.with(requireContext())
                             .load(Constants.API_POSTER_URL + movieModelExtended.backdropPath)
                             .into(imageViewMovieDetailBackgroundPoster);
