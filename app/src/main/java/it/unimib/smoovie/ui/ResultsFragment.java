@@ -1,6 +1,7 @@
 package it.unimib.smoovie.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,6 +97,13 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
                     adapter.addItems(responseWrapper.getResponse().movies);
                     hideProgress();
                 });
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i("movie", "onDestroy: " + "pipo");
+        
+        super.onDestroy();
     }
 
     @Override
