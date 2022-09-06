@@ -125,10 +125,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
                         Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
 
                         Navigation.findNavController(requireView())
-                                .navigate(R.id.homeFragment, new Bundle(), new NavOptions.Builder()
-                                        .setExitAnim(android.R.anim.fade_out)
-                                        .setPopEnterAnim(android.R.anim.fade_in)
-                                        .build());
+                                .popBackStack();
                         return;
                     }
 
@@ -151,7 +148,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
         Long id = requireArguments().getLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        MovieListRecyclerViewAdapter adapter = new MovieListRecyclerViewAdapter(getContext());
+        MovieListRecyclerViewAdapter adapter = new MovieListRecyclerViewAdapter(getContext(), R.id.action_movieDetailFragment_self);
         recyclerViewMovieSuggestions.setLayoutManager(layoutManager);
         recyclerViewMovieSuggestions.setAdapter(adapter);
 
@@ -172,10 +169,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
                         Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
 
                         Navigation.findNavController(requireView())
-                                .navigate(R.id.homeFragment, new Bundle(), new NavOptions.Builder()
-                                        .setExitAnim(android.R.anim.fade_out)
-                                        .setPopEnterAnim(android.R.anim.fade_in)
-                                        .build());
+                                .popBackStack();
                         return;
                     }
 

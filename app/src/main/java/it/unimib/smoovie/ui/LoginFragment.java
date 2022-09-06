@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +16,11 @@ import androidx.navigation.Navigation;
 
 import io.reactivex.disposables.Disposable;
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.core.validator.EmailValidator;
+import it.unimib.smoovie.core.validator.PasswordValidator;
+import it.unimib.smoovie.core.validator.ValidationResult;
 import it.unimib.smoovie.firebase.AuthManager;
+import it.unimib.smoovie.firebase.AuthenticationException;
 import it.unimib.smoovie.utils.ProgressDisplay;
 
 public class LoginFragment extends Fragment implements ProgressDisplay {
@@ -60,15 +65,32 @@ public class LoginFragment extends Fragment implements ProgressDisplay {
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
 
+            ValidationResult emailValidationResult = EmailValidator.validate(email);
+            if(!emailValidationResult.isSuccess()) {
+                editTextEmail.setError(getString(emailValidationResult.getMessageId()));
+                editTextEmail.requestFocus();
+                hideProgress();
+                return;
+            }
+
+            ValidationResult passwordValidationResult = PasswordValidator.validate(password);
+            if(!passwordValidationResult.isSuccess()) {
+                editTextPassword.setError(getString(passwordValidationResult.getMessageId()));
+                editTextPassword.requestFocus();
+                hideProgress();
+                return;
+            }
+
             disposableAuthenticateUser = authManager.authenticateUser(email, password)
-                    .subscribe(() -> {
+                    .subscribe(() -> Navigation.findNavController(requireView())
+                            .navigate(R.id.homeFragment), throwable -> {
                         hideProgress();
-                        Navigation.findNavController(requireView())
-                                .navigate(R.id.homeFragment);
+                        Toast.makeText(requireContext(), ((AuthenticationException) throwable).getErrorCode(), Toast.LENGTH_LONG)
+                                .show();
                     });
         });
 
-        buttonRegister.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.registerFragment));
+        buttonRegister.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment));
     }
 
     @Override

@@ -22,9 +22,11 @@ import it.unimib.smoovie.utils.Constants;
 public class MovieListRecyclerViewAdapter extends AbstractNotifiableListRecyclerViewAdapter<MovieModelCompact> {
 
     private Context context;
+    private final Integer navigateId;
 
-    public MovieListRecyclerViewAdapter(Context context) {
+    public MovieListRecyclerViewAdapter(Context context, Integer navigateId) {
         this.context = context;
+        this.navigateId = navigateId;
     }
 
     @NonNull
@@ -62,7 +64,7 @@ public class MovieListRecyclerViewAdapter extends AbstractNotifiableListRecycler
             bundle.putLong(Constants.MOVIE_DETAIL_ID_BUNDLE_KEY, model.id);
 
             Navigation.findNavController(v)
-                    .navigate(R.id.movieDetailFragment, bundle, new NavOptions.Builder()
+                    .navigate(navigateId, bundle, new NavOptions.Builder()
                             .setExitAnim(android.R.anim.fade_out)
                             .setPopEnterAnim(android.R.anim.fade_in)
                             .build());

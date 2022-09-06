@@ -10,10 +10,10 @@
         android:id="@+id/textView_nowPlayingMovies_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="4dp"
-        android:textSize="@dimen/text_size"
+        android:textSize="@dimen/text_size_h1"
         android:text="@string/now_playing_movie_category"
         android:textColor="@color/white_200" />
 
