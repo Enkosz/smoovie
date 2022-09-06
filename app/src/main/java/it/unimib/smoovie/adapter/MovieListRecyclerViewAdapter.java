@@ -1,6 +1,8 @@
 package it.unimib.smoovie.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,7 @@ public class MovieListRecyclerViewAdapter extends AbstractNotifiableListRecycler
         CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(holder.getImageViewMovieIcon().getContext());
         circularProgressDrawable.setStrokeWidth(5f);
         circularProgressDrawable.setCenterRadius(30f);
+        circularProgressDrawable.setColorSchemeColors(Color.RED);
         circularProgressDrawable.start();
 
         Glide.with(context)
