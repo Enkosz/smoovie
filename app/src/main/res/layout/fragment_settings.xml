@@ -140,23 +140,10 @@
 
             <View style="@style/HorizontalRow" />
 
-            <View style="@style/HorizontalRow" />
-
             <TextView
                 android:id="@+id/notifications_settings"
                 style="@style/TextViewButtonPrimary"
                 android:text="@string/settings_notifications"
-                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
-
-            <View style="@style/HorizontalRow" />
-
-            <TextView
-                style="@style/TextViewHeader"
-                android:text="@string/settings_header_about" />
-
-            <TextView
-                style="@style/TextViewButtonPrimary"
-                android:text="@string/settings_need_help"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
 
             <View style="@style/HorizontalRow" />
