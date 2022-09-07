@@ -88,4 +88,6 @@
     <string name="movie_genre_music">Musica</string>
     <string name="movie_genre_mystery">Mistero</string>
     <string name="movie_genre_romance">Romantico</string>
+    <string name="preferences_no_films">Non hai nessuna Preferenza</string>
+    <string name="placeholder_similar_content">Contenuti Simili</string>
 </resources>
