@@ -1,6 +1,7 @@
 package it.unimib.smoovie.core;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -26,6 +27,7 @@ public class GenreSearchStrategy implements SearchStrategy {
 
     @Override
     public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> search(int page) {
+        Log.i("movie", "" + category);
         return viewModel.getMoviesByCategory(category, page);
     }
 

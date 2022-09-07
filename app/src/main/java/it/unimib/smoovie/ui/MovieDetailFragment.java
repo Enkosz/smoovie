@@ -78,7 +78,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
     }
 
     private void setupUI() {
-        movieDetailViewModel = new ViewModelProvider(requireActivity()).get(MovieDetailViewModel.class);
+        movieDetailViewModel = new ViewModelProvider(this).get(MovieDetailViewModel.class);
 
         setupMovieDetailView();
         setupMovieDetailRecommendedView();
