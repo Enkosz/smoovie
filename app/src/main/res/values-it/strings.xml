@@ -12,6 +12,8 @@
     <string name="movie_genre_action">Azione</string>
     <string name="movie_genre_adventure">Avventura</string>
     <string name="movie_genre_fantasy">Fantasia</string>
+    <string name="movie_genre_animation">Animazione</string>
+
     <string name="movie_search_query_result_title">Risultati per %1$s</string>
 
     <string name="settings_title">Il mio Account</string>
@@ -57,6 +59,8 @@
     <string name="hint_email">Inserisci Indirizzo Mail Qui</string>
     <string name="hint_username">Inserisci Username Qui</string>
     <string name="password">Inserisci Password Qui</string>
+    <string name="preferences">I Miei Preferiti</string>
+    <string name="settings_preferences">Preferiti</string>
     <string name="text_validation_error_email">Email non valida</string>
     <string name="text_validation_error_empty_field">Il Campo non può essere vuoto</string>
     <string name="text_validation_error_min_password_length">La Password deve essere di almeno 6 caratteri</string>
@@ -74,4 +78,14 @@
     <string name="error_login_user_mismatch">Le credenziali fornite non corrispondono a quelle dell\'utente precedentemente connesso.</string>
     <string name="error_login_requires_recent_login">L\'operazione richiesta è sensibile e necessita di un accesso recente. Accedi di nuovo e riprovi.</string>
     <string name="error_login_accounts_exits_with_different_credential">Esiste già un account associato alla mail fornita, ma con diverse credenziali d\'accesso. Si prega di accedere tramite quelle credenziali.</string>
+    <string name="movie_genre_comedy">Commedia</string>
+    <string name="movie_genre_crime">Crimine</string>
+    <string name="movie_genre_documentary">Documentario</string>
+    <string name="movie_genre_drama">Drammatico</string>
+    <string name="movie_genre_family">Famiglia</string>
+    <string name="movie_genre_history">Storia</string>
+    <string name="movie_genre_horror">Orrore</string>
+    <string name="movie_genre_music">Musica</string>
+    <string name="movie_genre_mystery">Mistero</string>
+    <string name="movie_genre_romance">Romantico</string>
 </resources>

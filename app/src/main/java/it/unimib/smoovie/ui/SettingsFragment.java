@@ -23,6 +23,7 @@ public class SettingsFragment extends Fragment {
     private TextView textViewProfileUsername;
     private TextView textViewNotificationsSettings;
     private TextView textViewShowMatureContent;
+    private TextView textViewPreferences;
     private TextView textViewSettingsLogout;
     private SwitchCompat switchShowMatureContent;
 
@@ -45,6 +46,7 @@ public class SettingsFragment extends Fragment {
         relativeLayoutShowMatureContent = view.findViewById(R.id.relative_layout_show_mature_content);
         relativeLayoutLanguageSettings = view.findViewById(R.id.relative_layout_language);
         textViewLanguageSettings = view.findViewById(R.id.textView_language);
+        textViewPreferences = view.findViewById(R.id.settings_preferences);
 
         authManager = AuthManager.getInstance(requireActivity().getApplication());
 
@@ -63,6 +65,9 @@ public class SettingsFragment extends Fragment {
 
         textViewLanguageSettings.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(R.id.languageFragment));
+
+        textViewPreferences.setOnClickListener(v -> Navigation.findNavController(v)
+                .navigate(R.id.preferencesFragment));
     }
 
     private void setupUI() {
