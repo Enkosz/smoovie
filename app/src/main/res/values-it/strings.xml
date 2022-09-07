@@ -32,7 +32,7 @@
     <string name="settings_sell_personal_information">Non vendere le mie informazioni</string>
     <string name="settings_header_about">INFORMAZIONI</string>
     <string name="settings_need_help">Hai bisogno di Aiuto?</string>
-    <string name="settings_log_out">Esci</string>
+    <string name="settings_log_out">Disconnetti</string>
     <string name="settings_version">Versione</string>
     <string name="settings_tos">Termini di Servizio</string>
     <string name="settings_privacy_policy">Informativa sulla Privacy</string>
@@ -88,4 +88,6 @@
     <string name="movie_genre_music">Musica</string>
     <string name="movie_genre_mystery">Mistero</string>
     <string name="movie_genre_romance">Romantico</string>
+    <string name="preferences_no_films">Non hai nessuna Preferenza</string>
+    <string name="placeholder_similar_content">Contenuti Simili</string>
 </resources>
