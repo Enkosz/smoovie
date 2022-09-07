@@ -1,6 +1,7 @@
 package it.unimib.smoovie.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,7 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
     }
 
     private void setupViewModel() {
-        viewModel = new ViewModelProvider(requireActivity()).get(ResultsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ResultsViewModel.class);
     }
 
     private void setupStrategyFactory() {

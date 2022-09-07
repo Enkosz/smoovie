@@ -64,8 +64,13 @@ public class MovieViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
 
-        disposablePopularMovies.dispose();
-        disposableTopRatedMovies.dispose();
-        disposableNowPlayingMovies.dispose();
+        if(disposablePopularMovies != null && !disposablePopularMovies.isDisposed())
+            disposablePopularMovies.dispose();
+
+        if(disposableTopRatedMovies != null && !disposableTopRatedMovies.isDisposed())
+            disposableTopRatedMovies.dispose();
+
+        if(disposableNowPlayingMovies != null && !disposableNowPlayingMovies.isDisposed())
+            disposableNowPlayingMovies.dispose();
     }
 }
