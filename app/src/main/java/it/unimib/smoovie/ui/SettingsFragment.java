@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 
 import it.unimib.smoovie.R;
 import it.unimib.smoovie.firebase.AuthManager;
+import it.unimib.smoovie.utils.Constants;
 
 public class SettingsFragment extends Fragment {
 
@@ -74,36 +75,11 @@ public class SettingsFragment extends Fragment {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        switchShowMatureContent.setChecked(sharedPreferences.getBoolean("showMatureContent", true));
+        switchShowMatureContent.setChecked(sharedPreferences.getBoolean(Constants.SHARED_PREFERENCE_ADULT, false));
         switchShowMatureContent.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if (isChecked) {
-                editor.putBoolean("showMatureContent", true).apply();
-            } else {
-                editor.putBoolean("showMatureContent", false).apply();
-            }
+            if (isChecked) editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, true).apply();
+            else editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, false).apply();
         });
-        relativeLayoutShowMatureContent.setOnClickListener(
-                view1 -> {
-                    if (sharedPreferences.getBoolean("showMatureContent", true)) {
-                        switchShowMatureContent.setChecked(false);
-                        editor.putBoolean("showMatureContent", false).apply();
-                    } else {
-                        switchShowMatureContent.setChecked(true);
-                        editor.putBoolean("showMatureContent", true).apply();
-                    }
-                }
-        );
-        textViewShowMatureContent.setOnClickListener(
-                view12 -> {
-                    if (sharedPreferences.getBoolean("showMatureContent", true)) {
-                        switchShowMatureContent.setChecked(false);
-                        editor.putBoolean("showMatureContent", false).apply();
-                    } else {
-                        switchShowMatureContent.setChecked(true);
-                        editor.putBoolean("showMatureContent", true).apply();
-                    }
-                }
-        );
 
         textViewProfileUsername.setText(authManager.getAuthenticatedUser().getEmail());
     }

@@ -28,14 +28,14 @@ public class ResultsViewModel extends BaseViewModel {
     }
 
     public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByQuery(String query, int page) {
-        disposableSearchResultMovieList = moviesRepository.getMoviesByQuery(query, page, getCurrentLocale())
+        disposableSearchResultMovieList = moviesRepository.getMoviesByQuery(query, page, getCurrentLocale(), isAdultPreference())
                 .subscribe(searchResultMovieList::postValue);
 
         return searchResultMovieList;
     }
 
     public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByCategory(MovieGenre category, int page) {
-        disposableSearchResultMovieList = moviesRepository.getMoviesByCategory(category, page, getCurrentLocale())
+        disposableSearchResultMovieList = moviesRepository.getMoviesByCategory(category, page, getCurrentLocale(), isAdultPreference())
                 .subscribe(searchResultMovieList::postValue);
 
         return searchResultMovieList;

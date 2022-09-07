@@ -19,4 +19,10 @@ public abstract class BaseViewModel extends AndroidViewModel {
                 .getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
                 .getString(Constants.SHARED_PREFERENCE_LANGUAGE, Constants.LANGUAGE_ENGLISH);
     }
+
+    protected Boolean isAdultPreference() {
+        return getApplication()
+                .getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
+                .getBoolean(Constants.SHARED_PREFERENCE_ADULT, false);
+    }
 }

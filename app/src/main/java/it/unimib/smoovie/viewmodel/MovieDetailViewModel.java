@@ -49,7 +49,7 @@ public class MovieDetailViewModel extends BaseViewModel {
     }
 
     public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMovieDetailSuggestionsById(Long movieId, int page) {
-        disposableMovieDetailSuggestion = moviesRepository.getSimilarMoviesOfMovie(movieId, page, getCurrentLocale())
+        disposableMovieDetailSuggestion = moviesRepository.getSimilarMoviesOfMovie(movieId, page, getCurrentLocale(), isAdultPreference())
                 .subscribe(movieDetailSuggestionList::postValue);
 
         return movieDetailSuggestionList;
