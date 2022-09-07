@@ -17,11 +17,11 @@ public enum MovieGenre {
     MUSIC("MUSIC", 10402),
     MYSTERY("MYSTERY", 9648),
     ROMANCE("ROMANCE", 10749),
-    SCIENCEFICTION("SCIENCEFICTION", 878),
-    TVMOVIE("TVMOVIE", 10770);
-//    THRILLER("THRILLER", 53),
-//    WAR("WAR", 10752),
-//    WESTERN("WESTERN", 37);
+    SCIENCEFICTION("SCIENCEFICTION", 878);
+    //TVMOVIE("TVMOVIE", 10770),
+    //THRILLER("THRILLER", 53),
+    //WAR("WAR", 10752),
+    //WESTERN("WESTERN", 37);
 
     private final String category;
     private final Integer code;
