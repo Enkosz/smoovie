@@ -90,4 +90,5 @@
     <string name="movie_genre_romance">Romantico</string>
     <string name="preferences_no_films">Non hai nessuna Preferenza</string>
     <string name="placeholder_similar_content">Contenuti Simili</string>
+    <string name="result_not_found">Nessun Risultato</string>
 </resources>

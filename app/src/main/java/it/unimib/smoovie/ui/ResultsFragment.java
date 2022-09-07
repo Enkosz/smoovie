@@ -35,6 +35,7 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
     private ImageButton backButton;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private TextView textViewNoResultFound;
 
     private SearchStrategyFactory searchStrategyFactory;
 
@@ -46,6 +47,7 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
         backButton = view.findViewById(R.id.button_search_result_back);
         textViewSearchQuery = view.findViewById(R.id.textView_search_results);
         progressBar = view.findViewById(R.id.progressBar_results);
+        textViewNoResultFound = view.findViewById(R.id.textView_no_result_found);
 
         showProgress();
         setupViewModel();
@@ -93,9 +95,10 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
                                 .popBackStack();
                         return;
                     }
-
-                    adapter.addItems(responseWrapper.getResponse().movies);
+                    if (!responseWrapper.getResponse().movies.isEmpty())
+                        adapter.addItems(responseWrapper.getResponse().movies);
                     hideProgress();
+
                 });
     }
 

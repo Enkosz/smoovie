@@ -105,4 +105,5 @@
     <string name="movie_genre_sciencefiction" translatable="false">Science Fiction</string>
     <string name="movie_genre_tvmovie" translatable="false">TV Movie</string>
     <string name="preferences_no_films">You don\'t have any Preferences</string>
+    <string name="result_not_found">No Result Found</string>
 </resources>
