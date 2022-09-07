@@ -45,6 +45,7 @@ public class ResultsViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
 
-        disposableSearchResultMovieList.dispose();
+        if(disposableSearchResultMovieList != null && !disposableSearchResultMovieList.isDisposed())
+            disposableSearchResultMovieList.dispose();
     }
 }

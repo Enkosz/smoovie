@@ -39,6 +39,7 @@ public class PreferencesViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
 
-        disposableFavoriteMovieList.dispose();
+        if(disposableFavoriteMovieList != null && !disposableFavoriteMovieList.isDisposed())
+            disposableFavoriteMovieList.dispose();
     }
 }
