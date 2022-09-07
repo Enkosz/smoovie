@@ -64,7 +64,7 @@ public class PreferencesFragment extends Fragment implements ProgressDisplay {
     }
 
     private void setupViewModel() {
-        viewModel = new ViewModelProvider(requireActivity()).get(PreferencesViewModel.class);
+        viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
     }
 
     private void setupUI() {

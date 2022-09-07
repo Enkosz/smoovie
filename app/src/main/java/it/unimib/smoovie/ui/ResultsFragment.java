@@ -55,7 +55,7 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
     }
 
     private void setupViewModel() {
-        viewModel = new ViewModelProvider(requireActivity()).get(ResultsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ResultsViewModel.class);
     }
 
     private void setupStrategyFactory() {
@@ -97,13 +97,6 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
                     adapter.addItems(responseWrapper.getResponse().movies);
                     hideProgress();
                 });
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.i("movie", "onDestroy: " + "pipo");
-        
-        super.onDestroy();
     }
 
     @Override

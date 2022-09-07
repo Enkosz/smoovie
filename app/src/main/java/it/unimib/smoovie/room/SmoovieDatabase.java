@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import it.unimib.smoovie.room.dao.FavoriteMovieDao;
 import it.unimib.smoovie.room.model.FavoriteMovie;
 
-@Database(entities = {FavoriteMovie.class}, version = 1)
+@Database(entities = {FavoriteMovie.class}, version = 2)
 public abstract class SmoovieDatabase extends RoomDatabase {
 
     private static volatile SmoovieDatabase instance;
@@ -18,7 +18,9 @@ public abstract class SmoovieDatabase extends RoomDatabase {
 
     public static synchronized SmoovieDatabase getInstance(Context context) {
         if (instance == null)
-            instance = Room.databaseBuilder(context, SmoovieDatabase.class, "smoovie-database").build();
+            instance = Room.databaseBuilder(context, SmoovieDatabase.class, "smoovie-database")
+                    .fallbackToDestructiveMigration()
+                    .build();
 
         return instance;
     }

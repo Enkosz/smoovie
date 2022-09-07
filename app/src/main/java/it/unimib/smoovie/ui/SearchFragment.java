@@ -80,7 +80,7 @@ public class SearchFragment extends Fragment implements ProgressDisplay {
     }
 
     private void setupViewModel() {
-        SearchViewModel searchViewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
+        SearchViewModel searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
         searchViewModel.getMovieCategoryList()
             .observe(getViewLifecycleOwner(), movieCategories -> {
