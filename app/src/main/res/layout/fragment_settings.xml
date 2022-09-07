@@ -77,22 +77,6 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/settings_preferences"
-                style="@style/TextViewButtonPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_preferences"
-                android:textColor="@color/TextPrimary"
-                android:textSize="@dimen/text_size"
-                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16" />
-
-            <View
-                android:id="@+id/view"
-                style="@style/HorizontalRow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
                 android:id="@+id/textView_settings_logout"
                 style="@style/TextViewButtonPrimary"
                 android:text="@string/settings_log_out" />
