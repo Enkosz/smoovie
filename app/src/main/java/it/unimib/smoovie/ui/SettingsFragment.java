@@ -65,6 +65,7 @@ public class SettingsFragment extends Fragment {
 
         textViewLanguageSettings.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(R.id.languageFragment));
+
         textViewPreferences.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(R.id.preferencesFragment));
     }
