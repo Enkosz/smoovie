@@ -1,5 +1,9 @@
 package it.unimib.smoovie.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,9 +16,14 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Locale;
+
 import it.unimib.smoovie.R;
+import it.unimib.smoovie.utils.Constants;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
 
     private BottomNavigationView bottomNavigationView;
 
@@ -24,7 +33,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         setupNavControllerAuthenticationFilter();
-        Log.i("SDK", "SDK level: " + android.os.Build.VERSION.SDK_INT);
+        setupLanguageFromPreferences();
+        Log.i("SDK", "Startup completed, SDK level: " + android.os.Build.VERSION.SDK_INT);
+    }
+
+    private void setupLanguageFromPreferences() {
+        SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String preferenceLocale = sharedPreferences.getString(Constants.SHARED_PREFERENCE_LANGUAGE, Constants.LANGUAGE_ENGLISH);
+
+        String currentLocale = getBaseContext()
+                .getResources()
+                .getConfiguration()
+                .getLocales()
+                .toLanguageTags()
+                .toUpperCase(Locale.ROOT);
+        Log.i(TAG, String.format("Setting up language from preferences, current preference locale is %s, current locale is %s", preferenceLocale, currentLocale));
+
+        // change the locale if is different from the shared preferences
+        if(!currentLocale.equals(preferenceLocale)) {
+            Locale locale = new Locale(preferenceLocale);
+            Locale.setDefault(locale);
+            Resources resources = getBaseContext().getResources();
+            Configuration config = resources.getConfiguration();
+            config.setLocale(locale);
+            resources.updateConfiguration(config,null);
+            this.recreate();
+        }
     }
 
     private void setupNavControllerAuthenticationFilter() {
