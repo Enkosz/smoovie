@@ -75,6 +75,24 @@ public class SettingsFragment extends Fragment {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        textViewShowMatureContent.setOnClickListener(v -> {
+            if (sharedPreferences.getBoolean(Constants.SHARED_PREFERENCE_ADULT, false)) {
+                switchShowMatureContent.setChecked(false);
+                editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, false).apply();
+            } else {
+                switchShowMatureContent.setChecked(true);
+                editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, true).apply();
+            }
+        });
+        relativeLayoutShowMatureContent.setOnClickListener(v -> {
+            if (sharedPreferences.getBoolean(Constants.SHARED_PREFERENCE_ADULT, false)) {
+                switchShowMatureContent.setChecked(false);
+                editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, false).apply();
+            } else {
+                switchShowMatureContent.setChecked(true);
+                editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, true).apply();
+            }
+        });
         switchShowMatureContent.setChecked(sharedPreferences.getBoolean(Constants.SHARED_PREFERENCE_ADULT, false));
         switchShowMatureContent.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, true).apply();
