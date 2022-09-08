@@ -20,7 +20,7 @@ import it.unimib.smoovie.model.ResponseWrapper;
 import it.unimib.smoovie.repository.MoviesRepository;
 import it.unimib.smoovie.room.model.FavoriteMovie;
 
-public class MovieDetailViewModel extends AndroidViewModel {
+public class MovieDetailViewModel extends BaseViewModel {
 
     private final MutableLiveData<ResponseWrapper<MovieModelExtended>> movieDetail;
     private final MutableLiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> movieDetailSuggestionList;
@@ -42,14 +42,14 @@ public class MovieDetailViewModel extends AndroidViewModel {
     }
 
     public LiveData<ResponseWrapper<MovieModelExtended>> getMovieDetailById(Long id) {
-        disposableMovieDetail = moviesRepository.getMovieById(id)
+        disposableMovieDetail = moviesRepository.getMovieById(id, getCurrentLocale())
                 .subscribe(movieDetail::postValue);
 
         return movieDetail;
     }
 
     public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMovieDetailSuggestionsById(Long movieId, int page) {
-        disposableMovieDetailSuggestion = moviesRepository.getSimilarMoviesOfMovie(movieId, page)
+        disposableMovieDetailSuggestion = moviesRepository.getSimilarMoviesOfMovie(movieId, page, getCurrentLocale(), isAdultPreference())
                 .subscribe(movieDetailSuggestionList::postValue);
 
         return movieDetailSuggestionList;

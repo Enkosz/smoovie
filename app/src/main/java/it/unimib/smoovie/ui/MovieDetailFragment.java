@@ -42,6 +42,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
     private TextView textViewMovieReleaseDate;
     private TextView textViewMovieRuntime;
     private TextView textViewMovieOverview;
+    private TextView textViewMovieDetailVoteAverage;
     private RecyclerView recyclerViewMovieSuggestions;
     private ImageButton imageButtonBackNavigation;
     private ImageButton buttonMovieDetailAddFavorite;
@@ -65,6 +66,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
         textViewMovieReleaseDate = view.findViewById(R.id.textView_movieDetail_releaseDate);
         textViewMovieRuntime = view.findViewById(R.id.textView_movieDetail_runtime);
         textViewMovieOverview = view.findViewById(R.id.textView_movieDetail_overview);
+        textViewMovieDetailVoteAverage = view.findViewById(R.id.textView_movieDetail_voteAverage);
         recyclerViewMovieSuggestions = view.findViewById(R.id.recyclerView_movieDetail_suggestions);
         imageButtonBackNavigation = view.findViewById(R.id.imageButton_movieDetail_back);
         buttonMovieDetailAddFavorite = view.findViewById(R.id.button_movieDetail_addFavorite);
@@ -135,6 +137,7 @@ public class MovieDetailFragment extends Fragment implements ProgressDisplay {
                     textViewMovieReleaseDate.setText(movieModelExtended.releaseDate);
                     textViewMovieOverview.setText(movieModelExtended.overview);
                     textViewMovieRuntime.setText(getString(R.string.movie_detail_runtime, movieModelExtended.getRuntimeHours(), movieModelExtended.getRuntimeMinutes()));
+                    textViewMovieDetailVoteAverage.setText(Math.round(movieModelExtended.voteAverage) + "/" + "10");
                     backdropPath = movieModelExtended.posterPath;
                     Glide.with(requireContext())
                             .load(Constants.API_POSTER_URL + movieModelExtended.backdropPath)

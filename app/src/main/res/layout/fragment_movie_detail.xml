@@ -115,6 +115,12 @@
                         android:text="@string/placeholder_textview"
                         android:textSize="@dimen/text_size" />
 
+                    <TextView
+                        android:id="@+id/textView_movieDetail_voteAverage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
+
                     <LinearLayout
                         android:id="@+id/movie_detail_actions_container"
                         android:layout_width="match_parent"

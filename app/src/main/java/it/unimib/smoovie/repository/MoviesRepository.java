@@ -21,6 +21,7 @@ import it.unimib.smoovie.model.ResponseWrapper;
 import it.unimib.smoovie.room.SmoovieDatabase;
 import it.unimib.smoovie.room.model.FavoriteMovie;
 import it.unimib.smoovie.utils.Constants;
+import retrofit2.http.Query;
 
 public class MoviesRepository {
 
@@ -41,56 +42,56 @@ public class MoviesRepository {
         return instance;
     }
 
-    public Single<ResponseWrapper<MovieModelExtended>> getMovieById(Long id) {
-        return movieApiService.fetchMovie(id, Constants.API_KEY)
+    public Single<ResponseWrapper<MovieModelExtended>> getMovieById(Long id, String language) {
+        return movieApiService.fetchMovie(id, Constants.API_KEY, language)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
                 .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
     }
 
-    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getPopularMovies(int page) {
-        return movieApiService.fetchPopularMovies(Constants.API_KEY, page)
+    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getPopularMovies(int page, String language, Boolean includeAdult) {
+        return movieApiService.fetchPopularMovies(Constants.API_KEY, page, language, includeAdult)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
                 .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
     }
 
-    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getTopRatedMovies(int page) {
-        return movieApiService.fetchTopRatedMovies(Constants.API_KEY, page)
+    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getTopRatedMovies(int page, String language, Boolean includeAdult) {
+        return movieApiService.fetchTopRatedMovies(Constants.API_KEY, page, language, includeAdult)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
                 .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
     }
 
-    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getNowPlayingMovies(int page) {
-        return movieApiService.fetchNowPlayingMovies(Constants.API_KEY, page)
+    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getNowPlayingMovies(int page, String language, Boolean includeAdult) {
+        return movieApiService.fetchNowPlayingMovies(Constants.API_KEY, page, language, includeAdult)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
                 .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
     }
 
-    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByQuery(String query, int page) {
-        return movieApiService.fetchMoviesByQuery(Constants.API_KEY, query, page)
+    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByQuery(String query, int page, String language, Boolean includeAdult) {
+        return movieApiService.fetchMoviesByQuery(Constants.API_KEY, query, page, language, includeAdult)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
                 .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
     }
 
-    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByCategory(MovieGenre category, int page) {
-        return movieApiService.fetchMoviesByGenre(Constants.API_KEY, category.getCode(), page)
+    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByCategory(MovieGenre category, int page, String language, Boolean includeAdult) {
+        return movieApiService.fetchMoviesByGenre(Constants.API_KEY, category.getCode(), page, language, includeAdult)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)
                 .onErrorReturn(throwable -> new ResponseWrapper<>(Collections.singletonList(new Error("change me"))));
     }
 
-    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getSimilarMoviesOfMovie(Long movieId, int page) {
-        return movieApiService.fetchSimilarMovies(movieId, Constants.API_KEY, page)
+    public Single<ResponseWrapper<ApiResponse<MovieModelCompact>>> getSimilarMoviesOfMovie(Long movieId, int page, String language, Boolean includeAdult) {
+        return movieApiService.fetchSimilarMovies(movieId, Constants.API_KEY, page, language, includeAdult)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(ResponseWrapper::new)

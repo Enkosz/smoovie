@@ -14,7 +14,7 @@ import it.unimib.smoovie.model.MovieModelCompact;
 import it.unimib.smoovie.model.ResponseWrapper;
 import it.unimib.smoovie.repository.MoviesRepository;
 
-public class ResultsViewModel extends AndroidViewModel {
+public class ResultsViewModel extends BaseViewModel {
 
     private final MoviesRepository moviesRepository;
     private final MutableLiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> searchResultMovieList;
@@ -28,14 +28,14 @@ public class ResultsViewModel extends AndroidViewModel {
     }
 
     public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByQuery(String query, int page) {
-        disposableSearchResultMovieList = moviesRepository.getMoviesByQuery(query, page)
+        disposableSearchResultMovieList = moviesRepository.getMoviesByQuery(query, page, getCurrentLocale(), isAdultPreference())
                 .subscribe(searchResultMovieList::postValue);
 
         return searchResultMovieList;
     }
 
     public LiveData<ResponseWrapper<ApiResponse<MovieModelCompact>>> getMoviesByCategory(MovieGenre category, int page) {
-        disposableSearchResultMovieList = moviesRepository.getMoviesByCategory(category, page)
+        disposableSearchResultMovieList = moviesRepository.getMoviesByCategory(category, page, getCurrentLocale(), isAdultPreference())
                 .subscribe(searchResultMovieList::postValue);
 
         return searchResultMovieList;
