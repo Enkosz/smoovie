@@ -6,25 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/Background">
 
-    <TextView
-        android:id="@+id/textView_search_results"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:text="@string/placeholder_search_query"
-        android:textColor="@color/TextPrimary"
-        android:textSize="@dimen/text_size_h1"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
-        android:id="@+id/button_search_result_back"
+        android:id="@+id/button_search_preferences_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="26dp"
         android:background="@color/Background"
         app:layout_constraintEnd_toStartOf="@+id/textView_search_results"
         app:layout_constraintHorizontal_bias="0.0"
@@ -32,36 +19,48 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="214dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/preferences"
+        android:textSize="@dimen/text_size_h1"
+        app:layout_constraintStart_toEndOf="@+id/button_search_preferences_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_search_results"
-        app:layout_constraintVertical_bias="0.542">
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <TextView
-            android:id="@+id/textView_no_result_found"
+            android:id="@+id/no_preferences_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/result_not_found"
+            android:layout_marginEnd="0dp"
+            android:text="@string/preferences_no_films"
             android:textAlignment="center"
-            android:visibility="gone" />
+            app:layout_constraintBottom_toTopOf="@+id/progressBar_preferences"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar_results"
+            android:id="@+id/progressBar_preferences"
             style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_results"
+            android:id="@+id/recyclerView_preferences"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black"
@@ -69,7 +68,6 @@
             android:clipToPadding="false"
             android:paddingTop="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

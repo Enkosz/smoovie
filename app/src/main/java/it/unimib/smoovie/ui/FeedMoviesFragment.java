@@ -51,7 +51,7 @@ public abstract class FeedMoviesFragment extends Fragment implements ProgressDis
 
         this.showProgress();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        MovieListRecyclerViewAdapter adapter = new MovieListRecyclerViewAdapter(getContext());
+        MovieListRecyclerViewAdapter adapter = new MovieListRecyclerViewAdapter(getContext(), R.id.action_homeFragment_to_movieDetailFragment);
 
         recyclerViewMovies.setAdapter(adapter);
         recyclerViewMovies.setLayoutManager(layoutManager);
@@ -86,7 +86,7 @@ public abstract class FeedMoviesFragment extends Fragment implements ProgressDis
 
     protected MovieViewModel getViewModel() {
         if(modelProvider == null)
-            modelProvider = new ViewModelProvider(requireActivity());
+            modelProvider = new ViewModelProvider(this);
 
         return modelProvider.get(MovieViewModel.class);
     }

@@ -63,7 +63,7 @@ public class SearchFragment extends Fragment implements ProgressDisplay {
                 bundle.putString(Constants.SEARCH_MOVIE_TITLE_BUNDLE_KEY, query);
 
                 Navigation.findNavController(searchView)
-                        .navigate(R.id.resultsFragment, bundle, new NavOptions.Builder()
+                        .navigate(R.id.action_searchFragment_to_resultsFragment, bundle, new NavOptions.Builder()
                                 .setExitAnim(android.R.anim.fade_out)
                                 .setPopEnterAnim(android.R.anim.fade_in)
                                 .build());
@@ -80,7 +80,7 @@ public class SearchFragment extends Fragment implements ProgressDisplay {
     }
 
     private void setupViewModel() {
-        SearchViewModel searchViewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
+        SearchViewModel searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
         searchViewModel.getMovieCategoryList()
             .observe(getViewLifecycleOwner(), movieCategories -> {

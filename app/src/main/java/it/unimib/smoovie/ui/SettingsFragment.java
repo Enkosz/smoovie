@@ -3,7 +3,6 @@ package it.unimib.smoovie.ui;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,26 +11,28 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import it.unimib.smoovie.R;
-import it.unimib.smoovie.viewmodel.UserViewModel;
+import it.unimib.smoovie.firebase.AuthManager;
+import it.unimib.smoovie.utils.Constants;
 
 public class SettingsFragment extends Fragment {
 
     private TextView textViewProfileUsername;
     private TextView textViewNotificationsSettings;
     private TextView textViewShowMatureContent;
+    private TextView textViewPreferences;
+    private TextView textViewSettingsLogout;
     private SwitchCompat switchShowMatureContent;
 
     private RelativeLayout relativeLayoutShowMatureContent;
     private RelativeLayout relativeLayoutLanguageSettings;
+    private TextView textViewLanguageSettings;
 
-    private UserViewModel userViewModel;
+    private AuthManager authManager;
 
     @Nullable
     @Override
@@ -41,18 +42,19 @@ public class SettingsFragment extends Fragment {
         textViewProfileUsername = view.findViewById(R.id.textView_settings_profile_username);
         textViewNotificationsSettings = view.findViewById(R.id.notifications_settings);
         textViewShowMatureContent = view.findViewById(R.id.textView_show_mature_content);
+        textViewSettingsLogout = view.findViewById(R.id.textView_settings_logout);
         switchShowMatureContent = view.findViewById(R.id.switch_show_mature_content);
         relativeLayoutShowMatureContent = view.findViewById(R.id.relative_layout_show_mature_content);
         relativeLayoutLanguageSettings = view.findViewById(R.id.relative_layout_language);
+        textViewLanguageSettings = view.findViewById(R.id.textView_language);
+        textViewPreferences = view.findViewById(R.id.settings_preferences);
 
-        setupViewModel();
+        authManager = AuthManager.getInstance(requireActivity().getApplication());
+
         setupNavigation();
         setupUI();
+        setupLogoutHandler();
         return view;
-    }
-
-    private void setupViewModel() {
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
     }
 
     private void setupNavigation() {
@@ -61,42 +63,51 @@ public class SettingsFragment extends Fragment {
 
         relativeLayoutLanguageSettings.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(R.id.languageFragment));
+
+        textViewLanguageSettings.setOnClickListener(v -> Navigation.findNavController(v)
+                .navigate(R.id.languageFragment));
+
+        textViewPreferences.setOnClickListener(v -> Navigation.findNavController(v)
+                .navigate(R.id.preferencesFragment));
     }
 
     private void setupUI() {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        switchShowMatureContent.setChecked(sharedPreferences.getBoolean("showMatureContent", true));
-        switchShowMatureContent.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if (isChecked) {
-                editor.putBoolean("showMatureContent", true).apply();
+        textViewShowMatureContent.setOnClickListener(v -> {
+            if (sharedPreferences.getBoolean(Constants.SHARED_PREFERENCE_ADULT, false)) {
+                switchShowMatureContent.setChecked(false);
+                editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, false).apply();
             } else {
-                editor.putBoolean("showMatureContent", false).apply();
+                switchShowMatureContent.setChecked(true);
+                editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, true).apply();
             }
         });
-        relativeLayoutShowMatureContent.setOnClickListener(
-                view1 -> {
-                    if (sharedPreferences.getBoolean("showMatureContent", true)) {
-                        switchShowMatureContent.setChecked(false);
-                        editor.putBoolean("showMatureContent", false).apply();
-                    } else {
-                        switchShowMatureContent.setChecked(true);
-                        editor.putBoolean("showMatureContent", true).apply();
-                    }
-                }
-        );
-        textViewShowMatureContent.setOnClickListener(
-                view12 -> {
-                    if (sharedPreferences.getBoolean("showMatureContent", true)) {
-                        switchShowMatureContent.setChecked(false);
-                        editor.putBoolean("showMatureContent", false).apply();
-                    } else {
-                        switchShowMatureContent.setChecked(true);
-                        editor.putBoolean("showMatureContent", true).apply();
-                    }
-                }
-        );
+        relativeLayoutShowMatureContent.setOnClickListener(v -> {
+            if (sharedPreferences.getBoolean(Constants.SHARED_PREFERENCE_ADULT, false)) {
+                switchShowMatureContent.setChecked(false);
+                editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, false).apply();
+            } else {
+                switchShowMatureContent.setChecked(true);
+                editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, true).apply();
+            }
+        });
+        switchShowMatureContent.setChecked(sharedPreferences.getBoolean(Constants.SHARED_PREFERENCE_ADULT, false));
+        switchShowMatureContent.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked) editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, true).apply();
+            else editor.putBoolean(Constants.SHARED_PREFERENCE_ADULT, false).apply();
+        });
 
+        textViewProfileUsername.setText(authManager.getAuthenticatedUser().getEmail());
+    }
+
+    private void setupLogoutHandler() {
+        textViewSettingsLogout.setOnClickListener(v -> {
+            authManager.logout();
+
+            Navigation.findNavController(requireView())
+                    .navigate(R.id.loginFragment);
+        });
     }
 }

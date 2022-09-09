@@ -22,6 +22,9 @@ public interface FavoriteMovieDao {
     @Query("DELETE FROM favoritemovie WHERE film_id = :id")
     Completable deleteFavoriteMovie(Long id);
 
-    @Query("SELECT * FROM favoritemovie WHERE film_id = :id")
-    Maybe<FavoriteMovie> getFavoriteMovieById(Long id);
+    @Query("SELECT * FROM favoritemovie WHERE film_id = :id AND user_id = :userId")
+    Maybe<FavoriteMovie> getFavoriteMovieById(Long id, String userId);
+
+    @Query("SELECT * FROM favoritemovie")
+    Maybe<List<FavoriteMovie>> getAllFavoriteMovies();
 }

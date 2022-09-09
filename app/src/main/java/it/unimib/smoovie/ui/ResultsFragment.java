@@ -1,6 +1,7 @@
 package it.unimib.smoovie.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
     private ImageButton backButton;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private TextView textViewNoResultFound;
 
     private SearchStrategyFactory searchStrategyFactory;
 
@@ -45,6 +47,7 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
         backButton = view.findViewById(R.id.button_search_result_back);
         textViewSearchQuery = view.findViewById(R.id.textView_search_results);
         progressBar = view.findViewById(R.id.progressBar_results);
+        textViewNoResultFound = view.findViewById(R.id.textView_no_result_found);
 
         showProgress();
         setupViewModel();
@@ -54,7 +57,7 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
     }
 
     private void setupViewModel() {
-        viewModel = new ViewModelProvider(requireActivity()).get(ResultsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ResultsViewModel.class);
     }
 
     private void setupStrategyFactory() {
@@ -89,14 +92,14 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
                         Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_LONG).show();
 
                         Navigation.findNavController(requireView())
-                                .navigate(R.id.searchFragment, new Bundle(), new NavOptions.Builder()
-                                        .setExitAnim(android.R.anim.fade_out)
-                                        .setPopEnterAnim(android.R.anim.fade_in)
-                                        .build());
+                                .popBackStack();
                         return;
                     }
-
-                    adapter.addItems(responseWrapper.getResponse().movies);
+                    if (!responseWrapper.getResponse().movies.isEmpty()) {
+                        textViewNoResultFound.setVisibility(View.GONE);
+                        adapter.addItems(responseWrapper.getResponse().movies);
+                    } else
+                        textViewNoResultFound.setVisibility(View.VISIBLE);
                     hideProgress();
                 });
     }
