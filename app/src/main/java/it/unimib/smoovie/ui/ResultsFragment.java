@@ -95,10 +95,12 @@ public class ResultsFragment extends Fragment implements ProgressDisplay {
                                 .popBackStack();
                         return;
                     }
-                    if (!responseWrapper.getResponse().movies.isEmpty())
+                    if (!responseWrapper.getResponse().movies.isEmpty()) {
+                        textViewNoResultFound.setVisibility(View.GONE);
                         adapter.addItems(responseWrapper.getResponse().movies);
+                    } else
+                        textViewNoResultFound.setVisibility(View.VISIBLE);
                     hideProgress();
-
                 });
     }
 
